@@ -90,6 +90,52 @@ body {
     margin-top: 2rem;
 }
 
+/* What We Do Section */
+.what-we-do-section {
+    background: var(--white);
+}
+
+.activities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.activity-card {
+    background: var(--off-white);
+    padding: 2.5rem;
+    border-radius: 12px;
+    text-align: center;
+    transition: var(--transition);
+    border: 1px solid var(--light-gray);
+}
+
+.activity-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    background: var(--white);
+}
+
+.activity-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    line-height: 1;
+}
+
+.activity-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--logo-dark-brown);
+}
+
+.activity-card p {
+    font-size: 0.9375rem;
+    color: var(--gray);
+    line-height: 1.6;
+}
+
 /* Sections */
 .section {
     padding: 6rem 0;

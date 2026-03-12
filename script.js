@@ -57,7 +57,7 @@ function observeCards() {
         });
     }, { threshold: 0.1 });
     
-    const cards = document.querySelectorAll('.video-card, .insta-card, .community-card');
+    const cards = document.querySelectorAll('.video-card, .insta-card, .community-card, .activity-card');
     cards.forEach((card, i) => {
         card.style.opacity = '0';
         card.style.transform = 'translateY(30px)';
