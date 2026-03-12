@@ -11,6 +11,7 @@
     --logo-light-brown: #A0826D;
     --gray-brown: #9E9E9E;
     --light-gray: #E5E5E5;
+    --gray: #999999;
     --transition: all 0.2s ease;
 }
 
@@ -39,132 +40,54 @@ body {
     padding: 0 2rem;
 }
 
-/* Header */
-.header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background: var(--white);
-    border-bottom: 1px solid var(--light-gray);
-    z-index: 1000;
-}
-
-.header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.25rem 2rem;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    text-decoration: none;
-    color: var(--logo-dark-brown);
-    transition: var(--transition);
-}
-
-.logo:hover {
-    opacity: 0.8;
-}
-
-.logo-image {
-    height: 50px;
-    width: auto;
-    object-fit: contain;
-}
-
-.logo-text-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-}
-
-.logo-text {
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    color: var(--logo-dark-brown);
-}
-
-.logo-tagline {
-    font-size: 0.75rem;
-    color: var(--gray);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-}
-
-.nav {
-    display: flex;
-    gap: 2.5rem;
-}
-
-.nav-link {
-    color: var(--logo-dark-brown);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.9375rem;
-    transition: var(--transition);
-}
-
-.nav-link:hover {
-    color: var(--logo-orange);
-}
-
-/* Hero Section */
+/* Hero Section - Centered Logo */
 .hero {
-    padding: 10rem 0 6rem;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: var(--white);
+    padding: 2rem 0;
 }
 
 .hero-content {
     text-align: center;
     max-width: 800px;
-    margin: 0 auto;
+}
+
+.logo-centered {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.logo-image-large {
+    max-width: 280px;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
 }
 
 .hero-title {
-    font-size: 3.5rem;
+    font-size: 3rem;
     font-weight: 700;
-    line-height: 1.1;
+    line-height: 1.2;
     letter-spacing: -0.02em;
-    margin-bottom: 1rem;
     color: var(--logo-dark-brown);
 }
 
 .hero-subtitle {
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     color: var(--gray);
     font-weight: 400;
-    margin-bottom: 3rem;
     line-height: 1.5;
+    max-width: 600px;
 }
 
-.hero-stats {
-    display: flex;
-    justify-content: center;
-    gap: 4rem;
-}
-
-.stat {
-    text-align: center;
-}
-
-.stat-number {
-    display: block;
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--logo-orange);
-    margin-bottom: 0.5rem;
-}
-
-.stat-label {
-    font-size: 0.875rem;
-    color: var(--gray);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+.hero-cta {
+    margin-top: 2rem;
 }
 
 /* Sections */
@@ -283,9 +206,18 @@ body {
     color: var(--white);
 }
 
+.cta-button.whatsapp {
+    background: #25D366;
+    color: var(--white);
+}
+
 .cta-button:hover {
     opacity: 0.9;
     transform: translateY(-2px);
+}
+
+.cta-button.whatsapp:hover {
+    background: #20BA5A;
 }
 
 .icon {
@@ -336,11 +268,6 @@ body {
     min-height: 400px;
 }
 
-/* Hero CTA */
-.hero-cta {
-    margin-top: 3rem;
-}
-
 /* Community Section */
 .community-section {
     background: var(--off-white);
@@ -374,15 +301,6 @@ body {
     line-height: 1.5;
 }
 
-.cta-button.whatsapp {
-    background: #25D366;
-    color: var(--white);
-}
-
-.cta-button.whatsapp:hover {
-    background: #20BA5A;
-}
-
 /* Footer */
 .footer {
     background: var(--white);
@@ -405,23 +323,12 @@ body {
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
-    .header-content {
-        flex-direction: column;
-        gap: 1rem;
-        padding: 1rem;
-    }
-    
-    .nav {
-        gap: 1.5rem;
-    }
-    
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
     
-    .hero-stats {
-        gap: 2rem;
-        flex-wrap: wrap;
+    .logo-image-large {
+        max-width: 200px;
     }
     
     .video-grid {
@@ -438,6 +345,10 @@ body {
     
     .insta-grid {
         grid-template-columns: 1fr;
+    }
+    
+    .community-card {
+        padding: 2rem;
     }
 }
 
