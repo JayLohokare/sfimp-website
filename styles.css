@@ -48,6 +48,7 @@ body {
     background: var(--white);
     border-bottom: 1px solid var(--light-gray);
     z-index: 1000;
+    box-shadow: 0 1px 3px rgba(93, 64, 55, 0.05);
 }
 
 .header-content {
