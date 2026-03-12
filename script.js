@@ -1,10 +1,10 @@
-// SFIMP - Modern Website JS
+// SFIMP - Mobile-First Website JS
 
 document.addEventListener('DOMContentLoaded', () => {
     initLoadingScreen();
     initScrollAnimations();
-    loadYouTubeVideos();
-    loadInstagramPosts();
+    initHorizontalSwipe();
+    initBottomNav();
 });
 
 // Loading screen with logo
@@ -43,21 +43,8 @@ function initScrollAnimations() {
         observer.observe(section);
     });
     
-    // Animate cards dynamically
-    observeCards();
-}
-
-function observeCards() {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, { threshold: 0.1 });
-    
-    const cards = document.querySelectorAll('.video-card, .insta-card, .community-card, .activity-card');
+    // Animate cards
+    const cards = document.querySelectorAll('.activity-card, .platform-card, .community-card');
     cards.forEach((card, i) => {
         card.style.opacity = '0';
         card.style.transform = 'translateY(30px)';
@@ -66,110 +53,97 @@ function observeCards() {
     });
 }
 
-// Load YouTube videos dynamically using YouTube Data API
-async function loadYouTubeVideos() {
-    const videoGrid = document.getElementById('video-grid');
-    if (!videoGrid) return;
+// Horizontal swipe carousel for "What We Do"
+function initHorizontalSwipe() {
+    const track = document.querySelector('.activities-track');
+    if (!track) return;
     
-    // SFIMP YouTube Channel ID: UCm8gKLqSJkNzrXhKvPzTzKw (from @sfindianmusicproject)
-    // Using YouTube's oEmbed for simplicity without API key
-    const channelHandle = '@sfindianmusicproject';
+    // Touch/swipe support (native via CSS scroll-snap)
+    // Add mouse drag support for desktop
+    let isDown = false;
+    let startX;
+    let scrollLeft;
     
-    // Fallback: Static videos that will be replaced when API is configured
-    const fallbackVideos = [
-        {
-            id: 'NF673jaWZ3k',
-            title: 'Studio session: Atach baya ka / Bharla Madhumas',
-            meta: 'SF Indian Music Project'
-        },
-        {
-            id: '6PqNc5p1Mho',
-            title: 'The Reason / Tune jo na kaha / Naina',
-            meta: '376 views'
-        },
-        {
-            id: 'WfEbCQKOjyQ',
-            title: 'Pardesiya / Jiya Jale / Ye Haseen Waadiyan',
-            meta: '528 views'
-        },
-        {
-            id: '_YdjmxkqjGM',
-            title: 'Bin Tere / Sweet Child O Mine',
-            meta: '329 views'
-        },
-        {
-            id: 'mRPUOheEJZI',
-            title: 'Pehela Nasha / Everything I do',
-            meta: '643 views'
-        }
-    ];
+    track.addEventListener('mousedown', (e) => {
+        isDown = true;
+        startX = e.pageX - track.offsetLeft;
+        scrollLeft = track.scrollLeft;
+        track.style.cursor = 'grabbing';
+    });
     
-    // Render fallback videos
-    renderVideos(videoGrid, fallbackVideos);
+    track.addEventListener('mouseleave', () => {
+        isDown = false;
+        track.style.cursor = 'grab';
+    });
     
-    // TODO: To enable live YouTube API:
-    // 1. Get API key from Google Cloud Console
-    // 2. Replace with fetch to YouTube Data API v3
-    // Example:
-    // const apiKey = 'YOUR_API_KEY';
-    // const response = await fetch(`https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=UCm8gKLqSJkNzrXhKvPzTzKw&order=date&part=snippet&maxResults=6`);
-    // const data = await response.json();
-    // const videos = data.items.map(item => ({
-    //     id: item.id.videoId,
-    //     title: item.snippet.title,
-    //     meta: item.snippet.channelTitle
-    // }));
-    // renderVideos(videoGrid, videos);
+    track.addEventListener('mouseup', () => {
+        isDown = false;
+        track.style.cursor = 'grab';
+    });
+    
+    track.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - track.offsetLeft;
+        const walk = (x - startX) * 2;
+        track.scrollLeft = scrollLeft + walk;
+    });
+    
+    // Update carousel dots based on scroll position
+    track.addEventListener('scroll', () => {
+        updateCarouselDots();
+    });
 }
 
-function renderVideos(container, videos) {
-    container.innerHTML = videos.map((video, index) => `
-        <div class="video-card ${index === 0 ? 'featured' : ''}">
-            <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/${video.id}" title="${video.title}" frameborder="0" allowfullscreen></iframe>
-            </div>
-            <div class="video-info">
-                <h3 class="video-title">${video.title}</h3>
-                <p class="video-meta">${video.meta}</p>
-            </div>
-        </div>
-    `).join('');
+function updateCarouselDots() {
+    const track = document.querySelector('.activities-track');
+    const dots = document.querySelector('.carousel-dots');
+    if (!track || !dots) return;
     
-    // Re-observe new cards
-    observeCards();
+    const cards = document.querySelectorAll('.activity-card');
+    const scrollPos = track.scrollLeft;
+    const cardWidth = cards[0]?.offsetWidth || 280;
+    const activeIndex = Math.round(scrollPos / cardWidth);
+    
+    const dotsString = '○'.split('');
+    dotsString[activeIndex] = '⬤';
+    dots.textContent = dotsString.join(' ');
 }
 
-// Load Instagram posts
-// Note: Instagram doesn't provide a simple public embed API anymore
-// This uses static posts that should be updated manually or via Instagram Basic Display API
-function loadInstagramPosts() {
-    const instaGrid = document.getElementById('insta-grid');
-    if (!instaGrid) return;
+// Bottom navigation - scroll spy
+function initBottomNav() {
+    const navItems = document.querySelectorAll('.nav-item');
+    const sections = document.querySelectorAll('#home, #what-we-do, #videos, #instagram');
     
-    // Static Instagram posts (update these manually or use Instagram Basic Display API)
-    const posts = [
-        'DVxLOXdkXEx',
-        'DVnT5-nDc4Y',
-        'DVWp-I1knB3',
-        'DVL-KDTAHgO',
-        'DU7W66yEVlB',
-        'DUuPQ-jEUnN'
-    ];
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                navItems.forEach(item => {
+                    item.classList.remove('active');
+                    if (item.getAttribute('href') === `#${id}`) {
+                        item.classList.add('active');
+                    }
+                });
+            }
+        });
+    }, { threshold: 0.5 });
     
-    instaGrid.innerHTML = posts.map(id => `
-        <a href="https://www.instagram.com/reel/${id}/" target="_blank" class="insta-card">
-            <div class="insta-wrapper">
-                <iframe src="https://www.instagram.com/reel/${id}/embed" class="insta-embed" title="Instagram Post"></iframe>
-            </div>
-        </a>
-    `).join('');
+    sections.forEach(section => observer.observe(section));
     
-    // Re-observe new cards
-    observeCards();
-    
-    // TODO: To enable Instagram API:
-    // Use Instagram Basic Display API with OAuth
-    // Requires: Facebook Developer App, access token, and server-side refresh
+    // Smooth scroll for nav clicks
+    navItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            const href = item.getAttribute('href');
+            if (href && href.startsWith('#')) {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+    });
 }
 
 // Console signature
