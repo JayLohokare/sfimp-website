@@ -1,0 +1,391 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #FF6B35;
+    --secondary: #004E89;
+    --accent: #FFB347;
+    --dark: #1A1A2E;
+    --light: #F7F7F7;
+    --white: #FFFFFF;
+    --gradient: linear-gradient(135deg, #FF6B35 0%, #FFB347 100%);
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.6;
+    color: var(--dark);
+    background: var(--light);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Navigation */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    padding: 1rem 0;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--dark);
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--primary);
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: var(--gradient);
+    overflow: hidden;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('hero-bg.jpg') center/cover;
+    opacity: 0.2;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    color: var(--white);
+    max-width: 800px;
+    padding: 2rem;
+}
+
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.tagline {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: 0.5rem;
+}
+
+.mission {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.hero-stat {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 1rem;
+    backdrop-filter: blur(10px);
+}
+
+.cta-button {
+    display: inline-block;
+    background: var(--white);
+    color: var(--primary);
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Sections */
+.section {
+    padding: 5rem 0;
+}
+
+.alt-bg {
+    background: var(--white);
+}
+
+h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--secondary);
+}
+
+.section-intro {
+    text-align: center;
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: -2rem auto 3rem;
+    color: #666;
+}
+
+/* Vision Cards */
+.vision-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.vision-card {
+    background: var(--white);
+    padding: 2.5rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s;
+}
+
+.vision-card:hover {
+    transform: translateY(-5px);
+}
+
+.vision-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary);
+}
+
+.vision-meta {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    font-size: 0.85rem;
+    color: #666;
+    font-weight: 600;
+}
+
+/* Pods Grid */
+.pods-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.pod-card {
+    background: var(--gradient);
+    color: var(--white);
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+}
+
+.pod-card h4 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.music-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 3rem;
+    padding: 2rem;
+    background: var(--dark);
+    border-radius: 15px;
+    color: var(--white);
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* Events Grid */
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.event-card {
+    background: var(--light);
+    padding: 2rem;
+    border-radius: 12px;
+    border-left: 4px solid var(--primary);
+}
+
+.event-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: var(--secondary);
+}
+
+.event-meta {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #666;
+    font-style: italic;
+}
+
+/* Instagram Section */
+.instagram-embed {
+    max-width: 500px;
+    margin: 2rem auto;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.social-btn {
+    display: inline-block;
+    background: var(--gradient);
+    color: var(--white);
+    padding: 0.8rem 2rem;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.3s;
+}
+
+.social-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Roles Grid */
+.roles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.role-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.role-card h3 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+.founding-musicians {
+    text-align: center;
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: var(--accent);
+    color: var(--white);
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+/* Footer */
+footer {
+    background: var(--dark);
+    color: var(--white);
+    text-align: center;
+    padding: 3rem 0;
+}
+
+footer p {
+    opacity: 0.8;
+    margin: 0.5rem 0;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .tagline {
+        font-size: 1.2rem;
+    }
+
+    .nav-links {
+        gap: 1rem;
+        font-size: 0.9rem;
+    }
+
+    .vision-grid,
+    .pods-grid,
+    .events-grid,
+    .roles-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .music-stats {
+        flex-direction: column;
+        gap: 2rem;
+    }
+}
