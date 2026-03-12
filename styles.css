@@ -136,12 +136,13 @@ body {
 }
 
 .activity-card {
-    background: var(--off-white);
-    padding: 2.5rem;
+    background: var(--white);
+    padding: 2rem;
     border-radius: 12px;
     text-align: center;
     transition: var(--transition);
     border: 1px solid var(--light-gray);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .activity-card:hover {
