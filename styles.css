@@ -23,7 +23,7 @@ body {
     overflow-x: hidden;
 }
 
-/* Minimal Header */
+/* Minimal Header with Logo */
 .minimal-header {
     position: fixed;
     top: 0;
@@ -36,17 +36,35 @@ body {
     z-index: 1000;
 }
 
+.logo-container {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+}
+
 .logo {
     font-family: 'Playfair Display', Georgia, serif;
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     font-weight: 700;
-    letter-spacing: 0.05em;
-    opacity: 0.8;
-    transition: opacity 0.3s ease;
+    letter-spacing: 0.1em;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    opacity: 0.9;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .logo:hover {
     opacity: 1;
+    transform: scale(1.02);
+}
+
+.logo-tagline {
+    font-size: 0.875rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 0.05em;
 }
 
 /* Hero - Instagram Grid */
