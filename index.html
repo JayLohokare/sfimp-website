@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SF Indian Music Project - Bay Area's Premier Asian Music Community</title>
+    <title>SF Indian Music Project</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,201 +11,163 @@
     <meta name="theme-color" content="#6200EE">
 </head>
 <body>
+    <!-- Minimal Navbar -->
     <nav class="navbar">
         <div class="container">
             <div class="logo">SFIMP</div>
             <ul class="nav-links">
-                <li><a href="#about">About</a></li>
                 <li><a href="#music">Music</a></li>
-                <li><a href="#community">Community</a></li>
                 <li><a href="#events">Events</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#join">Join</a></li>
             </ul>
         </div>
     </nav>
 
+    <!-- Hero - Full Visual -->
     <header class="hero">
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <h1>San Francisco Indian Music Project</h1>
             <p class="tagline">Where Music Meets Community</p>
-            <p class="mission">North Star: Be the largest Asian music group in the Bay Area by 2028</p>
-            <div class="hero-stats">
-                <span class="hero-stat">1,023 Instagram Followers</span>
-                <span class="hero-stat">40+ Posts</span>
-                <span class="hero-stat">50+ Musicians</span>
-                <span class="hero-stat">150+ Videos</span>
-            </div>
-            <a href="#join" class="cta-button">Join the Movement</a>
+            <div class="scroll-indicator">↓</div>
         </div>
+        <div class="hero-video-bg"></div>
     </header>
 
-    <section id="about" class="section">
+    <!-- Music Section - Visual Gallery -->
+    <section id="music" class="section visual-section">
         <div class="container">
-            <h2>Our Vision</h2>
-            <p class="section-intro">Three pillars driving our mission to build a lasting musical community</p>
-            <div class="vision-grid">
-                <div class="vision-card">
-                    <h3>🎵 Music Excellence</h3>
-                    <p>Technical mastery meets soul and emotion. Cross-genre compositions for Indian and Western audiences. Studio jams, complex compositions, and refined multi-take recordings.</p>
-                    <p class="vision-meta">2026: 4 Music Pods | 50+ Musicians | 150+ Videos | 250K Monthly Views</p>
-                    <p class="vision-meta">YouTube: 1K followers (5X growth) | Instagram: 10K followers (20X growth)</p>
+            <h2 class="fade-in">Music</h2>
+            <p class="section-intro fade-in">Four pods. Infinite sounds.</p>
+            
+            <div class="visual-grid">
+                <div class="visual-card classical">
+                    <div class="visual-content">
+                        <h3>Classical</h3>
+                        <p>Roots & Tradition</p>
+                    </div>
                 </div>
-                <div class="vision-card">
-                    <h3>👥 Community First</h3>
-                    <p>Decentralized community built to outlast any single person. Public jams at Salesforce Park, East Cut, SF City Hall. Small-scale acoustic sessions and experimental formats.</p>
-                    <p class="vision-meta">2026: 3 Quarterly Events | 100+ Avg Participation | 1,000+ Annual Audience</p>
-                    <p class="vision-meta">Formats: Tiny Desk, Candlelight, Blues, Sing-alongs</p>
+                <div class="visual-card fusion">
+                    <div class="visual-content">
+                        <h3>Fusion</h3>
+                        <p>East meets West</p>
+                    </div>
                 </div>
-                <div class="vision-card">
-                    <h3>🌟 Sustainable Growth</h3>
-                    <p>Non-profit model where revenue reinvests into production, venues, and organizing committee. Venue partnerships, sponsorships, workshops, and flagship events.</p>
-                    <p class="vision-meta">Revenue Streams: Sponsorships | Workshops | Flagship Events (Diwali, Holi)</p>
-                    <p class="vision-meta">Model: Revenue → Production + Venues + Community Reimbursement</p>
+                <div class="visual-card bollywood">
+                    <div class="visual-content">
+                        <h3>Bollywood</h3>
+                        <p>Cinema & Soul</p>
+                    </div>
+                </div>
+                <div class="visual-card experimental">
+                    <div class="visual-content">
+                        <h3>Experimental</h3>
+                        <p>Boundaryless</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="music" class="section alt-bg">
+    <!-- Events Section - Visual Timeline -->
+    <section id="events" class="section visual-section alt-bg">
         <div class="container">
-            <h2>Music Pods</h2>
-            <p class="section-intro">Four unique pods, each with distinct themes, languages, and genres</p>
-            <div class="pods-grid">
-                <div class="pod-card">
-                    <h4>Pod 1</h4>
-                    <p>Classical & Traditional</p>
-                    <p class="pod-desc">Carnatic, Hindustani, devotional music</p>
+            <h2 class="fade-in">Events</h2>
+            <p class="section-intro fade-in">Feel the rhythm. Live.</p>
+            
+            <div class="event-showcase">
+                <div class="event-visual public-jam">
+                    <div class="event-content">
+                        <h3>Public Jams</h3>
+                        <p>Salesforce Park • East Cut • Downtown SF</p>
+                        <span class="event-cta">Quarterly</span>
+                    </div>
                 </div>
-                <div class="pod-card">
-                    <h4>Pod 2</h4>
-                    <p>Contemporary Fusion</p>
-                    <p class="pod-desc">East-meets-West, genre-blending</p>
+                <div class="event-visual small-jam">
+                    <div class="event-content">
+                        <h3>Small Jams</h3>
+                        <p>Acoustic • Classical • Instrument-specific</p>
+                        <span class="event-cta">Monthly</span>
+                    </div>
                 </div>
-                <div class="pod-card">
-                    <h4>Pod 3</h4>
-                    <p>Bollywood & Film</p>
-                    <p class="pod-desc">Hindi, Tamil, Telugu cinema hits</p>
-                </div>
-                <div class="pod-card">
-                    <h4>Pod 4</h4>
-                    <p>Experimental & Global</p>
-                    <p class="pod-desc">Indie, electronic, cross-cultural</p>
-                </div>
-            </div>
-            <p class="music-note">2026 Goal: Establish all 4 pods with dedicated musicians and unique identities</p>
-            <div class="music-stats">
-                <div class="stat">
-                    <span class="stat-number">50+</span>
-                    <span class="stat-label">Bay Area Musicians</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">150+</span>
-                    <span class="stat-label">Music Videos</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">250K</span>
-                    <span class="stat-label">Monthly Views</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">10K</span>
-                    <span class="stat-label">Instagram Followers</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">1K</span>
-                    <span class="stat-label">YouTube Subscribers</span>
+                <div class="event-visual flagship">
+                    <div class="event-content">
+                        <h3>Flagship</h3>
+                        <p>Diwali • Holi • Cultural Celebrations</p>
+                        <span class="event-cta">Annual</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="community" class="section">
+    <!-- Instagram Section - Visual Feed -->
+    <section id="instagram" class="section visual-section">
         <div class="container">
-            <h2>Community & Events</h2>
-            <div class="events-grid">
-                <div class="event-card">
-                    <h3>🎪 Public Jams</h3>
-                    <p>Quarterly large-scale events at Salesforce Park, East Cut, and downtown SF/East Bay</p>
-                    <p class="event-meta">100+ avg participation | 1,000+ annual audience</p>
-                    <p class="event-meta">Next: April 4th at Spark Social</p>
+            <h2 class="fade-in">@sfindianmusicproject</h2>
+            <p class="section-intro fade-in">1K+ followers • Living the vibe</p>
+            
+            <div class="insta-grid">
+                <div class="insta-post">
+                    <div class="insta-placeholder studio">
+                        <span>🎬 Studio Sessions</span>
+                    </div>
                 </div>
-                <div class="event-card">
-                    <h3>🎸 Small Scale Jams</h3>
-                    <p>Musician-experience focused sessions: acoustic, classical, instrument-specific</p>
-                    <p class="event-meta">Experimental formats: Tiny Desk, Candlelight, Blues, Sing-alongs</p>
-                    <p class="event-meta">Monthly studio recording sessions</p>
+                <div class="insta-post">
+                    <div class="insta-placeholder spark">
+                        <span>🎪 Spark Social</span>
+                    </div>
                 </div>
-                <div class="event-card">
-                    <h3>🎉 Flagship Events</h3>
-                    <p>Large-scale ticketed events for Diwali, Holi, and cultural celebrations</p>
-                    <p class="event-meta">Premium production | Target: SF City Hall</p>
-                    <p class="event-meta">Revenue goal: $80K+ per event</p>
+                <div class="insta-post">
+                    <div class="insta-placeholder acoustic">
+                        <span>🎸 Acoustic</span>
+                    </div>
+                </div>
+                <div class="insta-post">
+                    <div class="insta-placeholder fusion">
+                        <span>🎤 Fusion</span>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section id="instagram" class="section alt-bg">
-        <div class="container">
-            <h2>Latest from Instagram</h2>
-            <p class="section-intro">1,023 followers • 40+ posts • Growing 20X toward 10K goal</p>
-            <div class="recent-posts">
-                <div class="post-card">
-                    <h4>🎬 Studio Sessions BTS</h4>
-                    <p>Behind the scenes of our monthly recording sessions. Join us for collabs!</p>
-                    <span class="post-tag">#StudioSessions #BehindTheScenes</span>
-                </div>
-                <div class="post-card">
-                    <h4>🎪 Spark Social Jams</h4>
-                    <p>Monthly Bollywood jam sessions in downtown SF. Next session: April 4th!</p>
-                    <span class="post-tag">#Bollywood #LiveMusic #SparkSocial</span>
-                </div>
-                <div class="post-card">
-                    <h4>🎸 Acoustic & Unplugged</h4>
-                    <p>Raw, single-take acoustic renditions. Going back to our roots.</p>
-                    <span class="post-tag">#Acoustic #Unplugged #HindiSongs</span>
-                </div>
-                <div class="post-card">
-                    <h4>🎤 Classical → Rock Fusion</h4>
-                    <p>Deewani Mastani meets rock. Classical-to-rock creations.</p>
-                    <span class="post-tag">#ClassicalToRock #Fusion #BajiraoMastani</span>
-                </div>
-            </div>
-            <div class="social-links">
+            
+            <div class="social-cta">
                 <a href="https://instagram.com/sfindianmusicproject" class="social-btn">Instagram</a>
                 <a href="https://youtube.com/@sfindianmusicproject" class="social-btn">YouTube</a>
                 <a href="https://tiktok.com/@sfindianmusicproject" class="social-btn">TikTok</a>
             </div>
-            <p class="cta-note">RSVP for our next session: <a href="https://tinyurl.com/sfindianmusicproject-4april26" target="_blank">April 4th at Spark Social</a></p>
         </div>
     </section>
 
-    <section id="join" class="section">
+    <!-- Join Section - Minimal CTA -->
+    <section id="join" class="section visual-section alt-bg">
         <div class="container">
-            <h2>Get Involved</h2>
-            <div class="roles-grid">
-                <div class="role-card">
-                    <h3>Leadership</h3>
-                    <p>Lead a music pod, manage social media, host local sessions</p>
+            <h2 class="fade-in">Join Us</h2>
+            <p class="section-intro fade-in">50+ musicians. One community.</p>
+            
+            <div class="join-visual">
+                <div class="join-card">
+                    <span class="join-icon">🎵</span>
+                    <h3>Music</h3>
                 </div>
-                <div class="role-card">
-                    <h3>Operations</h3>
-                    <p>Manage jams, coordinate venue outreach, find sponsors</p>
+                <div class="join-card">
+                    <span class="join-icon">👥</span>
+                    <h3>Community</h3>
                 </div>
-                <div class="role-card">
-                    <h3>Creative</h3>
-                    <p>Edit content/music, create campaigns, design visuals</p>
+                <div class="join-card">
+                    <span class="join-icon">🎪</span>
+                    <h3>Events</h3>
                 </div>
             </div>
-            <p class="founding-musicians">Founding Musicians get voting rights, direct musical choices, and potential compensation</p>
-            <a href="mailto:sfindianmusicproject@gmail.com" class="cta-button">Contact Us</a>
+            
+            <a href="mailto:sfindianmusicproject@gmail.com" class="cta-button">Let's Create</a>
         </div>
     </section>
 
-    <footer id="contact">
+    <!-- Footer - Minimal -->
+    <footer>
         <div class="container">
-            <p>&copy; 2026 SF Indian Music Project. All rights reserved.</p>
-            <p>San Francisco Bay Area | Building Community Through Music</p>
+            <p>SF Indian Music Project</p>
+            <p>San Francisco Bay Area</p>
         </div>
     </footer>
 
