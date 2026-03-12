@@ -42,12 +42,19 @@ body {
 
 /* Hero Section - Centered Logo */
 .hero {
-    min-height: 100vh;
+    min-height: 80vh;
     display: flex;
     align-items: center;
     justify-content: center;
     background: var(--white);
-    padding: 2rem 0;
+    padding: 3rem 0;
+}
+
+@media (max-width: 768px) {
+    .hero {
+        min-height: 65vh;
+        padding: 2rem 0;
+    }
 }
 
 .hero-content {
@@ -63,11 +70,24 @@ body {
     margin-bottom: 3rem;
 }
 
+@media (max-width: 768px) {
+    .logo-centered {
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+}
+
 .logo-image-large {
     max-width: 280px;
     width: 100%;
     height: auto;
     object-fit: contain;
+}
+
+@media (max-width: 768px) {
+    .logo-image-large {
+        max-width: 200px;
+    }
 }
 
 .hero-title {
@@ -76,6 +96,12 @@ body {
     line-height: 1.2;
     letter-spacing: -0.02em;
     color: var(--logo-dark-brown);
+}
+
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2rem;
+    }
 }
 
 .hero-subtitle {
@@ -92,14 +118,21 @@ body {
 
 /* What We Do Section */
 .what-we-do-section {
-    background: var(--white);
+    background: var(--off-white);
 }
 
 .activities-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    margin-bottom: 3rem;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+    .activities-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
 }
 
 .activity-card {
@@ -138,7 +171,13 @@ body {
 
 /* Sections */
 .section {
-    padding: 6rem 0;
+    padding: 4rem 0;
+}
+
+@media (max-width: 768px) {
+    .section {
+        padding: 3rem 0;
+    }
 }
 
 .section-title {
@@ -163,7 +202,7 @@ body {
 
 /* Videos Section */
 .videos-section {
-    background: var(--off-white);
+    background: var(--white);
 }
 
 .video-grid {
@@ -273,7 +312,7 @@ body {
 
 /* Instagram Section */
 .insta-section {
-    background: var(--white);
+    background: var(--off-white);
 }
 
 .insta-grid {
@@ -316,7 +355,7 @@ body {
 
 /* Community Section */
 .community-section {
-    background: var(--off-white);
+    background: var(--white);
 }
 
 .community-content {
