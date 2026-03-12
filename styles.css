@@ -336,6 +336,53 @@ body {
     min-height: 400px;
 }
 
+/* Hero CTA */
+.hero-cta {
+    margin-top: 3rem;
+}
+
+/* Community Section */
+.community-section {
+    background: var(--off-white);
+}
+
+.community-content {
+    display: flex;
+    justify-content: center;
+}
+
+.community-card {
+    background: var(--white);
+    padding: 3rem;
+    border-radius: 12px;
+    text-align: center;
+    max-width: 500px;
+    border: 1px solid var(--light-gray);
+}
+
+.community-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--logo-dark-brown);
+}
+
+.community-card p {
+    font-size: 1rem;
+    color: var(--gray);
+    margin-bottom: 2rem;
+    line-height: 1.5;
+}
+
+.cta-button.whatsapp {
+    background: #25D366;
+    color: var(--white);
+}
+
+.cta-button.whatsapp:hover {
+    background: #20BA5A;
+}
+
 /* Footer */
 .footer {
     background: var(--white);
