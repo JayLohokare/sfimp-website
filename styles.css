@@ -144,13 +144,13 @@ body {
 
 .activities-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: 1fr;
     gap: 1.25rem;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 768px) {
     .activities-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     }
 }
 
