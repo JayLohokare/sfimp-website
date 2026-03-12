@@ -1,12 +1,30 @@
-// SFIMP - Minimal Community Showcase JS
+// SFIMP - Modern Website JS
 
 document.addEventListener('DOMContentLoaded', () => {
-    initSmoothFade();
-    initCardHoverEffects();
+    initLoadingScreen();
+    initScrollAnimations();
+    initSmoothScroll();
+    initHeaderScroll();
 });
 
-// Smooth fade-in on scroll
-function initSmoothFade() {
+// Loading screen
+function initLoadingScreen() {
+    const loader = document.createElement('div');
+    loader.id = 'page-loader';
+    loader.innerHTML = '<div class="loader-content"><span class="loader-music-note">♪</span></div>';
+    document.body.appendChild(loader);
+    
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            loader.style.opacity = '0';
+            loader.style.visibility = 'hidden';
+            setTimeout(() => loader.remove(), 500);
+        }, 800);
+    });
+}
+
+// Scroll animations
+function initScrollAnimations() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -16,39 +34,67 @@ function initSmoothFade() {
         });
     }, { threshold: 0.1 });
     
-    // Observe community message
-    const message = document.querySelector('.community-message');
-    if (message) {
-        message.style.opacity = '0';
-        message.style.transform = 'translateY(20px)';
-        message.style.transition = 'opacity 1s ease, transform 1s ease';
-        observer.observe(message);
-    }
+    // Animate sections
+    const sections = document.querySelectorAll('.section');
+    sections.forEach(section => {
+        section.style.opacity = '0';
+        section.style.transform = 'translateY(30px)';
+        section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+        observer.observe(section);
+    });
     
-    // Observe Instagram cards
-    const cards = document.querySelectorAll('.insta-card');
-    cards.forEach((card, i) => {
+    // Animate video cards
+    const videoCards = document.querySelectorAll('.video-card');
+    videoCards.forEach((card, i) => {
         card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = `opacity 0.6s ease ${i * 0.1}s, transform 0.6s ease ${i * 0.1}s`;
+        observer.observe(card);
+    });
+    
+    // Animate Instagram cards
+    const instaCards = document.querySelectorAll('.insta-card');
+    instaCards.forEach((card, i) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
         card.style.transition = `opacity 0.6s ease ${i * 0.1}s, transform 0.6s ease ${i * 0.1}s`;
         observer.observe(card);
     });
 }
 
-// Add subtle hover glow effect
-function initCardHoverEffects() {
-    const cards = document.querySelectorAll('.insta-card');
-    
-    cards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            card.style.filter = 'brightness(1.1)';
-        });
-        
-        card.addEventListener('mouseleave', () => {
-            card.style.filter = 'brightness(1)';
+// Smooth scroll for navigation
+function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const target = document.querySelector(targetId);
+            
+            if (target) {
+                const offsetTop = target.offsetTop - 80;
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
         });
     });
 }
 
+// Header scroll effect
+function initHeaderScroll() {
+    const header = document.querySelector('.header');
+    
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            header.style.background = 'rgba(10, 10, 10, 0.98)';
+            header.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.3)';
+        } else {
+            header.style.background = 'rgba(10, 10, 10, 0.95)';
+            header.style.boxShadow = 'none';
+        }
+    });
+}
+
 // Console signature
-console.log('SFIMP - Music. Community. Vibes.');
+console.log('SFIMP - Music. Community. Vibes. 🎵');

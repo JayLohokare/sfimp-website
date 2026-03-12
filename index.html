@@ -4,75 +4,185 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SF Indian Music Project</title>
-    <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Minimal Header with Logo -->
-    <header class="minimal-header">
-        <div class="logo-container">
-            <div class="logo">SFIMP</div>
-            <span class="logo-tagline">San Francisco Indian Music Project</span>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo">
+                <span class="logo-text">SFIMP</span>
+                <span class="logo-tagline">San Francisco Indian Music Project</span>
+            </div>
+            <nav class="nav">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#videos" class="nav-link">Videos</a>
+                <a href="#instagram" class="nav-link">Instagram</a>
+            </nav>
         </div>
     </header>
 
-    <!-- Hero - Instagram Grid as Centerpiece -->
-    <section class="hero-instagram">
-        <div class="insta-grid-hero">
-            <!-- Instagram post cards with links -->
-            <a href="https://www.instagram.com/sfindianmusicproject/reel/DVxLOXdkXEx/" target="_blank" class="insta-card">
-                <div class="insta-placeholder">
-                    <span>🎬 Studio Sessions</span>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background"></div>
+        <div class="container hero-content">
+            <h1 class="hero-title">
+                <span class="gradient-text">Music. Community. Vibes.</span>
+            </h1>
+            <p class="hero-subtitle">San Francisco Bay Area's premier South Asian music collective</p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">57</span>
+                    <span class="stat-label">Videos</span>
                 </div>
-            </a>
-            <a href="https://www.instagram.com/sfindianmusicproject/reel/DVnT5-nDc4Y/" target="_blank" class="insta-card">
-                <div class="insta-placeholder">
-                    <span>🎸 Live Music</span>
+                <div class="stat">
+                    <span class="stat-number">1K+</span>
+                    <span class="stat-label">Instagram</span>
                 </div>
-            </a>
-            <a href="https://www.instagram.com/sfindianmusicproject/reel/DVWp-I1knB3/" target="_blank" class="insta-card">
-                <div class="insta-placeholder">
-                    <span>✨ Classical Fusion</span>
+                <div class="stat">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">Musicians</span>
                 </div>
-            </a>
-            <a href="https://www.instagram.com/sfindianmusicproject/reel/DVL-KDTAHgO/" target="_blank" class="insta-card">
-                <div class="insta-placeholder">
-                    <span>🎪 Spark Social</span>
-                </div>
-            </a>
-            <a href="https://www.instagram.com/sfindianmusicproject/reel/DU7W66yEVlB/" target="_blank" class="insta-card">
-                <div class="insta-placeholder">
-                    <span>🎤 Bollywood Jam</span>
-                </div>
-            </a>
-            <a href="https://www.instagram.com/sfindianmusicproject/reel/DUuPQ-jEUnN/" target="_blank" class="insta-card">
-                <div class="insta-placeholder">
-                    <span>🎵 Acoustic Vibes</span>
-                </div>
-            </a>
+            </div>
         </div>
     </section>
 
-    <!-- Simple Community Message -->
-    <section class="community-message">
-        <h1>Music. Community. Vibes.</h1>
-        <p>San Francisco Bay Area</p>
+    <!-- YouTube Videos Section -->
+    <section id="videos" class="section videos-section">
+        <div class="container">
+            <h2 class="section-title">Latest Videos</h2>
+            <p class="section-subtitle">Studio sessions, live jams, and musical moments</p>
+            
+            <div class="video-grid">
+                <!-- Featured Video -->
+                <div class="video-card featured">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/NF673jaWZ3k" title="Studio session: Atach baya ka" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Studio session: Atach baya ka / Bharla Madhumas</h3>
+                        <p class="video-meta">SF Indian Music Project • 90 views</p>
+                    </div>
+                </div>
+                
+                <!-- Video Cards -->
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/6PqNc5p1Mho" title="The Reason / Tune jo na kaha" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">The Reason / Tune jo na kaha / Naina</h3>
+                        <p class="video-meta">376 views</p>
+                    </div>
+                </div>
+                
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/WfEbCQKOjyQ" title="Pardesiya / Jiya Jale" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Pardesiya / Jiya Jale / Ye Haseen Waadiyan</h3>
+                        <p class="video-meta">528 views</p>
+                    </div>
+                </div>
+                
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/_YdjmxkqjGM" title="Bin Tere / Sweet Child O Mine" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Bin Tere / Sweet Child O Mine</h3>
+                        <p class="video-meta">329 views</p>
+                    </div>
+                </div>
+                
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/mRPUOheEJZI" title="Pehela Nasha / Everything I do" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Pehela Nasha / Everything I do</h3>
+                        <p class="video-meta">643 views</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cta-container">
+                <a href="https://youtube.com/@sfindianmusicproject" target="_blank" class="cta-button youtube">
+                    <svg viewBox="0 0 24 24" fill="currentColor" class="icon">
+                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.587 3.545 12 3.545 12 3.545s-7.587 0-9.376.505A3.017 3.017 0 0 0 .502 6.186C0 7.973 0 12 0 12s0 4.027.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.789.505 9.376.505 9.376.505s7.587 0 9.376-.505a3.015 3.015 0 0 0 2.122-2.136c.502-1.787.502-5.814.502-5.814s0-4.027-.502-5.814z"/>
+                        <path d="M9.461 8.751l5.99 3.434-5.99 3.434V8.751z" fill="#fff"/>
+                    </svg>
+                    View All Videos
+                </a>
+            </div>
+        </div>
     </section>
 
-    <!-- Instagram Follow CTA -->
-    <section class="insta-cta">
-        <a href="https://instagram.com/sfindianmusicproject" class="insta-link">@sfindianmusicproject</a>
-        <p class="follower-count">1,023 followers • 40 posts</p>
+    <!-- Instagram Section -->
+    <section id="instagram" class="section insta-section">
+        <div class="container">
+            <h2 class="section-title">Instagram</h2>
+            <p class="section-subtitle">Behind the scenes, live moments, community vibes</p>
+            
+            <div class="insta-grid">
+                <a href="https://instagram.com/sfindianmusicproject" target="_blank" class="insta-card">
+                    <div class="insta-placeholder studio">
+                        <span class="insta-emoji">🎬</span>
+                        <span class="insta-text">Studio Sessions</span>
+                    </div>
+                </a>
+                <a href="https://instagram.com/sfindianmusicproject" target="_blank" class="insta-card">
+                    <div class="insta-placeholder live">
+                        <span class="insta-emoji">🎸</span>
+                        <span class="insta-text">Live Music</span>
+                    </div>
+                </a>
+                <a href="https://instagram.com/sfindianmusicproject" target="_blank" class="insta-card">
+                    <div class="insta-placeholder fusion">
+                        <span class="insta-emoji">✨</span>
+                        <span class="insta-text">Classical Fusion</span>
+                    </div>
+                </a>
+                <a href="https://instagram.com/sfindianmusicproject" target="_blank" class="insta-card">
+                    <div class="insta-placeholder spark">
+                        <span class="insta-emoji">🎪</span>
+                        <span class="insta-text">Spark Social</span>
+                    </div>
+                </a>
+                <a href="https://instagram.com/sfindianmusicproject" target="_blank" class="insta-card">
+                    <div class="insta-placeholder bollywood">
+                        <span class="insta-emoji">🎤</span>
+                        <span class="insta-text">Bollywood Jam</span>
+                    </div>
+                </a>
+                <a href="https://instagram.com/sfindianmusicproject" target="_blank" class="insta-card">
+                    <div class="insta-placeholder acoustic">
+                        <span class="insta-emoji">🎵</span>
+                        <span class="insta-text">Acoustic Vibes</span>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="cta-container">
+                <a href="https://instagram.com/sfindianmusicproject" target="_blank" class="cta-button instagram">
+                    @sfindianmusicproject
+                </a>
+            </div>
+        </div>
     </section>
 
-    <!-- Footer - Minimal -->
-    <footer>
-        <p>San Francisco Indian Music Project</p>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">SF Indian Music Project</p>
+            <p class="footer-subtext">San Francisco Bay Area</p>
+        </div>
     </footer>
 
-    <script async src="//www.instagram.com/embed.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
