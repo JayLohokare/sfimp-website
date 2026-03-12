@@ -7,11 +7,11 @@ document.addEventListener('DOMContentLoaded', () => {
     initHeaderScroll();
 });
 
-// Loading screen
+// Loading screen with logo
 function initLoadingScreen() {
     const loader = document.createElement('div');
     loader.id = 'page-loader';
-    loader.innerHTML = '<div class="loader-content"><span class="loader-music-note">♪</span></div>';
+    loader.innerHTML = '<div class="loader-content"><img src="logo.png" alt="SFIMP Logo" class="loader-logo"></div>';
     document.body.appendChild(loader);
     
     window.addEventListener('load', () => {
