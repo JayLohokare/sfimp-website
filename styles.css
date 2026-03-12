@@ -66,15 +66,24 @@ body {
     display: flex;
     align-items: center;
     gap: 1rem;
+    text-decoration: none;
+    transition: var(--transition);
 }
 
-.logo-icon {
-    font-size: 2.5rem;
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: pulse 2s ease-in-out infinite;
+.logo:hover {
+    transform: scale(1.02);
+}
+
+.logo-image {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 8px rgba(255, 193, 7, 0.3));
+    transition: var(--transition);
+}
+
+.logo:hover .logo-image {
+    filter: drop-shadow(0 4px 12px rgba(255, 193, 7, 0.5));
 }
 
 .logo-text-wrapper {
