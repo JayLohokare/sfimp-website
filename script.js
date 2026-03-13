@@ -270,7 +270,7 @@ function initEvents() {
 // YouTube channel configuration
 const YOUTUBE_CONFIG = {
     channelHandle: 'sfindianmusicproject',
-    channelId: null, // Will be auto-detected or can be set manually
+    channelId: 'UCPfOZK-GfS92UG4yaFJszNA', // Will be auto-detected or can be set manually
     maxVideos: 4
 };
 
