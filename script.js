@@ -270,12 +270,34 @@ function initEvents() {
 // YouTube channel configuration
 const YOUTUBE_CONFIG = {
     channelHandle: 'sfindianmusicproject',
-    channelId: null, // Optional: Set this if you know the channel ID (starts with UC)
+    channelId: null, // Will be auto-detected or can be set manually
     maxVideos: 4
 };
 
+// Helper: Get channel ID from a video ID using YouTube oEmbed
+async function getChannelIdFromVideoId(videoId) {
+    try {
+        const oembedUrl = `https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${videoId}&format=json`;
+        const response = await fetch(oembedUrl);
+        if (response.ok) {
+            const data = await response.json();
+            // Extract channel ID from author URL if available
+            if (data.author_url) {
+                const match = data.author_url.match(/channel\/([^\/]+)/);
+                if (match && match[1].startsWith('UC')) {
+                    return match[1];
+                }
+            }
+        }
+    } catch (e) {
+        console.log('Could not get channel ID from video:', e);
+    }
+    return null;
+}
+
 // Fetch and display YouTube videos
 async function initYouTubeVideos() {
+    console.log('initYouTubeVideos called');
     const videoGrid = document.getElementById('video-grid');
     if (!videoGrid) {
         console.warn('Video grid not found');
@@ -284,9 +306,11 @@ async function initYouTubeVideos() {
 
     // Store original videos as fallback
     const originalVideos = videoGrid.innerHTML;
+    console.log('Starting YouTube video fetch for:', YOUTUBE_CONFIG.channelHandle);
 
     try {
         const videos = await fetchYouTubeVideos(YOUTUBE_CONFIG.channelHandle, YOUTUBE_CONFIG.maxVideos, YOUTUBE_CONFIG.channelId);
+        console.log('Fetched videos:', videos.length);
         
         if (videos.length === 0) {
             // Keep original videos if no videos found
@@ -341,108 +365,139 @@ function escapeHtml(text) {
     return div.innerHTML;
 }
 
-// Fetch YouTube videos from channel
+// Fetch YouTube videos from channel - Simplified approach
 async function fetchYouTubeVideos(channelHandle, maxResults = 4, providedChannelId = null) {
     try {
-        // Use provided channel ID if available, otherwise try to get it dynamically
+        // Try multiple RSS feed formats that work with YouTube
+        const rssFormats = [];
+        
+        // If channel ID is provided, use it directly
+        if (providedChannelId) {
+            rssFormats.push(`https://www.youtube.com/feeds/videos.xml?channel_id=${providedChannelId}`);
+        }
+        
+        // Try channel handle formats
+        rssFormats.push(`https://www.youtube.com/feeds/videos.xml?user=${channelHandle}`);
+        rssFormats.push(`https://www.youtube.com/@${channelHandle}/videos.rss`);
+        
+        // If we have a channel ID from previous attempts, add it
         let channelId = providedChannelId;
         
-        if (!channelId) {
-            console.log('Attempting to get channel ID for:', channelHandle);
-            // First, try to get the channel ID from the handle
-            channelId = await getChannelIdFromHandle(channelHandle);
-            
-            // If we couldn't get channel ID, try alternative methods
-            if (!channelId) {
-                console.log('First method failed, trying alternative...');
-                // Try using the channel's uploads playlist RSS (works with handle in some cases)
-                channelId = await getChannelIdFromUploadsPlaylist(channelHandle);
-            }
-            
-            if (channelId) {
-                console.log('Found channel ID:', channelId);
-            } else {
-                console.warn('Could not find channel ID. Trying direct handle method...');
-                // Last resort: try using handle directly (may work for some channels)
-                const directRssUrl = `https://www.youtube.com/feeds/videos.xml?user=${channelHandle}`;
-                const directApiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(directRssUrl)}&api_key=public&count=${maxResults}`;
-                try {
-                    const directResponse = await fetch(directApiUrl);
-                    if (directResponse.ok) {
-                        const directData = await directResponse.json();
-                        if (directData.status === 'ok' && directData.items && directData.items.length > 0) {
-                            // Success! Extract channel ID from feed if available
-                            if (directData.feed && directData.feed.link) {
-                                const channelMatch = directData.feed.link.match(/channel\/([^\/]+)/);
-                                if (channelMatch && channelMatch[1].startsWith('UC')) {
-                                    channelId = channelMatch[1];
-                                    console.log('Found channel ID via direct method:', channelId);
-                                }
-                            }
-                            // Even without channel ID, we can return videos
-                            const videos = directData.items.map(item => {
-                                let videoId = null;
-                                if (item.link) {
-                                    const match = item.link.match(/[?&]v=([^&]+)/);
-                                    videoId = match ? match[1] : null;
-                                }
-                                return {
-                                    id: videoId,
-                                    title: item.title || 'Untitled Video',
-                                    published: item.pubDate || ''
-                                };
-                            }).filter(video => video.id);
-                            if (videos.length > 0) {
-                                return videos;
+        // Use rss2json API to convert RSS to JSON (handles CORS and parsing)
+        for (const rssUrl of rssFormats) {
+            try {
+                const rss2jsonUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}&api_key=public&count=${maxResults}`;
+                
+                const response = await fetch(rss2jsonUrl);
+                
+                if (!response.ok) {
+                    continue; // Try next format
+                }
+
+                const data = await response.json();
+                
+                if (data.status === 'ok' && data.items && data.items.length > 0) {
+                    // Success! Extract videos
+                    const videos = data.items.map(item => {
+                        // Extract video ID from link
+                        let videoId = null;
+                        if (item.link) {
+                            const match = item.link.match(/[?&]v=([^&]+)/);
+                            videoId = match ? match[1] : null;
+                        }
+                        if (!videoId && item.guid) {
+                            const match = item.guid.match(/[?&]v=([^&]+)/);
+                            videoId = match ? match[1] : null;
+                        }
+                        
+                        return {
+                            id: videoId,
+                            title: item.title || 'Untitled Video',
+                            published: item.pubDate || ''
+                        };
+                    }).filter(video => video.id); // Only include videos with valid IDs
+                    
+                    if (videos.length > 0) {
+                        // Store channel ID if we found it in the feed
+                        if (!channelId && data.feed && data.feed.link) {
+                            const channelMatch = data.feed.link.match(/channel\/([^\/]+)/);
+                            if (channelMatch && channelMatch[1].startsWith('UC')) {
+                                channelId = channelMatch[1];
+                                console.log('Found channel ID:', channelId);
                             }
                         }
+                        return videos;
                     }
-                } catch (e) {
-                    console.error('Direct handle method also failed:', e);
+                }
+            } catch (e) {
+                console.log('RSS format failed, trying next:', rssUrl, e.message);
+                continue; // Try next format
+            }
+        }
+        
+        // If all RSS formats failed, try to get channel ID from existing video
+        if (!channelId) {
+            // Try to get channel ID from one of the fallback videos
+            const fallbackVideoId = 'NF673jaWZ3k'; // First video in fallback list
+            channelId = await getChannelIdFromVideoId(fallbackVideoId);
+            
+            if (channelId) {
+                console.log('Found channel ID from video:', channelId);
+                const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
+                const rss2jsonUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}&api_key=public&count=${maxResults}`;
+                const response = await fetch(rss2jsonUrl);
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.status === 'ok' && data.items && data.items.length > 0) {
+                        const videos = data.items.map(item => {
+                            let videoId = null;
+                            if (item.link) {
+                                const match = item.link.match(/[?&]v=([^&]+)/);
+                                videoId = match ? match[1] : null;
+                            }
+                            return {
+                                id: videoId,
+                                title: item.title || 'Untitled Video',
+                                published: item.pubDate || ''
+                            };
+                        }).filter(video => video.id);
+                        if (videos.length > 0) {
+                            return videos;
+                        }
+                    }
+                }
+            }
+            
+            // Last resort: try the handle lookup methods
+            channelId = await getChannelIdFromHandle(channelHandle);
+            if (channelId) {
+                const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
+                const rss2jsonUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}&api_key=public&count=${maxResults}`;
+                const response = await fetch(rss2jsonUrl);
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.status === 'ok' && data.items && data.items.length > 0) {
+                        const videos = data.items.map(item => {
+                            let videoId = null;
+                            if (item.link) {
+                                const match = item.link.match(/[?&]v=([^&]+)/);
+                                videoId = match ? match[1] : null;
+                            }
+                            return {
+                                id: videoId,
+                                title: item.title || 'Untitled Video',
+                                published: item.pubDate || ''
+                            };
+                        }).filter(video => video.id);
+                        if (videos.length > 0) {
+                            return videos;
+                        }
+                    }
                 }
             }
         }
-
-        if (!channelId) {
-            throw new Error('Could not find channel ID. Please set YOUTUBE_CONFIG.channelId in script.js');
-        }
-
-        // Use rss2json API to convert RSS to JSON (handles CORS and parsing)
-        const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
-        const rss2jsonUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}&api_key=public&count=${maxResults}`;
         
-        const response = await fetch(rss2jsonUrl);
-        
-        if (!response.ok) {
-            throw new Error(`Failed to fetch RSS feed: ${response.status} ${response.statusText}`);
-        }
-
-        const data = await response.json();
-        
-        if (data.status !== 'ok' || !data.items || data.items.length === 0) {
-            throw new Error('No videos found in RSS feed');
-        }
-        
-        const videos = data.items.map(item => {
-            // Extract video ID from link or guid
-            let videoId = null;
-            if (item.link) {
-                const match = item.link.match(/[?&]v=([^&]+)/);
-                videoId = match ? match[1] : null;
-            }
-            if (!videoId && item.guid) {
-                const match = item.guid.match(/[?&]v=([^&]+)/);
-                videoId = match ? match[1] : null;
-            }
-            
-            return {
-                id: videoId,
-                title: item.title || 'Untitled Video',
-                published: item.pubDate || ''
-            };
-        }).filter(video => video.id); // Only include videos with valid IDs
-
-        return videos;
+        throw new Error('Could not fetch videos from any RSS format');
     } catch (error) {
         console.error('Error in fetchYouTubeVideos:', error);
         throw error;
