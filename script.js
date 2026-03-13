@@ -348,13 +348,58 @@ async function fetchYouTubeVideos(channelHandle, maxResults = 4, providedChannel
         let channelId = providedChannelId;
         
         if (!channelId) {
+            console.log('Attempting to get channel ID for:', channelHandle);
             // First, try to get the channel ID from the handle
             channelId = await getChannelIdFromHandle(channelHandle);
             
             // If we couldn't get channel ID, try alternative methods
             if (!channelId) {
+                console.log('First method failed, trying alternative...');
                 // Try using the channel's uploads playlist RSS (works with handle in some cases)
                 channelId = await getChannelIdFromUploadsPlaylist(channelHandle);
+            }
+            
+            if (channelId) {
+                console.log('Found channel ID:', channelId);
+            } else {
+                console.warn('Could not find channel ID. Trying direct handle method...');
+                // Last resort: try using handle directly (may work for some channels)
+                const directRssUrl = `https://www.youtube.com/feeds/videos.xml?user=${channelHandle}`;
+                const directApiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(directRssUrl)}&api_key=public&count=${maxResults}`;
+                try {
+                    const directResponse = await fetch(directApiUrl);
+                    if (directResponse.ok) {
+                        const directData = await directResponse.json();
+                        if (directData.status === 'ok' && directData.items && directData.items.length > 0) {
+                            // Success! Extract channel ID from feed if available
+                            if (directData.feed && directData.feed.link) {
+                                const channelMatch = directData.feed.link.match(/channel\/([^\/]+)/);
+                                if (channelMatch && channelMatch[1].startsWith('UC')) {
+                                    channelId = channelMatch[1];
+                                    console.log('Found channel ID via direct method:', channelId);
+                                }
+                            }
+                            // Even without channel ID, we can return videos
+                            const videos = directData.items.map(item => {
+                                let videoId = null;
+                                if (item.link) {
+                                    const match = item.link.match(/[?&]v=([^&]+)/);
+                                    videoId = match ? match[1] : null;
+                                }
+                                return {
+                                    id: videoId,
+                                    title: item.title || 'Untitled Video',
+                                    published: item.pubDate || ''
+                                };
+                            }).filter(video => video.id);
+                            if (videos.length > 0) {
+                                return videos;
+                            }
+                        }
+                    }
+                } catch (e) {
+                    console.error('Direct handle method also failed:', e);
+                }
             }
         }
 
@@ -362,55 +407,40 @@ async function fetchYouTubeVideos(channelHandle, maxResults = 4, providedChannel
             throw new Error('Could not find channel ID. Please set YOUTUBE_CONFIG.channelId in script.js');
         }
 
-        // Fetch videos from RSS feed
+        // Use rss2json API to convert RSS to JSON (handles CORS and parsing)
         const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
-        const proxyUrl = 'https://api.allorigins.win/raw?url=';
-        const response = await fetch(proxyUrl + encodeURIComponent(rssUrl));
+        const rss2jsonUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}&api_key=public&count=${maxResults}`;
+        
+        const response = await fetch(rss2jsonUrl);
         
         if (!response.ok) {
-            throw new Error('Failed to fetch RSS feed');
+            throw new Error(`Failed to fetch RSS feed: ${response.status} ${response.statusText}`);
         }
 
-        const xmlText = await response.text();
-        const parser = new DOMParser();
-        const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
+        const data = await response.json();
         
-        // Check for parsing errors
-        const parseError = xmlDoc.querySelector('parsererror');
-        if (parseError) {
-            throw new Error('Failed to parse RSS feed');
+        if (data.status !== 'ok' || !data.items || data.items.length === 0) {
+            throw new Error('No videos found in RSS feed');
         }
         
-        const entries = xmlDoc.querySelectorAll('entry');
-        const videos = [];
-
-        entries.forEach((entry, index) => {
-            if (index >= maxResults) return;
-            
-            // Try multiple selectors for video ID
-            let videoId = entry.querySelector('yt\\:videoId')?.textContent;
-            if (!videoId) {
-                videoId = entry.querySelector('videoId')?.textContent;
+        const videos = data.items.map(item => {
+            // Extract video ID from link or guid
+            let videoId = null;
+            if (item.link) {
+                const match = item.link.match(/[?&]v=([^&]+)/);
+                videoId = match ? match[1] : null;
             }
-            if (!videoId) {
-                const link = entry.querySelector('link')?.getAttribute('href');
-                if (link) {
-                    const match = link.match(/[?&]v=([^&]+)/);
-                    videoId = match ? match[1] : null;
-                }
+            if (!videoId && item.guid) {
+                const match = item.guid.match(/[?&]v=([^&]+)/);
+                videoId = match ? match[1] : null;
             }
             
-            const title = entry.querySelector('title')?.textContent || 'Untitled Video';
-            const published = entry.querySelector('published')?.textContent;
-            
-            if (videoId) {
-                videos.push({
-                    id: videoId,
-                    title: title,
-                    published: published
-                });
-            }
-        });
+            return {
+                id: videoId,
+                title: item.title || 'Untitled Video',
+                published: item.pubDate || ''
+            };
+        }).filter(video => video.id); // Only include videos with valid IDs
 
         return videos;
     } catch (error) {
@@ -422,7 +452,26 @@ async function fetchYouTubeVideos(channelHandle, maxResults = 4, providedChannel
 // Get channel ID from handle using YouTube page
 async function getChannelIdFromHandle(handle) {
     try {
-        // Try to fetch the channel page and extract channel ID
+        // Method 1: Try using rss2json with channel handle directly (some channels support this)
+        try {
+            const testRssUrl = `https://www.youtube.com/feeds/videos.xml?user=${handle}`;
+            const testApiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(testRssUrl)}&api_key=public&count=1`;
+            const testResponse = await fetch(testApiUrl);
+            if (testResponse.ok) {
+                const testData = await testResponse.json();
+                if (testData.status === 'ok' && testData.feed && testData.feed.link) {
+                    // Extract channel ID from feed link
+                    const channelMatch = testData.feed.link.match(/channel\/([^\/]+)/);
+                    if (channelMatch && channelMatch[1].startsWith('UC')) {
+                        return channelMatch[1];
+                    }
+                }
+            }
+        } catch (e) {
+            // Continue to next method
+        }
+
+        // Method 2: Try to fetch the channel page and extract channel ID
         const channelUrl = `https://www.youtube.com/@${handle}`;
         const proxyUrl = 'https://api.allorigins.win/raw?url=';
         const response = await fetch(proxyUrl + encodeURIComponent(channelUrl));
@@ -461,7 +510,32 @@ async function getChannelIdFromHandle(handle) {
 // Alternative method: Get channel ID from uploads playlist
 async function getChannelIdFromUploadsPlaylist(handle) {
     try {
-        // Try to access the channel's videos page
+        // Try using the channel handle with different RSS feed formats
+        const rssFormats = [
+            `https://www.youtube.com/feeds/videos.xml?user=${handle}`,
+            `https://www.youtube.com/feeds/videos.xml?channel_id=${handle}` // In case handle is actually an ID
+        ];
+        
+        for (const rssUrl of rssFormats) {
+            try {
+                const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}&api_key=public&count=1`;
+                const response = await fetch(apiUrl);
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.status === 'ok' && data.feed && data.feed.link) {
+                        const channelMatch = data.feed.link.match(/channel\/([^\/]+)/);
+                        if (channelMatch && channelMatch[1].startsWith('UC')) {
+                            return channelMatch[1];
+                        }
+                    }
+                }
+            } catch (e) {
+                // Try next format
+                continue;
+            }
+        }
+        
+        // Fallback: Try to access the channel's videos page
         const videosUrl = `https://www.youtube.com/@${handle}/videos`;
         const proxyUrl = 'https://api.allorigins.win/raw?url=';
         const response = await fetch(proxyUrl + encodeURIComponent(videosUrl));
