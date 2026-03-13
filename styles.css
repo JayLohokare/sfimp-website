@@ -220,6 +220,49 @@ body {
     width: 100%;
 }
 
+/* Instagram Section */
+.insta-section {
+    background: var(--white);
+}
+
+.insta-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+    .insta-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.insta-card {
+    display: block;
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 4/5;
+    border: 1px solid var(--light-gray);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.insta-wrapper {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--white);
+}
+
+.insta-embed {
+    width: 100%;
+    height: 100%;
+    border: none;
+    min-height: 400px;
+}
+
 .video-card {
     background: var(--white);
     border-radius: 12px;
