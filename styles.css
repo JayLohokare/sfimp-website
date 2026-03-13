@@ -156,6 +156,12 @@ body {
     }
 }
 
+@media (max-width: 480px) {
+    .activity-card {
+        padding: 1.5rem;
+    }
+}
+
 .activity-card {
     background: var(--white);
     padding: 1.75rem;
@@ -208,6 +214,10 @@ body {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
     }
+}
+
+.video-card {
+    width: 100%;
 }
 
 .video-card {
