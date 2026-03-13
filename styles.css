@@ -156,6 +156,18 @@ body {
     }
 }
 
+@media (max-width: 767px) {
+    .activities-grid {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    
+    .activity-card {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}
+
 @media (max-width: 480px) {
     .activity-card {
         padding: 1.5rem;
@@ -216,6 +228,18 @@ body {
     }
 }
 
+@media (max-width: 767px) {
+    .video-grid {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    
+    .video-card {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}
+
 .video-card {
     width: 100%;
 }
@@ -236,6 +260,18 @@ body {
     .insta-grid {
         display: grid !important;
         grid-template-columns: repeat(3, 1fr) !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .insta-grid {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    
+    .insta-card {
+        width: 100% !important;
+        max-width: 100% !important;
     }
 }
 
