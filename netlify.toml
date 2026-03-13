@@ -1,0 +1,24 @@
+# Netlify config for SFIMP website
+# Deploys every branch to unique preview URLs
+
+[build]
+  publish = "."
+  command = "echo 'No build step needed - static site'"
+
+# Dev branch gets its own preview URL
+[[redirects]]
+  from = "/dev/*"
+  to = "/dev/:splat"
+  status = 200
+
+# Playground always accessible
+[[redirects]]
+  from = "/playground/*"
+  to = "/playground/:splat"
+  status = 200
+
+# Main site
+[[redirects]]
+  from = "/*"
+  to = "/:splat"
+  status = 200

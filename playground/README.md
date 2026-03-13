@@ -1,7 +1,7 @@
 # SFIMP Playground 🧪
 
 ## Purpose
-This is a safe space to experiment with UX/UI designs and component styles before merging to main.
+Safe space to experiment with UX/UI designs before merging to main.
 
 ## Workflow
 
@@ -10,25 +10,50 @@ This is a safe space to experiment with UX/UI designs and component styles befor
 - Test different layouts, colors, typography
 - Pair components against different styles
 
-### 2. Review
-- Preview at: `https://jaylohokare.github.io/sfimp-website/playground/`
-- Share with team for feedback
-- Mark variants as:
-  - `Testing` - Early experiments
-  - `Ready to Review` - Ready for team feedback
-  - `Approved` - Team approved, ready to integrate
-  - `Deprecated` - Discarded ideas
+### 2. Review & Test
+**Testing options:**
+- **Local:** `git checkout dev && open playground/index.html`
+- **GitHub Preview:** Create PR from dev branch, GitHub shows preview
+- **Staging:** Push to dev, deploy to staging server (if available)
+
+Mark variants as:
+- `Testing` - Early experiments
+- `Ready to Review` - Ready for team feedback
+- `Approved` - Team approved, ready to integrate
+- `Deprecated` - Discarded ideas
 
 ### 3. Integrate to Dev
 - Move approved variants to main components
 - Update `index.html`, `styles.css`, `script.js`
-- Test full integration
+- Test full integration on dev branch
 
 ### 4. Merge to Main
 - Create PR from `dev` → `main`
 - Review changes
 - Merge when ready
-- Main site updates at: `https://findianmusicproject.org`
+- Main site updates at: `sfindianmusicproject.org`
+
+## Current Experiments
+
+### Hero Section Variants
+- **Variant A**: Minimal - Clean, centered logo
+- **Variant B**: Bold - Gradient background
+- **Variant C**: Split - Logo left, text right
+
+### Card Styles
+- **Style A**: Clean - White with subtle shadow
+- **Style B**: Gradient - Purple gradient background
+- **Style C**: Minimal - Light gray background
+
+### Color Schemes
+- **Current**: Warm browns, oranges, golds (SFIMP logo colors)
+- **Test**: Purple gradient palette
+
+## Notes
+- Main site: `sfindianmusicproject.org` (stable)
+- Dev branch: `dev` (experimental)
+- Always test locally before pushing
+- Use PRs for team review
 
 ## Current Experiments
 
