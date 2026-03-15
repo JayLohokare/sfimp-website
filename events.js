@@ -3,7 +3,7 @@ const eventsConfig = [
     {
         id: 1,
         title: "SF Indian Music project @ SPARK Social SF",
-        date: "2025-04-04",
+        date: "2026-04-04",
         time: "2:00 PM PT",
         location: "SPARK Social SF",
         description: "Join us for Indian / Bollywood music in San Francisco! This is a free to attend jam session / concert. Play/Sing along, or just join for the great vibes! We will have a pre-decided setlist (crowdsourced). And spots for singers / musicians to signup. This is a rock music session - We will play songs with real instruments.",
