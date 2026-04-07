@@ -143,12 +143,28 @@ function initEvents() {
         const now = new Date();
         now.setHours(0, 0, 0, 0);
 
-        let filteredEvents = eventsConfig.filter(event => {
+        // Pre-process events
+        const processedEvents = eventsConfig.map(event => {
             const eventDate = new Date(event.date);
             eventDate.setHours(0, 0, 0, 0);
-            
+            return {
+                ...event,
+                parsedDate: eventDate,
+                isUpcoming: eventDate >= now,
+                isPast: eventDate < now,
+                isNext: false
+            };
+        });
+
+        // Identify the "next" event out of upcoming ones
+        const upcomingEvents = processedEvents.filter(e => e.isUpcoming).sort((a,b) => a.parsedDate - b.parsedDate);
+        if (upcomingEvents.length > 0) {
+            upcomingEvents[0].isNext = true;
+        }
+
+        let filteredEvents = processedEvents.filter(event => {
             // Filter by date
-            if (!showPastEvents && eventDate < now && !event.isNext) {
+            if (!showPastEvents && event.isPast) {
                 return false;
             }
             
@@ -162,22 +178,20 @@ function initEvents() {
 
         // Sort events
         filteredEvents.sort((a, b) => {
-            // Sort by isNext first, then by date (upcoming first, then past)
-            if (a.isNext && !b.isNext) return -1;
-            if (!a.isNext && b.isNext) return 1;
-            
-            const dateA = new Date(a.date);
-            const dateB = new Date(b.date);
-            
-            // If showing past events, sort upcoming first, then past
             if (showPastEvents) {
-                const nowA = dateA >= now;
-                const nowB = dateB >= now;
-                if (nowA && !nowB) return -1;
-                if (!nowA && nowB) return 1;
+                // If showing past events, sort upcoming first, then past
+                if (a.isUpcoming && !b.isUpcoming) return -1;
+                if (!a.isUpcoming && b.isUpcoming) return 1;
+                
+                if (a.isUpcoming && b.isUpcoming) {
+                    return a.parsedDate - b.parsedDate;
+                } else {
+                    return b.parsedDate - a.parsedDate; // Descending for past
+                }
+            } else {
+                // Default: just sort upcoming by date ascending
+                return a.parsedDate - b.parsedDate;
             }
-            
-            return dateA - dateB;
         });
 
         if (filteredEvents.length === 0) {
@@ -187,9 +201,9 @@ function initEvents() {
 
         // Display events
         eventsContainer.innerHTML = filteredEvents.map(event => {
-            const eventDate = new Date(event.date);
-            const isUpcoming = eventDate >= now || event.isNext;
-            const isPast = eventDate < now && !event.isNext;
+            const eventDate = event.parsedDate;
+            const isUpcoming = event.isUpcoming;
+            const isPast = event.isPast;
 
             return `
                 <div class="event-card ${event.isNext ? 'next-event' : ''} ${isPast ? 'past-event' : ''}" data-type="${event.type}">
@@ -271,7 +285,7 @@ function initEvents() {
 const YOUTUBE_CONFIG = {
     channelHandle: 'sfindianmusicproject',
     channelId: 'UCPfOZK-GfS92UG4yaFJszNA', // Will be auto-detected or can be set manually
-    maxVideos: 4
+    maxVideos: 5
 };
 
 // Helper: Get channel ID from a video ID using multiple methods
@@ -338,7 +352,7 @@ async function initYouTubeVideos() {
     console.log('Starting YouTube video fetch for:', YOUTUBE_CONFIG.channelHandle);
 
     try {
-        const videos = await fetchYouTubeVideos(YOUTUBE_CONFIG.channelHandle, YOUTUBE_CONFIG.maxVideos, YOUTUBE_CONFIG.channelId);
+        let videos = await fetchYouTubeVideos(YOUTUBE_CONFIG.channelHandle, YOUTUBE_CONFIG.maxVideos, YOUTUBE_CONFIG.channelId);
         console.log('Fetched videos:', videos.length);
         
         if (videos.length === 0) {
@@ -346,6 +360,14 @@ async function initYouTubeVideos() {
             console.warn('No videos found, keeping fallback videos');
             return;
         }
+
+        // Ensure newly added pinned video is present
+        const pinnedVideo = {
+            id: 'dSfqIt3o_Ro',
+            title: 'Studio session: Tu hi re / He Surranno Chandra vha / Sukoon',
+            published: ''
+        };
+        videos = [pinnedVideo, ...videos].filter((v, i, a) => a.findIndex(t => t.id === v.id) === i).slice(0, YOUTUBE_CONFIG.maxVideos);
 
         // Render videos - matching the exact format of the original
         videoGrid.innerHTML = videos.map((video, index) => {
