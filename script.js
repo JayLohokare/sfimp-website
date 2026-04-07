@@ -97,7 +97,8 @@ function initEvents() {
 
         // Pre-process events
         const processedEvents = eventsConfig.map(event => {
-            const eventDate = new Date(event.date);
+            // Replace hyphens with slashes to prevent default UTC parsing and force local timezone parsing
+            const eventDate = new Date(event.date.replace(/-/g, '\/'));
             eventDate.setHours(0, 0, 0, 0);
             return {
                 ...event,
