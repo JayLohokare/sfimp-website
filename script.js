@@ -284,7 +284,7 @@ function initEvents() {
 const YOUTUBE_CONFIG = {
     channelHandle: 'sfindianmusicproject',
     channelId: 'UCPfOZK-GfS92UG4yaFJszNA', // Will be auto-detected or can be set manually
-    maxVideos: 5
+    maxVideos: 4
 };
 
 // Helper: Get channel ID from a video ID using multiple methods
@@ -351,7 +351,7 @@ async function initYouTubeVideos() {
     console.log('Starting YouTube video fetch for:', YOUTUBE_CONFIG.channelHandle);
 
     try {
-        let videos = await fetchYouTubeVideos(YOUTUBE_CONFIG.channelHandle, YOUTUBE_CONFIG.maxVideos, YOUTUBE_CONFIG.channelId);
+        const videos = await fetchYouTubeVideos(YOUTUBE_CONFIG.channelHandle, YOUTUBE_CONFIG.maxVideos, YOUTUBE_CONFIG.channelId);
         console.log('Fetched videos:', videos.length);
         
         if (videos.length === 0) {
@@ -359,14 +359,6 @@ async function initYouTubeVideos() {
             console.warn('No videos found, keeping fallback videos');
             return;
         }
-
-        // Ensure newly added pinned video is present
-        const pinnedVideo = {
-            id: 'dSfqIt3o_Ro',
-            title: 'Studio session: Tu hi re / He Surranno Chandra vha / Sukoon',
-            published: ''
-        };
-        videos = [pinnedVideo, ...videos].filter((v, i, a) => a.findIndex(t => t.id === v.id) === i).slice(0, YOUTUBE_CONFIG.maxVideos);
 
         // Render videos - matching the exact format of the original
         videoGrid.innerHTML = videos.map((video, index) => {
@@ -446,7 +438,7 @@ async function fetchYouTubeVideos(channelHandle, maxResults = 4, providedChannel
         console.log('Fetching RSS feed:', rssUrl);
         
         // Use rss2json API to convert RSS to JSON (handles CORS and parsing)
-        const rss2jsonUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}&api_key=public&count=${maxResults}`;
+        const rss2jsonUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}&count=${maxResults}`;
         const response = await fetch(rss2jsonUrl);
         
         if (!response.ok) {
@@ -566,7 +558,7 @@ async function getChannelIdFromUploadsPlaylist(handle) {
         
         for (const rssUrl of rssFormats) {
             try {
-                const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}&api_key=public&count=1`;
+                const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}&count=1`;
                 const response = await fetch(apiUrl);
                 if (response.ok) {
                     const data = await response.json();
