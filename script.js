@@ -209,7 +209,6 @@ function initEvents() {
                 <div class="event-card ${event.isNext ? 'next-event' : ''} ${isPast ? 'past-event' : ''}" data-type="${event.type}">
                     ${event.isNext ? '<div class="next-event-badge">Next Event</div>' : ''}
                     ${isPast ? '<div class="past-event-badge">Past Event</div>' : ''}
-                    <div class="event-type-badge">${event.type}</div>
                     <div class="event-date">
                         <div class="event-date-day">${eventDate.getDate()}</div>
                         <div class="event-date-month">${eventDate.toLocaleDateString('en-US', { month: 'short' })}</div>
