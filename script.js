@@ -3,7 +3,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     initLoadingScreen();
     initHoverAnimations();
-    initInstagramPosts();
     initEvents();
     initYouTubeVideos();
 });
@@ -41,53 +40,6 @@ function initHoverAnimations() {
     });
 }
 
-// Fetch and display Instagram posts
-async function initInstagramPosts() {
-    const instaCards = document.querySelectorAll('.insta-card[data-instagram-url]');
-    
-    instaCards.forEach(async (card) => {
-        const postUrl = card.getAttribute('data-instagram-url');
-        const imageContainer = card.querySelector('.insta-image-container');
-        const placeholder = card.querySelector('.insta-image-placeholder');
-        const image = card.querySelector('.insta-image');
-        
-        try {
-            // Try direct Instagram oEmbed API first (works on GitHub Pages)
-            const oembedUrl = `https://api.instagram.com/oembed/?url=${encodeURIComponent(postUrl)}&omitscript=true`;
-            let response = await fetch(oembedUrl);
-            
-            // If direct access fails, try with CORS proxy as fallback
-            if (!response.ok) {
-                const proxyUrl = 'https://api.allorigins.win/raw?url=';
-                response = await fetch(proxyUrl + encodeURIComponent(oembedUrl));
-            }
-            
-            if (!response.ok) {
-                throw new Error('Failed to fetch Instagram post');
-            }
-            
-            const data = await response.json();
-            
-            if (data.thumbnail_url) {
-                image.src = data.thumbnail_url;
-                image.alt = data.title || 'Instagram Post';
-                image.style.display = 'block';
-                
-                image.onload = () => {
-                    imageContainer.classList.add('loaded');
-                };
-                
-                image.onerror = () => {
-                    console.error('Failed to load Instagram image');
-                    // Keep placeholder visible on image load error
-                };
-            }
-        } catch (error) {
-            console.error('Error fetching Instagram post:', error);
-            // Keep placeholder visible on error - graceful degradation
-        }
-    });
-}
 
 // Load and display events from config
 function initEvents() {
