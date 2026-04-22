@@ -100,7 +100,18 @@ const eventsConfig = [
         type: "Rock Jam",
         isFree: false,
         price: "$20"
-    }
+    },
+    {
+        id: 9,
+        title: "Instrumental Jam : SF Indian Music Jam",
+        date: "2026-05-16",
+        time: "6:00 PM PT",
+        location: "The Commons San Francisco",
+        description: "Come join us for an instrumental jam session. This session will be split into 2 parts - 1st will be a rock session, 2nd will be Indian classical.",
+        url: "https://partiful.com/e/aZzzMuMA951ZxstENqPV",
+        type: "Rock Jam",
+        isFree: true
+    },
 ];
 
 // Export for use in other scripts
