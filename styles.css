@@ -1184,8 +1184,18 @@ body {
 
 
 /* --- PDF Export Styles --- */
-.pdf-exporting body, .pdf-exporting {
+.pdf-exporting {
+    width: 1200px !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    overflow: visible !important;
+}
+
+.pdf-exporting body {
+    width: 1200px !important;
+    max-width: 1200px !important;
     background: #ffffff !important;
+    overflow: visible !important;
 }
 
 .pdf-exporting .pdf-hide {
@@ -1196,7 +1206,7 @@ body {
 .pdf-exporting .section {
     page-break-inside: avoid;
     break-inside: avoid;
-    padding: 2rem 0 !important;
+    padding: 3rem 0 !important;
 }
 
 .pdf-exporting .masonry-item {
@@ -1216,13 +1226,15 @@ body {
     column-gap: 2rem !important;
 }
 
-/* Make the hero section fit nicely on the first page */
+/* Fix Hero section rendering */
 .pdf-exporting .hero {
-    min-height: 60vh !important;
+    min-height: auto !important;
+    padding: 6rem 0 !important;
+    background-color: #1a1a1a !important; /* Force dark background for white text */
 }
 
 .pdf-exporting .hero-bg-slider {
-    position: absolute !important;
+    display: none !important; /* Hide dynamic slider in PDF */
 }
 
 /* Ensure background colors print */
