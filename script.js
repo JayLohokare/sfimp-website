@@ -349,40 +349,4 @@ function initGallery() {
 document.addEventListener('DOMContentLoaded', initGallery);
 
 
-// Setup PDF Download Button
-document.addEventListener('DOMContentLoaded', () => {
-    const downloadBtn = document.getElementById('download-epk-btn');
-    if (downloadBtn) {
-        downloadBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // Change button text to show progress
-            const originalText = downloadBtn.textContent;
-            downloadBtn.textContent = 'Generating PDF...';
-            
-            // Add exporting class to hide unwanted elements
-            document.body.classList.add('pdf-exporting');
-            
-            // Configure html2pdf
-            const element = document.body;
-            const opt = {
-                margin:       10,
-                filename:     'SF_Indian_Music_Project_EPK.pdf',
-                image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true, windowWidth: 1200, width: 1200 },
-                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            };
-            
-            // Generate PDF
-            html2pdf().set(opt).from(element).save().then(() => {
-                // Restore state
-                document.body.classList.remove('pdf-exporting');
-                downloadBtn.textContent = originalText;
-            }).catch(err => {
-                console.error('PDF generation failed:', err);
-                document.body.classList.remove('pdf-exporting');
-                downloadBtn.textContent = originalText;
-            });
-        });
-    }
-});
+
