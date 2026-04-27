@@ -324,6 +324,25 @@ function initGallery() {
     });
     
     galleryContainer.innerHTML = html;
+    
+    // Setup expand button
+    if (galleryImages.length > 9) {
+        const actionsContainer = document.getElementById('gallery-actions');
+        const expandBtn = document.getElementById('expand-gallery-btn');
+        if (actionsContainer && expandBtn) {
+            actionsContainer.style.display = 'block';
+            expandBtn.addEventListener('click', () => {
+                galleryContainer.classList.toggle('expanded');
+                if (galleryContainer.classList.contains('expanded')) {
+                    expandBtn.textContent = 'Show Less';
+                } else {
+                    expandBtn.textContent = 'View More';
+                    // Scroll to top of gallery smoothly
+                    galleryContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        }
+    }
 }
 
 // Call initGallery on load

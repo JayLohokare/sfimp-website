@@ -43,6 +43,24 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    // Setup expand button
+    if (validImages.length > 9) {
+        const actionsContainer = document.getElementById('epk-gallery-actions');
+        const expandBtn = document.getElementById('expand-epk-gallery-btn');
+        if (actionsContainer && expandBtn) {
+            actionsContainer.style.display = 'block';
+            expandBtn.addEventListener('click', () => {
+                galleryContainer.classList.toggle('expanded');
+                if (galleryContainer.classList.contains('expanded')) {
+                    expandBtn.textContent = 'Show Less';
+                } else {
+                    expandBtn.textContent = 'View More';
+                    galleryContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        }
+    }
+
     if (slides.length > 1) {
         let currentIndex = 0;
         setInterval(() => {

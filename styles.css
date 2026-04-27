@@ -408,6 +408,16 @@ body {
     opacity: 1;
 }
 
+/* Limit Gallery to ~3 rows initially */
+.masonry-grid:not(.expanded) .masonry-item:nth-child(n+10) {
+    display: none;
+}
+
+.gallery-actions {
+    text-align: center;
+    margin-top: 2rem;
+}
+
 @media (max-width: 900px) {
     .masonry-grid {
         column-count: 2;

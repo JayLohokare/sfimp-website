@@ -276,6 +276,16 @@ body {
     opacity: 1;
 }
 
+/* Limit Gallery to ~3 rows initially */
+.epk-masonry:not(.expanded) .epk-masonry-item:nth-child(n+10) {
+    display: none;
+}
+
+.epk-gallery-actions {
+    text-align: center;
+    margin-top: 3rem;
+}
+
 /* Videos */
 .epk-videos {
     display: grid;
