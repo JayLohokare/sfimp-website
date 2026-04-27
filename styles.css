@@ -1202,11 +1202,27 @@ body {
 .pdf-exporting .masonry-item {
     page-break-inside: avoid;
     break-inside: avoid;
+    margin-bottom: 2rem !important;
 }
 
 .pdf-exporting .stat-item {
     page-break-inside: avoid;
     break-inside: avoid;
+}
+
+/* Make images larger in PDF by reducing columns */
+.pdf-exporting .masonry-grid {
+    column-count: 2 !important;
+    column-gap: 2rem !important;
+}
+
+/* Make the hero section fit nicely on the first page */
+.pdf-exporting .hero {
+    min-height: 60vh !important;
+}
+
+.pdf-exporting .hero-bg-slider {
+    position: absolute !important;
 }
 
 /* Ensure background colors print */
