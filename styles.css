@@ -188,6 +188,29 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
+.whatsapp-btn {
+    background-color: #25D366;
+    border-color: #25D366;
+}
+
+.whatsapp-btn:hover {
+    background-color: #128C7E;
+    border-color: #128C7E;
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+}
+
+.instagram-btn {
+    background-color: #E1306C;
+    border-color: #E1306C;
+}
+
+.instagram-btn:hover {
+    background-color: #C13584;
+    border-color: #C13584;
+    box-shadow: 0 4px 12px rgba(225, 48, 108, 0.4);
+}
+
+
 .cta-button {
     display: inline-flex;
     align-items: center;
