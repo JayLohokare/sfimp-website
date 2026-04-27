@@ -1181,3 +1181,36 @@ body {
     0%, 100% { opacity: 0.8; transform: scale(1); }
     50% { opacity: 0.6; transform: scale(0.95); }
 }
+
+
+/* --- PDF Export Styles --- */
+.pdf-exporting body, .pdf-exporting {
+    background: #ffffff !important;
+}
+
+.pdf-exporting .pdf-hide {
+    display: none !important;
+}
+
+/* Force elements to not break across pages in PDF */
+.pdf-exporting .section {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    padding: 2rem 0 !important;
+}
+
+.pdf-exporting .masonry-item {
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+.pdf-exporting .stat-item {
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+/* Ensure background colors print */
+.pdf-exporting * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+}
