@@ -305,3 +305,26 @@ function initYouTubeVideos() {
 
 // Console signature
 console.log('SFIMP - Music. Community. Vibes. 🎵');
+
+// Render Gallery from epkImages array
+function initGallery() {
+    const galleryContainer = document.getElementById('main-gallery');
+    if (!galleryContainer || typeof epkImages === 'undefined') return;
+
+    // Use a subset or all images for gallery (excluding logo/assets if any)
+    const galleryImages = epkImages.filter(img => !img.includes('logo'));
+    
+    let html = '';
+    galleryImages.forEach((img, index) => {
+        html += `
+            <div class="masonry-item">
+                <img src="assets/epk/${img}" alt="SFIMP Performance ${index + 1}" loading="lazy">
+            </div>
+        `;
+    });
+    
+    galleryContainer.innerHTML = html;
+}
+
+// Call initGallery on load
+document.addEventListener('DOMContentLoaded', initGallery);
