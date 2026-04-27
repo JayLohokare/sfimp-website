@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electronic Press Kit | SF Indian Music Project</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="epk.css">
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <header class="epk-hero">
+        <div class="epk-hero-bg-slider" id="epk-slider">
+            <!-- Dynamic slides will be inserted here -->
+        </div>
+        <div class="epk-hero-overlay"></div>
+        <div class="epk-hero-content">
+            <img src="logo.png" alt="SFIMP Logo" class="epk-hero-logo">
+            <span class="epk-hero-subtitle">San Francisco Indian Music Project</span>
+            <h1 class="epk-hero-title">Electronic Press Kit</h1>
+            <p class="epk-hero-desc">The Bay Area's premier South Asian music collective. We bring musicians together through massive jams, intimate sessions, and professional studio recordings.</p>
+            <a href="#contact" class="epk-btn">Book Us</a>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="epk-section">
+        <h2 class="epk-section-title">Who We Are</h2>
+        <div class="epk-bio-grid">
+            <div class="epk-bio-image">
+                <img src="assets/epk/PXL_20250511_220205138.jpg" alt="SFIMP Performance">
+            </div>
+            <div class="epk-bio-text">
+                <p><strong>San Francisco Indian Music Project (SFIMP)</strong> is a vibrant, community-driven music collective based in the heart of the Bay Area. What started as a small group of passionate musicians has rapidly grown into a massive movement celebrating South Asian musical heritage, fused with modern global sounds.</p>
+                <p>We host diverse musical experiences—from massive public jam sessions in iconic locations like Salesforce Park, to highly-curated weekly themed jams spanning Bollywood, Indian Classical, Acoustic, and Rock. Our musicians range from enthusiastic beginners to seasoned professionals, all united by a shared love for the craft.</p>
+                <p>Beyond live events, SFIMP produces high-quality studio sessions, pushing the boundaries of traditional arrangements with innovative mashups and covers that resonate with a global audience.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Stats -->
+    <section class="epk-section" style="padding-top: 0; padding-bottom: 0;">
+        <div class="epk-stats">
+            <div class="epk-stat-item">
+                <div class="epk-stat-number">1000+</div>
+                <div class="epk-stat-label">Community Members</div>
+            </div>
+            <div class="epk-stat-item">
+                <div class="epk-stat-number">50+</div>
+                <div class="epk-stat-label">Live Events</div>
+            </div>
+            <div class="epk-stat-item">
+                <div class="epk-stat-number">200+</div>
+                <div class="epk-stat-label">Active Musicians</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Media Gallery -->
+    <section id="media" class="epk-section">
+        <h2 class="epk-section-title">Gallery</h2>
+        <div class="epk-masonry" id="epk-gallery">
+            <!-- Dynamic gallery items will be inserted here -->
+        </div>
+    </section>
+
+    <!-- Videos -->
+    <section class="epk-section">
+        <h2 class="epk-section-title">Live & Studio Highlights</h2>
+        <div class="epk-videos">
+            <!-- Videos will be dynamically loaded from youtube_videos.js -->
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="epk-section">
+        <div class="epk-contact">
+            <h2>Ready to collaborate?</h2>
+            <p>For booking inquiries, press, and partnerships, please get in touch.</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="mailto:contact@sfindianmusicproject.org" class="epk-btn">Email Us</a>
+                <a href="https://instagram.com/sfindianmusicproject" target="_blank" class="epk-btn epk-btn-outline">Instagram</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dynamic Scripts -->
+    <script src="youtube_videos.js"></script>
+    <script src="epk_images.js"></script>
+    <script src="epk.js"></script>
+</body>
+</html>

@@ -24,6 +24,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       
+      - name: Generate dynamic data
+        run: |
+          chmod +x generate_image_list.sh
+          ./generate_image_list.sh
+          python3 fetch_youtube_videos.py
+      
       - name: Setup Pages
         uses: actions/configure-pages@v4
       

@@ -20,7 +20,7 @@ html {
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
     background: var(--white);
     color: var(--logo-dark);
     line-height: 1.6;
@@ -34,17 +34,57 @@ body {
 
 /* Hero Section */
 .hero {
-    min-height: 70vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     padding: 4rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-bg-slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    background-color: #000;
+}
+
+.hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transform: scale(1.05);
+    transition: opacity 1.5s ease-in-out, transform 6s linear;
+}
+
+.hero-slide.active {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(20, 10, 5, 0.4) 0%, rgba(10, 5, 0, 0.85) 100%);
+    z-index: -1;
 }
 
 @media (max-width: 768px) {
     .hero {
-        min-height: 60vh;
+        min-height: 100vh;
         padding: 3rem 0;
     }
 }
@@ -53,7 +93,8 @@ body {
     max-width: 240px;
     width: 100%;
     height: auto;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.4));
 }
 
 @media (max-width: 768px) {
@@ -63,39 +104,88 @@ body {
 }
 
 .hero-org-name {
-    font-size: 1.125rem;
-    font-weight: 500;
-    color: var(--logo-dark);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--logo-orange);
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
     margin-bottom: 0.5rem;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    opacity: 0.9;
 }
 
 @media (max-width: 768px) {
     .hero-org-name {
-        font-size: 0.9375rem;
+        font-size: 1.125rem;
     }
 }
 
 .hero-title {
-    font-size: 2.5rem;
-    font-weight: 700;
+    font-size: 4rem;
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
     margin-bottom: 0.75rem;
-    color: var(--logo-dark);
+    color: white;
+    text-shadow: 0 8px 24px rgba(0,0,0,0.6);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
 }
 
 @media (max-width: 768px) {
     .hero-title {
-        font-size: 2rem;
+        font-size: 2.25rem;
     }
 }
 
 .hero-subtitle {
-    font-size: 1rem;
-    color: var(--gray);
-    max-width: 500px;
-    margin: 0 auto 2rem;
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    max-width: 600px;
+    margin: 0 auto 1.5rem;
+    opacity: 0.95;
+}
+
+.hero-cta-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.hero-btn {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background-color: var(--logo-orange);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    border: 2px solid var(--logo-orange);
+}
+
+.hero-btn:hover {
+    background-color: #d6711c;
+    border-color: #d6711c;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(230, 126, 34, 0.4);
+}
+
+.hero-btn-outline {
+    background-color: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    color: white;
+}
+
+.hero-btn-outline:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: white;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .cta-button {
@@ -153,23 +243,35 @@ body {
     margin-right: auto;
 }
 
-/* What We Do - Grid */
-.what-we-do-section {
+/* About Section */
+.about-section {
     background: var(--off-white);
 }
 
-.activities-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+/* What We Do - Grid */
+.what-we-do-section {
+    background: var(--white);
 }
 
-@media (min-width: 768px) {
-    .activities-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.25rem;
-    }
+.activities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+/* About Section */
+.about-text {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.about-text p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--logo-dark);
+    margin-bottom: 1.5rem;
 }
 
 @media (max-width: 767px) {
@@ -227,7 +329,7 @@ body {
 /* Platform Cards (YouTube/Instagram) */
 /* Videos Section */
 .videos-section {
-    background: var(--white);
+    background: var(--off-white);
 }
 
 .video-grid {

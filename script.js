@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initHoverAnimations();
     initEvents();
     initYouTubeVideos();
+    initHeroSlider();
 });
 
 // Loading screen with logo
@@ -21,6 +22,34 @@ function initLoadingScreen() {
             setTimeout(() => loader.remove(), 500);
         }, 800);
     });
+}
+
+// Hero background slider
+function initHeroSlider() {
+    const sliderContainer = document.getElementById('main-hero-slider');
+    if (!sliderContainer || typeof epkImages === 'undefined') return;
+
+    const validImages = epkImages.filter(img => img.match(/\.(jpg|jpeg|png|webp|gif)$/i));
+    if (validImages.length === 0) return;
+
+    const slides = [];
+    validImages.forEach((imgName, index) => {
+        const slide = document.createElement('div');
+        slide.className = 'hero-slide';
+        if (index === 0) slide.classList.add('active');
+        slide.style.backgroundImage = `url('assets/epk/${imgName}')`;
+        sliderContainer.appendChild(slide);
+        slides.push(slide);
+    });
+
+    if (slides.length > 1) {
+        let currentIndex = 0;
+        setInterval(() => {
+            slides[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % slides.length;
+            slides[currentIndex].classList.add('active');
+        }, 5000);
+    }
 }
 
 // Hover animations only - no scroll-based hiding
@@ -221,137 +250,10 @@ function initEvents() {
             `;
         }).join('');
 
-        // Add smooth scroll to next event if it exists
-        const nextEventCard = eventsContainer.querySelector('.next-event');
-        if (nextEventCard && !showPastEvents) {
-            setTimeout(() => {
-                nextEventCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            }, 100);
-        }
     }
 
     // Initial render
     renderEvents();
-}
-
-// YouTube channel configuration
-const YOUTUBE_CONFIG = {
-    channelHandle: 'sfindianmusicproject',
-    channelId: 'UCPfOZK-GfS92UG4yaFJszNA', // Will be auto-detected or can be set manually
-    maxVideos: 4
-};
-
-// Helper: Get channel ID from a video ID using multiple methods
-async function getChannelIdFromVideoId(videoId) {
-    try {
-        // Method 1: Try oEmbed API
-        const oembedUrl = `https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${videoId}&format=json`;
-        const response = await fetch(oembedUrl);
-        if (response.ok) {
-            const data = await response.json();
-            // Extract channel ID from author URL if available
-            if (data.author_url) {
-                const match = data.author_url.match(/channel\/([^\/]+)/);
-                if (match && match[1].startsWith('UC')) {
-                    console.log('Found channel ID via oEmbed:', match[1]);
-                    return match[1];
-                }
-            }
-        }
-    } catch (e) {
-        console.log('oEmbed method failed:', e);
-    }
-    
-    // Method 2: Try fetching video page and extracting channel ID
-    try {
-        const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
-        const proxyUrl = 'https://api.allorigins.win/raw?url=';
-        const response = await fetch(proxyUrl + encodeURIComponent(videoUrl));
-        if (response.ok) {
-            const html = await response.text();
-            // Look for channel ID in various patterns
-            const patterns = [
-                /"channelId":"([^"]+)"/,
-                /channel_id=([^"&\/]+)/,
-                /"ucid":"([^"]+)"/,
-                /\/channel\/([^"\/\?]+)/
-            ];
-            for (const pattern of patterns) {
-                const match = html.match(pattern);
-                if (match && match[1] && match[1].startsWith('UC')) {
-                    console.log('Found channel ID via video page:', match[1]);
-                    return match[1];
-                }
-            }
-        }
-    } catch (e) {
-        console.log('Video page method failed:', e);
-    }
-    
-    return null;
-}
-
-// Fetch and display YouTube videos
-async function initYouTubeVideos() {
-    console.log('initYouTubeVideos called');
-    const videoGrid = document.getElementById('video-grid');
-    if (!videoGrid) {
-        console.warn('Video grid not found');
-        return;
-    }
-
-    // Store original videos as fallback
-    const originalVideos = videoGrid.innerHTML;
-    console.log('Starting YouTube video fetch for:', YOUTUBE_CONFIG.channelHandle);
-
-    try {
-        const videos = await fetchYouTubeVideos(YOUTUBE_CONFIG.channelHandle, YOUTUBE_CONFIG.maxVideos, YOUTUBE_CONFIG.channelId);
-        console.log('Fetched videos:', videos.length);
-        
-        if (videos.length === 0) {
-            // Keep original videos if no videos found
-            console.warn('No videos found, keeping fallback videos');
-            return;
-        }
-
-        // Render videos - matching the exact format of the original
-        videoGrid.innerHTML = videos.map((video, index) => {
-            const isFeatured = index === 0;
-            return `
-                <div class="video-card ${isFeatured ? 'featured' : ''}">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/${video.id}" 
-                                title="${escapeHtml(video.title)}" 
-                                frameborder="0" 
-                                allowfullscreen></iframe>
-                    </div>
-                    <div class="video-info">
-                        <h3 class="video-title">${escapeHtml(video.title)}</h3>
-                        <p class="video-meta">SF Indian Music Project</p>
-                    </div>
-                </div>
-            `;
-        }).join('');
-
-        // Re-initialize hover animations for new video cards
-        const newCards = videoGrid.querySelectorAll('.video-card');
-        newCards.forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                card.style.transform = 'translateY(-4px)';
-                card.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.08)';
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'translateY(0)';
-                card.style.boxShadow = 'none';
-            });
-        });
-
-    } catch (error) {
-        console.error('Error fetching YouTube videos:', error);
-        // Keep original videos on error - they're already there as fallback
-        // No need to show error message, just silently fall back
-    }
 }
 
 // Helper function to escape HTML
@@ -361,204 +263,44 @@ function escapeHtml(text) {
     return div.innerHTML;
 }
 
-// Fetch YouTube videos from channel - Get channel ID first, then fetch RSS
-async function fetchYouTubeVideos(channelHandle, maxResults = 4, providedChannelId = null) {
-    try {
-        let channelId = providedChannelId;
-        
-        // Step 1: Get channel ID if not provided
-        if (!channelId) {
-            console.log('Channel ID not provided, attempting to find it...');
-            
-            // Method 1: Try to get from existing video (most reliable)
-            const fallbackVideoId = 'NF673jaWZ3k'; // First video in fallback list
-            channelId = await getChannelIdFromVideoId(fallbackVideoId);
-            
-            // Method 2: Try handle lookup if video method failed
-            if (!channelId) {
-                console.log('Video method failed, trying handle lookup...');
-                channelId = await getChannelIdFromHandle(channelHandle);
-            }
-            
-            if (!channelId) {
-                throw new Error('Could not find channel ID. Please set YOUTUBE_CONFIG.channelId manually in script.js');
-            }
-            
-            console.log('Using channel ID:', channelId);
-        }
-        
-        // Step 2: Fetch RSS feed using channel ID
-        const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
-        console.log('Fetching RSS feed:', rssUrl);
-        
-        // Use rss2json API to convert RSS to JSON (handles CORS and parsing)
-        const rss2jsonUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}&count=${maxResults}`;
-        const response = await fetch(rss2jsonUrl);
-        
-        if (!response.ok) {
-            throw new Error(`Failed to fetch RSS feed: ${response.status} ${response.statusText}`);
-        }
+// Render YouTube videos from statically generated youtubeVideos array
+function initYouTubeVideos() {
+    const videoGrid = document.getElementById('video-grid');
+    if (!videoGrid || typeof youtubeVideos === 'undefined') return;
 
-        const data = await response.json();
-        console.log('RSS2JSON response:', data);
-        
-        if (data.status !== 'ok') {
-            throw new Error(`RSS2JSON error: ${data.message || 'Unknown error'}`);
-        }
-        
-        if (!data.items || data.items.length === 0) {
-            throw new Error('No videos found in RSS feed');
-        }
-        
-        // Extract videos from response
-        const videos = data.items.map(item => {
-            // Extract video ID from link
-            let videoId = null;
-            if (item.link) {
-                const match = item.link.match(/[?&]v=([^&]+)/);
-                videoId = match ? match[1] : null;
-            }
-            if (!videoId && item.guid) {
-                const match = item.guid.match(/[?&]v=([^&]+)/);
-                videoId = match ? match[1] : null;
-            }
-            
-            return {
-                id: videoId,
-                title: item.title || 'Untitled Video',
-                published: item.pubDate || ''
-            };
-        }).filter(video => video.id); // Only include videos with valid IDs
+    if (youtubeVideos.length === 0) return;
 
-        if (videos.length === 0) {
-            throw new Error('No valid video IDs found in RSS feed');
-        }
-        
-        console.log(`Successfully fetched ${videos.length} videos`);
-        return videos;
-        
-    } catch (error) {
-        console.error('Error in fetchYouTubeVideos:', error);
-        throw error;
-    }
-}
+    videoGrid.innerHTML = youtubeVideos.map((video, index) => {
+        const isFeatured = index === 0;
+        return `
+            <div class="video-card ${isFeatured ? 'featured' : ''}">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/${video.id}" 
+                            title="${escapeHtml(video.title)}" 
+                            frameborder="0" 
+                            allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">${escapeHtml(video.title)}</h3>
+                    <p class="video-meta">SF Indian Music Project</p>
+                </div>
+            </div>
+        `;
+    }).join('');
 
-// Get channel ID from handle using YouTube page
-async function getChannelIdFromHandle(handle) {
-    try {
-        // Method 1: Try using rss2json with channel handle directly (some channels support this)
-        try {
-            const testRssUrl = `https://www.youtube.com/feeds/videos.xml?user=${handle}`;
-            const testApiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(testRssUrl)}&api_key=public&count=1`;
-            const testResponse = await fetch(testApiUrl);
-            if (testResponse.ok) {
-                const testData = await testResponse.json();
-                if (testData.status === 'ok' && testData.feed && testData.feed.link) {
-                    // Extract channel ID from feed link
-                    const channelMatch = testData.feed.link.match(/channel\/([^\/]+)/);
-                    if (channelMatch && channelMatch[1].startsWith('UC')) {
-                        return channelMatch[1];
-                    }
-                }
-            }
-        } catch (e) {
-            // Continue to next method
-        }
-
-        // Method 2: Try to fetch the channel page and extract channel ID
-        const channelUrl = `https://www.youtube.com/@${handle}`;
-        const proxyUrl = 'https://api.allorigins.win/raw?url=';
-        const response = await fetch(proxyUrl + encodeURIComponent(channelUrl));
+    // Re-initialize hover animations for new video cards
+    const newCards = videoGrid.querySelectorAll('.video-card');
+    newCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.style.transform = 'translateY(-4px)';
+            card.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.08)';
+        });
         
-        if (!response.ok) {
-            throw new Error('Failed to fetch channel page');
-        }
-
-        const html = await response.text();
-        
-        // Extract channel ID from the page - try multiple patterns
-        const patterns = [
-            /"channelId":"([^"]+)"/,
-            /"externalId":"([^"]+)"/,
-            /channel_id=([^"&\/]+)/,
-            /\/channel\/([^"\/\?]+)/,
-            /"browseId":"([^"]+)"/,
-            /"ucid":"([^"]+)"/
-        ];
-        
-        for (const pattern of patterns) {
-            const match = html.match(pattern);
-            if (match && match[1] && match[1].startsWith('UC')) {
-                // YouTube channel IDs start with UC
-                return match[1];
-            }
-        }
-        
-        return null;
-    } catch (error) {
-        console.error('Error getting channel ID from handle:', error);
-        return null;
-    }
-}
-
-// Alternative method: Get channel ID from uploads playlist
-async function getChannelIdFromUploadsPlaylist(handle) {
-    try {
-        // Try using the channel handle with different RSS feed formats
-        const rssFormats = [
-            `https://www.youtube.com/feeds/videos.xml?user=${handle}`,
-            `https://www.youtube.com/feeds/videos.xml?channel_id=${handle}` // In case handle is actually an ID
-        ];
-        
-        for (const rssUrl of rssFormats) {
-            try {
-                const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}&count=1`;
-                const response = await fetch(apiUrl);
-                if (response.ok) {
-                    const data = await response.json();
-                    if (data.status === 'ok' && data.feed && data.feed.link) {
-                        const channelMatch = data.feed.link.match(/channel\/([^\/]+)/);
-                        if (channelMatch && channelMatch[1].startsWith('UC')) {
-                            return channelMatch[1];
-                        }
-                    }
-                }
-            } catch (e) {
-                // Try next format
-                continue;
-            }
-        }
-        
-        // Fallback: Try to access the channel's videos page
-        const videosUrl = `https://www.youtube.com/@${handle}/videos`;
-        const proxyUrl = 'https://api.allorigins.win/raw?url=';
-        const response = await fetch(proxyUrl + encodeURIComponent(videosUrl));
-        
-        if (!response.ok) {
-            return null;
-        }
-
-        const html = await response.text();
-        
-        // Look for channel ID in the videos page
-        const patterns = [
-            /"channelId":"([^"]+)"/,
-            /channel_id=([^"&\/]+)/,
-            /"browseId":"([^"]+)"/
-        ];
-        
-        for (const pattern of patterns) {
-            const match = html.match(pattern);
-            if (match && match[1] && match[1].startsWith('UC')) {
-                return match[1];
-            }
-        }
-        
-        return null;
-    } catch (error) {
-        console.error('Error getting channel ID from uploads playlist:', error);
-        return null;
-    }
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'translateY(0)';
+            card.style.boxShadow = 'none';
+        });
+    });
 }
 
 // Console signature
