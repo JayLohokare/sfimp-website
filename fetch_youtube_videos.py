@@ -21,7 +21,7 @@ try:
             'id': video_id,
             'title': title
         })
-        if len(videos) >= 4: # Get latest 4 videos
+        if len(videos) >= 6: # Get latest 6 videos
             break
             
     with open('youtube_videos.js', 'w', encoding='utf-8') as f:
