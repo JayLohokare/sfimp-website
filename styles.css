@@ -188,36 +188,28 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.whatsapp-btn {
-    background-color: #25D366;
-    border-color: #25D366;
+.whatsapp-btn, .instagram-btn, .youtube-btn {
+    min-width: 200px;
+    text-align: center;
+    background-color: var(--logo-dark);
+    border-color: var(--logo-dark);
 }
 
 .whatsapp-btn:hover {
-    background-color: #128C7E;
-    border-color: #128C7E;
+    background-color: #25D366;
+    border-color: #25D366;
     box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
 }
 
-.instagram-btn {
+.instagram-btn:hover {
     background-color: #E1306C;
     border-color: #E1306C;
-}
-
-.instagram-btn:hover {
-    background-color: #C13584;
-    border-color: #C13584;
     box-shadow: 0 4px 12px rgba(225, 48, 108, 0.4);
 }
 
-.youtube-btn {
+.youtube-btn:hover {
     background-color: #FF0000;
     border-color: #FF0000;
-}
-
-.youtube-btn:hover {
-    background-color: #CC0000;
-    border-color: #CC0000;
     box-shadow: 0 4px 12px rgba(255, 0, 0, 0.4);
 }
 
