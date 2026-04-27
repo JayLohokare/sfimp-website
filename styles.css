@@ -210,6 +210,18 @@ body {
     box-shadow: 0 4px 12px rgba(225, 48, 108, 0.4);
 }
 
+.youtube-btn {
+    background-color: #FF0000;
+    border-color: #FF0000;
+}
+
+.youtube-btn:hover {
+    background-color: #CC0000;
+    border-color: #CC0000;
+    box-shadow: 0 4px 12px rgba(255, 0, 0, 0.4);
+}
+
+
 
 .cta-button {
     display: inline-flex;
