@@ -1,26 +1,26 @@
 const youtubeVideos = [
   {
-    "id": "fbROg1ExIwU",
-    "title": "Studio Session: Husn / Let her go"
+    "id": "icXEbw3OyQM",
+    "title": "Studio Session: Aa Zara + Toxic"
   },
   {
-    "id": "xyJed7Bh5oM",
-    "title": "Community Highlight: Sajna"
+    "id": "uahli32zZ6E",
+    "title": "Community Highlight: Maa"
   },
   {
-    "id": "5kfd66nBQKA",
-    "title": "Community Highlight: Zombie"
+    "id": "ZfKYli3we84",
+    "title": "Community Highlights: Ambarsariya"
   },
   {
-    "id": "Dasi-3XndUE",
-    "title": "Community Highlight: Mein agar kahoon"
+    "id": "77k8J01ZsZ4",
+    "title": "Community Highlights: Bheegi Bheegi / Khamoshiya"
   },
   {
-    "id": "Y-zNxIHfrQ8",
-    "title": "SF Indian Music Project Jam at The Commons SF"
+    "id": "9fieBih1ATE",
+    "title": "Community Highlights: Chaleya"
   },
   {
-    "id": "XEogYC_HXOo",
-    "title": "Community Highlight: Pichle Saat Dino Me"
+    "id": "IwCA-QBMXwU",
+    "title": "Community highlight: Ghungaroo"
   }
 ];
