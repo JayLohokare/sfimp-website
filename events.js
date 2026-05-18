@@ -1,6 +1,28 @@
 // Events configuration for SF Indian Music Project
 const eventsConfig = [
     {
+        id: 10,
+        title: "Sounds of India",
+        date: "2026-06-27",
+        time: "6:00 PM PT",
+        location: "Secret location in San Francisco",
+        description: "We are proud to bring to you 'Sounds of India', a live tribute to the four kings of Bollywood melodies: AR Rahman, RD Burman, Shankar Ehsaan Loy, and Pritam. Beautiful acoustics and venue, semi-acoustic highly curated sets.",
+        url: "https://partiful.com/e/uYj2PPvBjjNeQKGJdGSC",
+        type: "Concert",
+        isFree: false
+    },
+    {
+        id: 11,
+        title: "SF Indian Music project Jam @ SPARK Social SF",
+        date: "2026-04-04",
+        time: "2:00 PM PT",
+        location: "SPARK Social SF",
+        description: "Join us for Indian / Bollywood music in San Francisco! This is a free to attend jam session / concert. Play/Sing along, or just join for the great vibes!",
+        url: "https://partiful.com/e/2092PMMDEcKpuGxsptTC",
+        type: "Rock Jam",
+        isFree: true
+    },
+    {
         id: 0,
         title: "Acoustic Jam : SF Indian music project",
         date: "2026-04-18",
