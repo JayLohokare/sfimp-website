@@ -1,5 +1,9 @@
 const youtubeVideos = [
   {
+    "id": "L1BXBtUiNWc",
+    "title": "Community highlight: Naadan Parindey"
+  },
+  {
     "id": "icXEbw3OyQM",
     "title": "Studio Session: Aa Zara + Toxic"
   },
@@ -18,9 +22,5 @@ const youtubeVideos = [
   {
     "id": "9fieBih1ATE",
     "title": "Community Highlights: Chaleya"
-  },
-  {
-    "id": "IwCA-QBMXwU",
-    "title": "Community highlight: Ghungaroo"
   }
 ];
