@@ -135,7 +135,7 @@ const eventsConfig = [
         isFree: true
     },
     {
-        id: 10,
+        id: 12,
         title: "Acoustic Jam : SF Indian music project",
         date: "2026-06-13",
         time: "2:00 PM PT",
