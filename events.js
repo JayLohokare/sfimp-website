@@ -7,9 +7,10 @@ const eventsConfig = [
         time: "6:00 PM PT",
         location: "Secret location in San Francisco",
         description: "We are proud to bring to you 'Sounds of India', a live tribute to the four kings of Bollywood melodies: AR Rahman, RD Burman, Shankar Ehsaan Loy, and Pritam. Beautiful acoustics and venue, semi-acoustic highly curated sets.",
-        url: "https://partiful.com/e/uYj2PPvBjjNeQKGJdGSC",
+        url: "https://navaconcerts.ticketspice.com/sounds-of-india",
         type: "Concert",
-        isFree: false
+        isFree: false,
+        ctaText: "Buy Tickets"
     },
     {
         id: 11,
