@@ -1,6 +1,17 @@
 // Events configuration for SF Indian Music Project
 const eventsConfig = [
     {
+        id: 13,
+        title: "SF Indian Music Project Jam at The Commons",
+        date: "2026-07-11",
+        time: "6:00 PM PT",
+        location: "550 Laguna St, San Francisco (Full Studio)",
+        description: "Come jam with us on some South Asian Music. We will sing songs, play instruments and have loads of fun! This is a Bi-Weekly series, and we will have themes every event!",
+        url: "https://luma.com/the-dyej",
+        type: "Jam @ The Commons SF",
+        isFree: true
+    },
+    {
         id: 10,
         title: "Sounds of India",
         date: "2026-06-27",
@@ -8,7 +19,7 @@ const eventsConfig = [
         location: "Secret location in San Francisco",
         description: "We are proud to bring to you 'Sounds of India', a live tribute to the four kings of Bollywood melodies: AR Rahman, RD Burman, Shankar Ehsaan Loy, and Pritam. Beautiful acoustics and venue, semi-acoustic highly curated sets.",
         url: "https://navaconcerts.ticketspice.com/sounds-of-india",
-        type: "Concert",
+        type: "Concerts",
         isFree: false,
         ctaText: "Buy Tickets"
     },
@@ -20,7 +31,18 @@ const eventsConfig = [
         location: "SPARK Social SF",
         description: "Join us for Indian / Bollywood music in San Francisco! This is a free to attend jam session / concert. Play/Sing along, or just join for the great vibes!",
         url: "https://partiful.com/e/2092PMMDEcKpuGxsptTC",
-        type: "Rock Jam",
+        type: "Jam @ Spark Social SF",
+        isFree: true
+    },
+    {
+        id: 9,
+        title: "Instrumental Jam : SF Indian Music Jam",
+        date: "2026-05-16",
+        time: "6:00 PM PT",
+        location: "The Commons San Francisco",
+        description: "Come join us for an instrumental jam session. This session will be split into 2 parts - 1st will be a rock session, 2nd will be Indian classical.",
+        url: "https://partiful.com/e/aZzzMuMA951ZxstENqPV",
+        type: "Jam @ The Commons SF",
         isFree: true
     },
     {
@@ -35,6 +57,17 @@ const eventsConfig = [
         isFree: true
     },
     {
+        id: 12,
+        title: "Acoustic Jam : SF Indian music project",
+        date: "2026-06-13",
+        time: "2:00 PM PT",
+        location: "Salesforce Park, 425 Mission St, San Francisco",
+        description: "Come jam with us on some Indian music. We will sing songs, play acoustic instruments and have loads of fun! This is beginner friendly. No need to prepare, just turn up and we will have fun! This is a picnic + crowd singing vibe event. Please bring your own instrument.",
+        url: "https://partiful.com/e/5UFuIADmMtcHj1HgWLx3",
+        type: "Acoustic Jam",
+        isFree: true
+    },
+    {
         id: 1,
         title: "SF Indian Music project @ SPARK Social SF",
         date: "2026-04-04",
@@ -42,7 +75,7 @@ const eventsConfig = [
         location: "SPARK Social SF",
         description: "Join us for Indian / Bollywood music in San Francisco! This is a free to attend jam session / concert. Play/Sing along, or just join for the great vibes! We will have a pre-decided setlist (crowdsourced). And spots for singers / musicians to signup. This is a rock music session - We will play songs with real instruments.",
         url: "https://partiful.com/e/QeLdo7rNlXW5VmQY6pib",
-        type: "Rock Jam",
+        type: "Jam @ Spark Social SF",
         isFree: true
     },
     {
@@ -64,7 +97,7 @@ const eventsConfig = [
         location: "SPARK Social SF",
         description: "Come jam with us on some Indian / Bollywood music! This is a free to attend jam session! This is a rock music session - We will play songs with real instruments. We'll be taking turns suggesting songs, playing some music, and having a blast!",
         url: "https://partiful.com/e/fs6Era4ax0CcpM1M89tm",
-        type: "Rock Jam",
+        type: "Jam @ Spark Social SF",
         isFree: true
     },
     {
@@ -75,7 +108,7 @@ const eventsConfig = [
         location: "39 Tehama St, San Francisco",
         description: "Come jam with us on some Indian classical music. We will sing songs, play instruments and have loads of fun! We'll be taking turns suggesting songs, playing some music, and having a blast!",
         url: "https://partiful.com/e/yImFCXq2E1ZAzhMXyOLZ",
-        type: "Classical Jam",
+        type: "Misc Jam sessions",
         isFree: true
     },
     {
@@ -97,7 +130,7 @@ const eventsConfig = [
         location: "Downtown San Francisco (SoMa area)",
         description: "Come jam with us on some Indian music! We're putting together a rock-forward Bollywood music jam session. This is a PAID event (~$20 per person, used to pay venue costs). We have a strong preference to non-acoustic, upbeat songs.",
         url: "https://partiful.com/e/qd6iTG5LKqD08S8zdX2A",
-        type: "Rock Jam",
+        type: "Misc Jam sessions",
         isFree: false,
         price: "$20"
     },
@@ -120,31 +153,9 @@ const eventsConfig = [
         location: "Downtown San Francisco (SoMa area)",
         description: "Come jam with us on some Indian music! We're putting together a rock-forward Bollywood music jam session. This is a PAID event (~$20 per person, used to pay venue costs). We have a strong preference to non-acoustic, upbeat songs.",
         url: "https://partiful.com/e/vfptBzlzMS0OooslqeHd",
-        type: "Rock Jam",
+        type: "Misc Jam sessions",
         isFree: false,
         price: "$20"
-    },
-    {
-        id: 9,
-        title: "Instrumental Jam : SF Indian Music Jam",
-        date: "2026-05-16",
-        time: "6:00 PM PT",
-        location: "The Commons San Francisco",
-        description: "Come join us for an instrumental jam session. This session will be split into 2 parts - 1st will be a rock session, 2nd will be Indian classical.",
-        url: "https://partiful.com/e/aZzzMuMA951ZxstENqPV",
-        type: "Rock Jam",
-        isFree: true
-    },
-    {
-        id: 12,
-        title: "Acoustic Jam : SF Indian music project",
-        date: "2026-06-13",
-        time: "2:00 PM PT",
-        location: "Salesforce Park, 425 Mission St, San Francisco",
-        description: "Come jam with us on some Indian music. We will sing songs, play acoustic instruments and have loads of fun! This is beginner friendly. No need to prepare, just turn up and we will have fun! This is a picnic + crowd singing vibe event. Please bring your own instrument.",
-        url: "https://partiful.com/e/5UFuIADmMtcHj1HgWLx3",
-        type: "Acoustic Jam",
-        isFree: true
     },
 ];
 
