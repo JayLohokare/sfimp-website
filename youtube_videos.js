@@ -1,7 +1,7 @@
 const youtubeVideos = [
   {
-    "id": "L1BXBtUiNWc",
-    "title": "Community highlight: Naadan Parindey"
+    "id": "e_qCnijvjPU",
+    "title": "Join us at our next jam! #sfindianmusicproject #jamsession"
   },
   {
     "id": "icXEbw3OyQM",
