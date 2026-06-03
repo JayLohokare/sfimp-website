@@ -61,7 +61,7 @@ const eventsConfig = [
         title: "Acoustic Jam : SF Indian music project",
         date: "2026-06-13",
         time: "2:00 PM PT",
-        location: "Salesforce Park, 425 Mission St, San Francisco",
+        location: "Crissy Field Beach, San Francisco"
         description: "Come jam with us on some Indian music. We will sing songs, play acoustic instruments and have loads of fun! This is beginner friendly. No need to prepare, just turn up and we will have fun! This is a picnic + crowd singing vibe event. Please bring your own instrument.",
         url: "https://partiful.com/e/5UFuIADmMtcHj1HgWLx3",
         type: "Acoustic Jam",
