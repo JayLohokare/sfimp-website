@@ -2,11 +2,11 @@
 const eventsConfig = [
     {
         id: 14,
-        title: "SF Indian Music Project Jam at The Commons",
+        title: "World Music Day with SF Indian Music Project",
         date: "2026-06-21",
         time: "2:00 PM PT",
         location: "The Commons, San Francisco",
-        description: "Come jam with us on some South Asian Music. We will sing songs, play instruments and have loads of fun! This is a Bi-Weekly series, and we will have themes every event!",
+        description: "Come join us as we create some music! We will celebrate the world music day by experiment with new sounds / trying some musical exercises!",
         url: "https://luma.com/the-f6o8",
         type: "Jam @ The Commons SF",
         isFree: true
