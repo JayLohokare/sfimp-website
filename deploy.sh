@@ -11,6 +11,16 @@ if [ ! -f "index.html" ]; then
     exit 1
 fi
 
+# Update the dynamic image list for the EPK
+if [ -f "generate_image_list.sh" ]; then
+    ./generate_image_list.sh
+fi
+
+# Fetch latest YouTube videos
+if [ -f "fetch_youtube_videos.py" ]; then
+    python3 fetch_youtube_videos.py
+fi
+
 # Add all changes
 git add .
 
