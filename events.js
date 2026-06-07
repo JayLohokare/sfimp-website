@@ -6,7 +6,7 @@ const eventsConfig = [
         date: "2026-06-21",
         time: "2:00 PM PT",
         location: "The Commons, San Francisco",
-        description: "Come join us as we create some music! We will celebrate the world music day by experiment with new sounds / trying some musical exercises!",
+        description: "Come join us as we create some music! We will celebrate the world music day by experimenting with new sounds / trying some musical exercises!",
         url: "https://luma.com/the-f6o8",
         type: "Jam @ The Commons SF",
         isFree: true
