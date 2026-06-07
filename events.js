@@ -1,6 +1,17 @@
 // Events configuration for SF Indian Music Project
 const eventsConfig = [
     {
+        id: 14,
+        title: "SF Indian Music Project Jam at The Commons",
+        date: "2026-06-21",
+        time: "2:00 PM PT",
+        location: "The Commons, San Francisco",
+        description: "Come jam with us on some South Asian Music. We will sing songs, play instruments and have loads of fun! This is a Bi-Weekly series, and we will have themes every event!",
+        url: "https://luma.com/the-f6o8",
+        type: "Jam @ The Commons SF",
+        isFree: true
+    },
+    {
         id: 13,
         title: "SF Indian Music Project Jam at The Commons",
         date: "2026-07-11",
