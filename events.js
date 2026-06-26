@@ -1,6 +1,17 @@
 // Events configuration for SF Indian Music Project
 const eventsConfig = [
     {
+        id: 15,
+        title: "The Luminals @ Savoy Tivoli SF",
+        date: "2026-07-17",
+        time: "9:00 PM PT",
+        location: "Savoy Tivoli, San Francisco",
+        description: "Join us for a night of Bollywood and Rock Bangers 🤘 High energy, nostalgia, lots of singing along.",
+        url: "https://partiful.com/e/OKJT0tj6G7UdcQVs1nJn",
+        type: "Concerts",
+        isFree: true
+    },
+    {
         id: 14,
         title: "World Music Day with SF Indian Music Project",
         date: "2026-06-21",
