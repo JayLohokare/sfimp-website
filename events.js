@@ -1,6 +1,28 @@
 // Events configuration for SF Indian Music Project
 const eventsConfig = [
     {
+        id: 17,
+        title: "SF Indian Music Project Jam at The Commons",
+        date: "2026-09-16",
+        time: "6:00 PM PT",
+        location: "550 Laguna St, San Francisco (Full Studio)",
+        description: "Come jam with us on some South Asian Music. We will sing songs, play instruments and have loads of fun! This is a Bi-Weekly series, and we will have themes every event!",
+        url: "https://luma.com/the-h9xr",
+        type: "Jam @ The Commons SF",
+        isFree: true
+    },
+    {
+        id: 16,
+        title: "SF Indian Music Project Jam @ Egg Mania",
+        date: "2026-08-08",
+        time: "6:30 PM PT",
+        location: "Egg Mania, Sunnyvale",
+        description: "Get ready for an afternoon of fantastic food, great company, and stripped-down melodies! We are hosting a casual, community acoustic jam at Egg Mania in Sunnyvale. Acoustic instruments only!",
+        url: "https://partiful.com/e/oUFuxonFD3vF0Anhnxto",
+        type: "Acoustic Jam",
+        isFree: true
+    },
+    {
         id: 15,
         title: "The Luminals @ Savoy Tivoli SF",
         date: "2026-07-17",
