@@ -1,6 +1,17 @@
 // Events configuration for SF Indian Music Project
 const eventsConfig = [
     {
+        id: 18,
+        title: "SF Indian Music Project Jam",
+        date: "2026-10-04",
+        time: "12:30 PM PT",
+        location: "Mountain View, CA",
+        description: "Get ready for an afternoon of great company, and stripped-down melodies! We are hosting a casual, community acoustic jam and you're invited to be part of the music. Acoustic instruments only!",
+        url: "https://partiful.com/e/GT49OvhRrRLPkw8swu2T",
+        type: "Acoustic Jam",
+        isFree: true
+    },
+    {
         id: 17,
         title: "SF Indian Music Project Jam at The Commons",
         date: "2026-09-16",
