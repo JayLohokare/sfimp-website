@@ -304,6 +304,16 @@ body {
     letter-spacing: -0.01em;
 }
 
+.mission-box {
+    background: var(--white);
+    border-left: 4px solid var(--logo-orange);
+    padding: 1.5rem 2rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    text-align: left;
+}
+
 .about-highlight {
     font-size: 1.25rem;
     font-weight: 600;
@@ -311,11 +321,20 @@ body {
     color: var(--logo-dark);
 }
 
+.mission-desc {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--logo-dark);
+    margin-top: 0.75rem;
+    margin-bottom: 0 !important;
+}
+
 .about-callout {
     font-size: 1.15rem;
     font-weight: 700;
     color: var(--logo-orange);
     letter-spacing: 0.02em;
+    margin-top: 1.5rem;
 }
 
 .about-text p {
