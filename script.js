@@ -12,16 +12,21 @@ document.addEventListener('DOMContentLoaded', () => {
 function initLoadingScreen() {
     const loader = document.createElement('div');
     loader.id = 'page-loader';
-    loader.innerHTML = '<div class="loader-content"><img src="logo.png" alt="SFIMP Logo" class="loader-logo"></div>';
+    loader.innerHTML = '<div class="loader-content"><img src="logo-small.png" alt="SFIMP Logo" class="loader-logo"></div>';
     document.body.appendChild(loader);
     
-    window.addEventListener('load', () => {
-        setTimeout(() => {
-            loader.style.opacity = '0';
-            loader.style.visibility = 'hidden';
-            setTimeout(() => loader.remove(), 500);
-        }, 800);
-    });
+    let isHidden = false;
+    const hideLoader = () => {
+        if (isHidden) return;
+        isHidden = true;
+        loader.style.opacity = '0';
+        loader.style.visibility = 'hidden';
+        setTimeout(() => loader.remove(), 500);
+    };
+
+    // Hide loader when window finishes loading or after max 1.2s safety timeout
+    window.addEventListener('load', hideLoader);
+    setTimeout(hideLoader, 1200);
 }
 
 // Hero background slider
