@@ -5,6 +5,7 @@ const epkImages = [
   "20250906_141354.jpg",
   "20260416_175645.jpg",
   "20260416_195012.jpg",
+  "20260804_candlelight.jpg",
   "Ajeeb Dastan 080p.jpg",
   "Atacah Baya 1080p.jpg",
   "IMG_0264.jpg",
