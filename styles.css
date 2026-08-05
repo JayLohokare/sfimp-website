@@ -289,13 +289,13 @@ body {
 
 /* About Section */
 .about-text {
-    max-width: 820px;
+    max-width: 760px;
     margin: 0 auto;
     text-align: center;
 }
 
 .mission-tagline {
-    font-size: 1.75rem;
+    font-size: 1.6rem;
     font-weight: 700;
     font-family: 'Playfair Display', serif;
     color: var(--logo-orange);
@@ -304,29 +304,18 @@ body {
     letter-spacing: -0.01em;
 }
 
-.mission-box {
-    background: var(--white);
-    border-left: 4px solid var(--logo-orange);
-    padding: 1.5rem 2rem;
-    border-radius: 8px;
-    margin-bottom: 2rem;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-    text-align: left;
-}
-
-.about-highlight {
-    font-size: 1.25rem;
-    font-weight: 600;
-    line-height: 1.6;
+.about-lead {
+    font-size: 1.2rem;
+    font-weight: 500;
+    line-height: 1.7;
     color: var(--logo-dark);
+    margin-bottom: 1.25rem;
 }
 
-.mission-desc {
+.about-text p {
     font-size: 1.05rem;
     line-height: 1.7;
     color: var(--logo-dark);
-    margin-top: 0.75rem;
-    margin-bottom: 0 !important;
 }
 
 .about-callout {
