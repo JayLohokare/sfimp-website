@@ -24,8 +24,14 @@ function initLoadingScreen() {
         setTimeout(() => loader.remove(), 500);
     };
 
-    // Hide loader when window finishes loading or after max 1.2s safety timeout
-    window.addEventListener('load', hideLoader);
+    // Dismiss on DOMContentLoaded (HTML ready) - does NOT wait for images/YT videos
+    if (document.readyState === 'interactive' || document.readyState === 'complete') {
+        setTimeout(hideLoader, 400);
+    } else {
+        document.addEventListener('DOMContentLoaded', () => setTimeout(hideLoader, 400));
+    }
+
+    // Absolute hard ceiling: max 1.2s total display time
     setTimeout(hideLoader, 1200);
 }
 
