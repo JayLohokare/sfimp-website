@@ -1,6 +1,17 @@
 // Events configuration for SF Indian Music Project
 const eventsConfig = [
     {
+        id: 19,
+        title: "SF Indian Music Project @ Saratoga",
+        date: "2026-08-29",
+        time: "5:00 PM PT",
+        location: "Saratoga, CA",
+        description: "Redwoods and Indian Music! Get ready for an evening of great company, and stripped-down melodies! We are hosting a casual, community acoustic jam and you're invited to be part of the music. Acoustic instruments only!",
+        url: "https://partiful.com/e/PYXk9qORhhmpxbmv1D5J",
+        type: "Acoustic Jam",
+        isFree: true
+    },
+    {
         id: 18,
         title: "SF Indian Music Project Jam",
         date: "2026-10-04",
