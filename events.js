@@ -1,6 +1,17 @@
 // Events configuration for SF Indian Music Project
 const eventsConfig = [
     {
+        id: 20,
+        title: "SF Indian Music Project @ Bay Area Chowpaty",
+        date: "2026-09-19",
+        time: "6:30 PM PT",
+        location: "Bay Area Chowpaty, 3961 Washington Blvd, Fremont, CA",
+        description: "Get ready for an afternoon of fantastic food, great company, and stripped-down melodies! We are hosting a casual, community acoustic jam at Bay Area Chowpaty Fremont. Acoustic instruments only!",
+        url: "https://partiful.com/e/W1vGpOrV4mCaR6mVXcWN",
+        type: "Acoustic Jam",
+        isFree: true
+    },
+    {
         id: 19,
         title: "SF Indian Music Project @ Saratoga",
         date: "2026-08-29",
