@@ -1,6 +1,18 @@
 // Events configuration for SF Indian Music Project
 const eventsConfig = [
     {
+        id: 21,
+        title: "Goonj - The Sounds of India",
+        date: "2026-09-25",
+        time: "7:00 PM PT",
+        location: "Christ the Good Shepherd Lutheran Church, San Jose, CA",
+        description: "Join us for an evening of beautiful Bollywood melodies in a candlelit venue. Bollywood Classics — AR Rahman, RD Burman, Shankar Ehsaan Loy, Pritam. A Nava Experience.",
+        url: "https://navaconcerts.ticketspice.com/goonj-the-sounds-of-india",
+        type: "Concerts",
+        isFree: false,
+        ctaText: "Buy Tickets"
+    },
+    {
         id: 20,
         title: "SF Indian Music Project @ Bay Area Chowpaty",
         date: "2026-09-19",
