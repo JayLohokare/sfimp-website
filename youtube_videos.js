@@ -1,26 +1,26 @@
 const youtubeVideos = [
   {
-    "id": "e_qCnijvjPU",
-    "title": "Join us at our next jam! #sfindianmusicproject #jamsession"
+    "id": "jBfiKkuqkkw",
+    "title": "We are bringing Goonj - The Sounds of India to San Jose"
   },
   {
-    "id": "icXEbw3OyQM",
-    "title": "Studio Session: Aa Zara + Toxic"
+    "id": "71gxHlFcZoo",
+    "title": "Bay area! We are heading to Saratoga"
   },
   {
-    "id": "uahli32zZ6E",
-    "title": "Community Highlight: Maa"
+    "id": "RlSzO66Eyhs",
+    "title": "What an evening it was! Thank you, all 300 of you who showed up! Maa Tujhe Salam was the highlight!"
   },
   {
-    "id": "ZfKYli3we84",
-    "title": "Community Highlights: Ambarsariya"
+    "id": "vQ_mM3-Oep0",
+    "title": "Studio Session: Dil Hai Chhota Sa / Santeria / Jiye Kyun"
   },
   {
-    "id": "77k8J01ZsZ4",
-    "title": "Community Highlights: Bheegi Bheegi / Khamoshiya"
+    "id": "yBJ0spNoTNc",
+    "title": "Community Highlights: Bring me to life"
   },
   {
-    "id": "9fieBih1ATE",
-    "title": "Community Highlights: Chaleya"
+    "id": "cVdvlEWOxtI",
+    "title": "Community Highlights: Pareshaan"
   }
 ];
