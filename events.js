@@ -1,6 +1,95 @@
 // Events configuration for SF Indian Music Project
 const eventsConfig = [
     {
+        id: 22,
+        title: "SF Indian Music Project @ Milpitas",
+        date: "2026-11-07",
+        time: "6:00 PM PT",
+        location: "Milpitas, CA",
+        description: "Get ready for an evening of great company, and stripped-down melodies! We are hosting a casual, community acoustic jam and you're invited to be part of the music. Whether you want to belt out your favorite Bollywood classics, harmonize on some South Asian fusion tracks, or just sit back and enjoy the vibes, this is the perfect space to connect and create. 🚫 No Speakers Allowed 🚫 No Microphones or Amps 🎸 Acoustic Instruments Only. Family-friendly, all ages welcome!",
+        url: "https://partiful.com/e/Y9O2h3msyhXn0ecg6dNQ",
+        type: "Acoustic Jam",
+        isFree: true
+    },
+    {
+        id: 21,
+        title: "Goonj - The Sounds of India",
+        date: "2026-09-25",
+        time: "7:00 PM PT",
+        location: "Christ the Good Shepherd Lutheran Church, San Jose, CA",
+        description: "Join us for an evening of beautiful Bollywood melodies in a candlelit venue. Bollywood Classics — AR Rahman, RD Burman, Shankar Ehsaan Loy, Pritam. A Nava Experience.",
+        url: "https://navaconcerts.ticketspice.com/goonj-the-sounds-of-india",
+        type: "Concerts",
+        isFree: false,
+        ctaText: "Buy Tickets"
+    },
+    {
+        id: 20,
+        title: "SF Indian Music Project @ Bay Area Chowpaty",
+        date: "2026-09-19",
+        time: "6:30 PM PT",
+        location: "Bay Area Chowpaty, 3961 Washington Blvd, Fremont, CA",
+        description: "Get ready for an afternoon of fantastic food, great company, and stripped-down melodies! We are hosting a casual, community acoustic jam at Bay Area Chowpaty Fremont. Acoustic instruments only!",
+        url: "https://partiful.com/e/W1vGpOrV4mCaR6mVXcWN",
+        type: "Acoustic Jam",
+        isFree: true
+    },
+    {
+        id: 19,
+        title: "SF Indian Music Project @ Saratoga",
+        date: "2026-08-29",
+        time: "5:00 PM PT",
+        location: "Saratoga, CA",
+        description: "Redwoods and Indian Music! Get ready for an evening of great company, and stripped-down melodies! We are hosting a casual, community acoustic jam and you're invited to be part of the music. Acoustic instruments only!",
+        url: "https://partiful.com/e/PYXk9qORhhmpxbmv1D5J",
+        type: "Acoustic Jam",
+        isFree: true
+    },
+    {
+        id: 18,
+        title: "SF Indian Music Project Jam",
+        date: "2026-10-04",
+        time: "12:30 PM PT",
+        location: "Mountain View, CA",
+        description: "Get ready for an afternoon of great company, and stripped-down melodies! We are hosting a casual, community acoustic jam and you're invited to be part of the music. Acoustic instruments only!",
+        url: "https://partiful.com/e/GT49OvhRrRLPkw8swu2T",
+        type: "Acoustic Jam",
+        isFree: true
+    },
+    {
+        id: 17,
+        title: "SF Indian Music Project Jam at The Commons",
+        date: "2026-09-16",
+        time: "6:00 PM PT",
+        location: "550 Laguna St, San Francisco (Full Studio)",
+        description: "Come jam with us on some South Asian Music. We will sing songs, play instruments and have loads of fun! This is a Bi-Weekly series, and we will have themes every event!",
+        url: "https://luma.com/the-h9xr",
+        type: "Jam @ The Commons SF",
+        isFree: true
+    },
+    {
+        id: 16,
+        title: "SF Indian Music Project Jam @ Egg Mania",
+        date: "2026-08-08",
+        time: "6:30 PM PT",
+        location: "Egg Mania, Sunnyvale",
+        description: "Get ready for an afternoon of fantastic food, great company, and stripped-down melodies! We are hosting a casual, community acoustic jam at Egg Mania in Sunnyvale. Acoustic instruments only!",
+        url: "https://partiful.com/e/oUFuxonFD3vF0Anhnxto",
+        type: "Acoustic Jam",
+        isFree: true
+    },
+    {
+        id: 15,
+        title: "The Luminals @ Savoy Tivoli SF",
+        date: "2026-07-17",
+        time: "9:00 PM PT",
+        location: "Savoy Tivoli, San Francisco",
+        description: "Join us for a night of Bollywood and Rock Bangers 🤘 High energy, nostalgia, lots of singing along.",
+        url: "https://partiful.com/e/OKJT0tj6G7UdcQVs1nJn",
+        type: "Concerts",
+        isFree: true
+    },
+    {
         id: 14,
         title: "World Music Day with SF Indian Music Project",
         date: "2026-06-21",
