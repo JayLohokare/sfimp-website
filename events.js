@@ -1,6 +1,18 @@
 // Events configuration for SF Indian Music Project
 const eventsConfig = [
     {
+        id: 23,
+        title: "ओढ मातीची — Ajay Atul Tribute",
+        date: "2026-10-04",
+        time: "7:00 PM PT (Doors 7pm, Show 7:30-9pm)",
+        location: "Christ the Good Shepherd Lutheran Church, San Jose, CA",
+        description: "World's first candlelit musical celebrating the rich sounds of Maharashtra, featuring melodies of Ajay Atul. VIP and General Admission tickets available.",
+        url: "https://navaconcerts.ticketspice.com/ajay-atul-san-jose-october-26",
+        type: "Concerts",
+        isFree: false,
+        ctaText: "Buy Tickets"
+    },
+    {
         id: 22,
         title: "SF Indian Music Project @ Milpitas",
         date: "2026-11-07",
