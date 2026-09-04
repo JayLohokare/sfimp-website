@@ -7,6 +7,7 @@ const eventsConfig = [
         time: "6:00 PM PT",
         location: "San Ramon, CA",
         description: "Get ready for an evening of great company, and stripped-down melodies! We are hosting a casual, community acoustic jam and you're invited to be part of the music. Whether you want to belt out your favorite Bollywood classics, harmonize on some South Asian fusion tracks, or just sit back and enjoy the vibes, this is the perfect space to connect and create. 🚫 No Speakers Allowed 🚫 No Microphones or Amps 🎸 Acoustic Instruments Only. Family-friendly, all ages welcome!",
+        url: "https://partiful.com/e/qAn6oCDgyouR0CnvHzwI",
         type: "Acoustic Jam",
         isFree: true
     },
