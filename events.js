@@ -1,6 +1,17 @@
 // Events configuration for SF Indian Music Project
 const eventsConfig = [
     {
+        id: 25,
+        title: "SF Indian Music Project Jam @ Egg Mania",
+        date: "2026-10-10",
+        time: "6:00 PM PT",
+        location: "Egg Mania, Sunnyvale",
+        description: "Get ready for an afternoon of fantastic food, great company, and stripped-down melodies! We are hosting a casual, community acoustic jam at Egg Mania in Sunnyvale. Acoustic instruments only! Family-friendly, all ages welcome!",
+        url: "https://partiful.com/e/2nP8yTi3uLFwA52BKog0",
+        type: "Acoustic Jam",
+        isFree: true
+    },
+    {
         id: 24,
         title: "SF Indian Music Project @ San Ramon",
         date: "2026-11-21",
