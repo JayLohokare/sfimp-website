@@ -8,7 +8,7 @@ on:
     branches: ["main"]
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -31,6 +31,13 @@ jobs:
           chmod +x generate_image_list.sh
           ./generate_image_list.sh
           python3 fetch_youtube_videos.py
+
+      - name: Commit updated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git diff --quiet youtube_videos.js || git add youtube_videos.js && git commit -m "Auto-update youtube_videos.js [skip ci]" && git push
+          git diff --quiet epk_images.js || git add epk_images.js && git commit -m "Auto-update epk_images.js [skip ci]" && git push || true
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
