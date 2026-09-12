@@ -1,26 +1,26 @@
 const youtubeVideos = [
   {
-    "id": "jBfiKkuqkkw",
-    "title": "We are bringing Goonj - The Sounds of India to San Jose"
+    "id": "aCTebo3hRiw",
+    "title": "We have loads of music coming to the bay area! RSVP now - sfindianmusicproject.org"
   },
   {
-    "id": "71gxHlFcZoo",
-    "title": "Bay area! We are heading to Saratoga"
+    "id": "3CyxKc7mjws",
+    "title": "Kagaz - The SF Indian Music Project"
   },
   {
-    "id": "RlSzO66Eyhs",
-    "title": "What an evening it was! Thank you, all 300 of you who showed up! Maa Tujhe Salam was the highlight!"
+    "id": "YiyOtIWxfBY",
+    "title": "Join us at The Commons San Francisco on 16th sept!"
   },
   {
-    "id": "vQ_mM3-Oep0",
-    "title": "Studio Session: Dil Hai Chhota Sa / Santeria / Jiye Kyun"
+    "id": "yemXzVhYvJc",
+    "title": "Sukoon ✨️"
   },
   {
-    "id": "yBJ0spNoTNc",
-    "title": "Community Highlights: Bring me to life"
+    "id": "T5dteyR4J6M",
+    "title": "Another one from our Saratoga jam!"
   },
   {
-    "id": "cVdvlEWOxtI",
-    "title": "Community Highlights: Pareshaan"
+    "id": "RxMZ7F-X1dw",
+    "title": "What an epic jam it was, in Saratoga!"
   }
 ];
