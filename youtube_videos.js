@@ -1,26 +1,26 @@
 const youtubeVideos = [
   {
-    "id": "aCTebo3hRiw",
-    "title": "We have loads of music coming to the bay area! RSVP now - sfindianmusicproject.org"
-  },
-  {
     "id": "3CyxKc7mjws",
-    "title": "Kagaz - The SF Indian Music Project"
+    "title": "Keyboard shortcuts"
   },
   {
-    "id": "YiyOtIWxfBY",
-    "title": "Join us at The Commons San Francisco on 16th sept!"
+    "id": "vQ_mM3-Oep0",
+    "title": "Video vQ_mM3-Oep0"
   },
   {
-    "id": "yemXzVhYvJc",
-    "title": "Sukoon ✨️"
+    "id": "yBJ0spNoTNc",
+    "title": "Video yBJ0spNoTNc"
   },
   {
-    "id": "T5dteyR4J6M",
-    "title": "Another one from our Saratoga jam!"
+    "id": "cVdvlEWOxtI",
+    "title": "Video cVdvlEWOxtI"
   },
   {
-    "id": "RxMZ7F-X1dw",
-    "title": "What an epic jam it was, in Saratoga!"
+    "id": "y9ADgprUd6Y",
+    "title": "Video y9ADgprUd6Y"
+  },
+  {
+    "id": "ENLoOaglqkA",
+    "title": "Video ENLoOaglqkA"
   }
 ];
