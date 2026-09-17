@@ -1,26 +1,26 @@
 const youtubeVideos = [
   {
     "id": "soVgZ6Pf9yg",
-    "title": "Studio Session: Phantom of the Opera / Dastane-Om"
-  },
-  {
-    "id": "aCTebo3hRiw",
-    "title": "We have loads of music coming to the bay area! RSVP now - sfindianmusicproject.org"
+    "title": "Keyboard shortcuts"
   },
   {
     "id": "3CyxKc7mjws",
-    "title": "Kagaz - The SF Indian Music Project"
+    "title": "Video 3CyxKc7mjws"
   },
   {
-    "id": "YiyOtIWxfBY",
-    "title": "Join us at The Commons San Francisco on 16th sept!"
+    "id": "vQ_mM3-Oep0",
+    "title": "Video vQ_mM3-Oep0"
   },
   {
-    "id": "yemXzVhYvJc",
-    "title": "Sukoon ✨️"
+    "id": "yBJ0spNoTNc",
+    "title": "Video yBJ0spNoTNc"
   },
   {
-    "id": "T5dteyR4J6M",
-    "title": "Another one from our Saratoga jam!"
+    "id": "cVdvlEWOxtI",
+    "title": "Video cVdvlEWOxtI"
+  },
+  {
+    "id": "y9ADgprUd6Y",
+    "title": "Video y9ADgprUd6Y"
   }
 ];
