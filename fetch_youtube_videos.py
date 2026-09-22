@@ -28,7 +28,7 @@ def save_videos(videos):
         f.write(f'const youtubeVideos = {json.dumps(videos, indent=2, ensure_ascii=False)};\n')
 
 def fetch_via_rss(channel_id):
-    """Strategy 1: YouTube RSS feed (works from residential IPs, often blocked from CI)."""
+    """Strategy 1: YouTube RSS feed."""
     rss_url = f'https://www.youtube.com/feeds/videos.xml?channel_id={channel_id}'
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
@@ -62,7 +62,7 @@ INVIDIOUS_INSTANCES = [
 ]
 
 def fetch_via_invidious(channel_id):
-    """Strategy 2: Invidious API (open-source YouTube frontend with public API)."""
+    """Strategy 2: Invidious API."""
     for instance in INVIDIOUS_INSTANCES:
         try:
             url = f'{instance}/api/v1/channels/{channel_id}/videos?sort_by=newest'
@@ -86,8 +86,29 @@ def fetch_via_invidious(channel_id):
             continue
     return None
 
+def fetch_via_noembed(video_ids):
+    """Strategy 3: Use noembed.com to resolve video IDs to titles."""
+    videos = []
+    for vid_id in video_ids[:NUM_VIDEOS]:
+        try:
+            url = f'https://noembed.com/embed?url=https://www.youtube.com/watch?v={vid_id}'
+            req = urllib.request.Request(url, headers={
+                'User-Agent': 'Mozilla/5.0',
+                'Accept': 'application/json',
+            })
+            response = urllib.request.urlopen(req, timeout=10)
+            data = json.loads(response.read())
+            title = data.get('title', '')
+            if title and title != vid_id and len(title) > 3:
+                videos.append({'id': vid_id, 'title': title})
+            else:
+                print(f"  ⚠️ Noembed returned bad title for {vid_id}: {title}")
+        except Exception as e:
+            print(f"  ⚠️ Noembed failed for {vid_id}: {e}")
+    return videos if videos else None
+
 def fetch_via_scrape(channel_id):
-    """Strategy 3: Scrape the YouTube channel page for video IDs."""
+    """Strategy 4: Scrape YouTube channel page for video IDs, then resolve titles via noembed."""
     url = f'https://www.youtube.com/channel/{channel_id}'
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
@@ -98,33 +119,29 @@ def fetch_via_scrape(channel_id):
     response = urllib.request.urlopen(req, timeout=15)
     html = response.read().decode('utf-8', errors='ignore')
 
-    # Extract video IDs from the page source (appears in initial data JSON)
-    video_ids = re.findall(r'"videoId":"([a-zA-Z0-9_-]{11})"', html)
-    # Extract titles paired with those video IDs
-    # The JSON structure has videoId and title close together
-    title_map = {}
-    for match in re.finditer(r'"videoId":"([a-zA-Z0-9_-]{11})".*?"title":\{"runs":\[\{"text":"(.*?)"\}\]', html):
-        vid_id, title = match.group(1), match.group(2)
-        title_map[vid_id] = title.replace('\\"', '"').replace('\\u0026', '&')
-
-    videos = []
+    # Extract unique video IDs from page source
+    video_ids = []
     seen = set()
-    for vid_id in video_ids:
-        if vid_id in seen:
-            continue
-        seen.add(vid_id)
-        title = title_map.get(vid_id, f'Video {vid_id}')
-        videos.append({'id': vid_id, 'title': title})
-        if len(videos) >= NUM_VIDEOS:
+    for vid_id in re.findall(r'"videoId":"([a-zA-Z0-9_-]{11})"', html):
+        if vid_id not in seen:
+            seen.add(vid_id)
+            video_ids.append(vid_id)
+        if len(video_ids) >= NUM_VIDEOS:
             break
-    return videos if videos else None
+
+    if not video_ids:
+        return None
+
+    # Resolve titles via noembed (never trust scrape regex for titles —
+    # it picks up garbage like "Keyboard shortcuts" from accessibility overlays)
+    return fetch_via_noembed(video_ids)
 
 def fetch_videos():
     """Try multiple strategies to fetch YouTube videos."""
     strategies = [
         ('YouTube RSS', fetch_via_rss),
         ('Invidious API', lambda cid: fetch_via_invidious(cid)),
-        ('YouTube scrape', fetch_via_scrape),
+        ('YouTube scrape + noembed', fetch_via_scrape),
     ]
 
     for name, strategy in strategies:
