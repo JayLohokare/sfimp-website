@@ -4,23 +4,23 @@ const youtubeVideos = [
     "title": "Studio Session: Phantom of the Opera / Dastane-Om"
   },
   {
+    "id": "aCTebo3hRiw",
+    "title": "We have loads of music coming to the bay area! RSVP now - sfindianmusicproject.org"
+  },
+  {
     "id": "3CyxKc7mjws",
     "title": "Kagaz - The SF Indian Music Project"
   },
   {
-    "id": "vQ_mM3-Oep0",
-    "title": "Studio Session: Dil Hai Chhota Sa / Santeria / Jiye Kyun"
+    "id": "YiyOtIWxfBY",
+    "title": "Join us at The Commons San Francisco on 16th sept!"
   },
   {
-    "id": "yBJ0spNoTNc",
-    "title": "Community Highlights: Bring me to life"
+    "id": "yemXzVhYvJc",
+    "title": "Sukoon ✨️"
   },
   {
-    "id": "cVdvlEWOxtI",
-    "title": "Community Highlights: Pareshaan"
-  },
-  {
-    "id": "y9ADgprUd6Y",
-    "title": "Community Highlights: Falling in Love with you"
+    "id": "T5dteyR4J6M",
+    "title": "Another one from our Saratoga jam!"
   }
 ];
