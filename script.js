@@ -289,11 +289,8 @@ function initYouTubeVideos() {
                     <iframe src="https://www.youtube.com/embed/${video.id}" 
                             title="${escapeHtml(video.title)}" 
                             frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                             allowfullscreen></iframe>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">${escapeHtml(video.title)}</h3>
-                    <p class="video-meta">SF Indian Music Project</p>
                 </div>
             </div>
         `;
