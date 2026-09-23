@@ -1,5 +1,13 @@
 const youtubeVideos = [
   {
+    "id": "uiLnf5-JWnE",
+    "title": "Soniyon Re - Fremont Jam"
+  },
+  {
+    "id": "XZzmBfrcksE",
+    "title": "Pichle Saat Dino Me - Fremont version"
+  },
+  {
     "id": "soVgZ6Pf9yg",
     "title": "Studio Session: Phantom of the Opera / Dastane-Om"
   },
@@ -14,13 +22,5 @@ const youtubeVideos = [
   {
     "id": "YiyOtIWxfBY",
     "title": "Join us at The Commons San Francisco on 16th sept!"
-  },
-  {
-    "id": "yemXzVhYvJc",
-    "title": "Sukoon ✨️"
-  },
-  {
-    "id": "T5dteyR4J6M",
-    "title": "Another one from our Saratoga jam!"
   }
 ];
