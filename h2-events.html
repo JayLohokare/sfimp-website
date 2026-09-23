@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#C4732B">
+    <title>Events — SF Indian Music Project</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="home2.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="h2-nav">
+        <div class="container">
+            <a href="home2.html" class="h2-nav-logo">SF<span>IMP</span></a>
+            <div class="h2-nav-links">
+                <a href="h2-events.html" class="active">Events</a>
+                <a href="h2-about.html">About</a>
+                <a href="h2-videos.html">Videos</a>
+                <a href="h2-gallery.html">Gallery</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="h2-page-header">
+        <h1>Events</h1>
+        <p>Join us for our next jam session or community event</p>
+    </div>
+
+    <!-- Events -->
+    <section class="h2-section h2-events-bg">
+        <div class="container">
+            <div id="h2-events-filters" class="h2-filters"></div>
+            <div id="h2-events-container"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="h2-footer">
+        <div class="container">
+            <p>SF Indian Music Project INC (501c3)</p>
+        </div>
+    </footer>
+
+    <script src="events.js"></script>
+    <script>
+    (function() {
+        const container = document.getElementById('h2-events-container');
+        const filtersEl = document.getElementById('h2-events-filters');
+        if (!container || typeof eventsConfig === 'undefined') return;
+
+        let showPast = false;
+        let selectedType = 'all';
+        const types = [...new Set(eventsConfig.map(e => e.type))];
+
+        function renderFilters() {
+            filtersEl.innerHTML = `
+                ${types.map(t => `<button class="h2-filter-btn ${selectedType === t ? 'active' : ''}" data-type="${t}">${t}</button>`).join('')}
+                <button class="h2-filter-btn ${selectedType === 'all' ? 'active' : ''}" data-type="all">All</button>
+                <button class="h2-filter-toggle" id="h2-toggle-past">${showPast ? 'Hide Past' : 'Show Past'}</button>
+            `;
+            filtersEl.querySelectorAll('.h2-filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => { selectedType = btn.dataset.type; render(); });
+            });
+            document.getElementById('h2-toggle-past')?.addEventListener('click', () => { showPast = !showPast; render(); });
+        }
+
+        function render() {
+            const now = new Date(); now.setHours(0,0,0,0);
+            const processed = eventsConfig.map(e => {
+                const [y,m,d] = e.date.split('-');
+                const dt = new Date(+y, +m-1, +d); dt.setHours(0,0,0,0);
+                return { ...e, parsedDate: dt, isUpcoming: dt >= now, isPast: dt < now, isNext: false };
+            });
+            const upcoming = processed.filter(e => e.isUpcoming).sort((a,b) => a.parsedDate - b.parsedDate);
+            if (upcoming.length) upcoming[0].isNext = true;
+
+            let filtered = processed.filter(e => {
+                if (!showPast && e.isPast) return false;
+                if (selectedType !== 'all' && e.type !== selectedType) return false;
+                return true;
+            }).sort((a,b) => showPast ? (a.isUpcoming === b.isUpcoming ? a.parsedDate - b.parsedDate : a.isUpcoming ? -1 : 1) : a.parsedDate - b.parsedDate);
+
+            if (!filtered.length) { container.innerHTML = '<p class="h2-no-events">No events found.</p>'; return; }
+
+            container.innerHTML = filtered.map(e => {
+                const dt = e.parsedDate;
+                const month = dt.toLocaleDateString('en-US', { month: 'short' });
+                const badges = [
+                    e.isNext ? '<span class="h2-event-badge next">Next Event</span>' : '',
+                    e.isPast ? '<span class="h2-event-badge past">Past</span>' : '',
+                    e.type ? `<span class="h2-event-badge type">${e.type}</span>` : '',
+                ].filter(Boolean).join(' ');
+
+                const actions = e.isUpcoming
+                    ? `<a href="${e.url}" target="_blank" rel="noopener noreferrer" class="h2-event-rsvp">${e.ctaText || 'RSVP'}</a>`
+                    : `<a href="${e.url}" target="_blank" rel="noopener noreferrer" class="h2-event-link">Details</a>`;
+
+                const free = e.isFree ? '<span class="h2-event-free">Free</span>' : '';
+                const price = e.price ? `<span>${e.price}${e.isFree ? '' : '/person'}</span>` : '';
+
+                return `
+                <div class="h2-event-card ${e.isNext ? 'next' : ''} ${e.isPast ? 'past' : ''}">
+                    <div class="h2-event-date-box">
+                        <div class="h2-event-day">${dt.getDate()}</div>
+                        <div class="h2-event-month">${month}</div>
+                    </div>
+                    <div class="h2-event-body">
+                        ${badges}
+                        <div class="h2-event-name">${e.title}</div>
+                        <div class="h2-event-meta">
+                            <span>${e.location}</span> · <span>${e.time}</span>
+                            ${price ? ' · ' + price : ''} ${free}
+                        </div>
+                        ${e.description ? `<div class="h2-event-meta">${e.description}</div>` : ''}
+                        <div class="h2-event-actions">${actions}</div>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        renderFilters();
+        render();
+    })();
+    </script>
+</body>
+</html>

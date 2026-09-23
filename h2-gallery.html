@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#C4732B">
+    <title>Gallery — SF Indian Music Project</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="home2.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="h2-nav">
+        <div class="container">
+            <a href="home2.html" class="h2-nav-logo">SF<span>IMP</span></a>
+            <div class="h2-nav-links">
+                <a href="h2-events.html">Events</a>
+                <a href="h2-about.html">About</a>
+                <a href="h2-videos.html">Videos</a>
+                <a href="h2-gallery.html" class="active">Gallery</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="h2-page-header">
+        <h1>Gallery</h1>
+        <p>Moments from our jams, studio sessions, and community events</p>
+    </div>
+
+    <!-- Gallery -->
+    <section class="h2-section h2-gallery-bg">
+        <div class="container">
+            <div class="h2-masonry" id="h2-gallery"></div>
+            <button class="h2-gallery-toggle" id="h2-gallery-toggle">View More</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="h2-footer">
+        <div class="container">
+            <p>SF Indian Music Project INC (501c3)</p>
+        </div>
+    </footer>
+
+    <script src="epk_images.js"></script>
+    <script>
+    (function() {
+        const container = document.getElementById('h2-gallery');
+        const toggleBtn = document.getElementById('h2-gallery-toggle');
+        if (!container || typeof epkImages === 'undefined') return;
+        const valid = epkImages.filter(img => img.match(/\.(jpg|jpeg|png|webp|gif)$/i));
+        if (!valid.length) { toggleBtn && (toggleBtn.style.display = 'none'); return; }
+        container.innerHTML = valid.map(src => `<div class="h2-masonry-item"><img src="assets/epk/${src}" alt="SFIMP" loading="lazy"></div>`).join('');
+        toggleBtn?.addEventListener('click', () => { container.classList.add('expanded'); toggleBtn.style.display = 'none'; });
+    })();
+    </script>
+</body>
+</html>
