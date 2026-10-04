@@ -108,20 +108,6 @@
         </div>
     </section>
 
-    <!-- Events Preview -->
-    <section id="events" class="h2-section h2-events-bg">
-        <div class="container">
-            <h2 class="h2-section-title">Upcoming Events</h2>
-            <p class="h2-section-sub">Join us for our next jam session or community event</p>
-            <div id="h2-events-container"></div>
-            <div style="text-align: center; margin-top: 2.5rem;">
-                <a href="events.html" class="h2-hero-cta" style="display: inline-flex; padding: 0.875rem 2.5rem;">
-                    View All Events & Past Archive
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;margin-left:0.5rem;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
-            </div>
-        </div>
-    </section>
 
     <!-- What We Do -->
     <section id="what-we-do" class="h2-section">
@@ -187,7 +173,6 @@
 
     <script src="epk_images.js"></script>
     <script src="youtube_videos.js"></script>
-    <script src="events.js"></script>
     <script>
     // home2.js — Clean minimal page logic
 
@@ -218,62 +203,6 @@
             let cur = 0;
             setInterval(() => { slides[cur].classList.remove('active'); cur = (cur + 1) % slides.length; slides[cur].classList.add('active'); }, 5000);
         }
-    })();
-
-    // Events Preview (Upcoming only, top 2)
-    (function() {
-        const container = document.getElementById('h2-events-container');
-        if (!container || typeof eventsConfig === 'undefined') return;
-
-        const now = new Date(); now.setHours(0,0,0,0);
-        const processed = eventsConfig.map(e => {
-            const [y,m,d] = e.date.split('-');
-            const dt = new Date(+y, +m-1, +d); dt.setHours(0,0,0,0);
-            return { ...e, parsedDate: dt, isUpcoming: dt >= now };
-        });
-
-        const upcoming = processed
-            .filter(e => e.isUpcoming)
-            .sort((a,b) => a.parsedDate - b.parsedDate)
-            .slice(0, 2);
-
-        if (!upcoming.length) {
-            container.innerHTML = '<p class="h2-no-events">No upcoming events scheduled at this moment. Stay tuned!</p>';
-            return;
-        }
-
-        upcoming[0].isNext = true;
-
-        container.innerHTML = upcoming.map(e => {
-            const dt = e.parsedDate;
-            const month = dt.toLocaleDateString('en-US', { month: 'short' });
-            const badges = [
-                e.isNext ? '<span class="h2-event-badge next">Next Event</span>' : '',
-                e.type ? `<span class="h2-event-badge type">${e.type}</span>` : '',
-            ].filter(Boolean).join(' ');
-
-            const actions = `<a href="${e.url}" target="_blank" rel="noopener noreferrer" class="h2-event-rsvp">${e.ctaText || 'RSVP'}</a>`;
-            const free = e.isFree ? '<span class="h2-event-free">Free</span>' : '';
-            const price = e.price ? `<span>${e.price}${e.isFree ? '' : '/person'}</span>` : '';
-
-            return `
-            <div class="h2-event-card ${e.isNext ? 'next' : ''}">
-                <div class="h2-event-date-box">
-                    <div class="h2-event-day">${dt.getDate()}</div>
-                    <div class="h2-event-month">${month}</div>
-                </div>
-                <div class="h2-event-body">
-                    ${badges}
-                    <div class="h2-event-name">${e.title}</div>
-                    <div class="h2-event-meta">
-                        <span>${e.location}</span> · <span>${e.time}</span>
-                        ${price ? ' · ' + price : ''} ${free}
-                    </div>
-                    ${e.description ? `<div class="h2-event-meta">${e.description}</div>` : ''}
-                    <div class="h2-event-actions">${actions}</div>
-                </div>
-            </div>`;
-        }).join('');
     })();
 
     // Videos
