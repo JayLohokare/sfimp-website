@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#141210">
+    <title>Events — SF Indian Music Project</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Esteban&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="home2.css">
+</head>
+<body>
+    <!-- Page Loader -->
+    <div class="h2-page-loader" id="h2-page-loader">
+        <img src="logo-small.png" alt="SFIMP Logo">
+    </div>
+
+    <!-- Navigation (App Bar + Responsive Drawer) -->
+    <nav class="h2-nav">
+        <div class="container">
+            <a href="/" class="h2-nav-logo">SF<span>IMP</span></a>
+            <div class="h2-nav-links" id="h2-nav-links">
+                <a href="/">Home</a>
+                <a href="events.html" class="active">Events</a>
+                <a href="/#what-we-do">About</a>
+                <a href="/#videos">Videos</a>
+                <a href="/#gallery">Gallery</a>
+            </div>
+            <button class="h2-nav-toggle" id="h2-nav-toggle" aria-label="Toggle navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+    <div class="h2-nav-backdrop" id="h2-nav-backdrop"></div>
+
+    <!-- Events Page Header -->
+    <header class="h2-section" style="margin-top: 68px; padding-bottom: 2rem; background: #FFFFFF; border-bottom: 1px solid var(--border);">
+        <div class="container" style="text-align: center;">
+            <p style="font-size: 0.75rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.18em; color: var(--accent); margin-bottom: 0.75rem;">San Francisco Indian Music Project</p>
+            <h1 class="h2-section-title" style="font-size: 3rem; margin-bottom: 1rem;">Community Events & Jams</h1>
+            <p class="h2-section-sub" style="margin-bottom: 1.5rem;">Join us for monthly open jam sessions, intimate listening rooms, workshops, and immersive multi-sensory experiences across the Bay Area.</p>
+            <div style="display: inline-flex; gap: 1rem; align-items: center; justify-content: center; flex-wrap: wrap;">
+                <a href="https://chat.whatsapp.com/IYWdM3ZT61SL0jaLIRl9Nv" target="_blank" class="h2-social-link" style="display:inline-flex;">
+                    <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.42 4.432-9.849 9.855-9.849 2.632.001 5.109 1.027 6.973 2.891a9.814 9.814 0 012.886 6.973c-.003 5.42-4.433 9.849-9.855 9.849m8.361-18.21A11.81 11.81 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.88 11.88 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.82 11.82 0 00-3.48-8.397"/></svg>
+                    Join WhatsApp Group for Updates
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Events List Section -->
+    <main class="h2-section h2-events-bg" style="min-height: 60vh;">
+        <div class="container">
+            <div id="h2-events-filters" class="h2-filters"></div>
+            <div id="h2-events-container"></div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="h2-footer">
+        <div class="container">
+            <p>SF Indian Music Project INC (501c3)</p>
+        </div>
+    </footer>
+
+    <script src="events.js"></script>
+    <script>
+    // Loader
+    (function() {
+        const loader = document.getElementById('h2-page-loader');
+        let hidden = false;
+        const hide = () => { if (hidden) return; hidden = true; loader.style.opacity = '0'; loader.style.visibility = 'hidden'; setTimeout(() => loader.remove(), 400); };
+        if (document.readyState === 'interactive' || document.readyState === 'complete') setTimeout(hide, 400);
+        else document.addEventListener('DOMContentLoaded', () => setTimeout(hide, 400));
+        setTimeout(hide, 1200);
+    })();
+
+    // Events rendering and filtering
+    (function() {
+        const container = document.getElementById('h2-events-container');
+        const filtersEl = document.getElementById('h2-events-filters');
+        if (!container || typeof eventsConfig === 'undefined') return;
+
+        let showPast = false;
+        let selectedType = 'all';
+
+        const types = [...new Set(eventsConfig.map(e => e.type))];
+
+        function renderFilters() {
+            filtersEl.innerHTML = `
+                ${types.map(t => `<button class="h2-filter-btn ${selectedType === t ? 'active' : ''}" data-type="${t}">${t}</button>`).join('')}
+                <button class="h2-filter-btn ${selectedType === 'all' ? 'active' : ''}" data-type="all">All</button>
+                <button class="h2-filter-toggle" id="h2-toggle-past">${showPast ? 'Hide Past' : 'Show Past'}</button>
+            `;
+            filtersEl.querySelectorAll('.h2-filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => { selectedType = btn.dataset.type; render(); });
+            });
+            document.getElementById('h2-toggle-past')?.addEventListener('click', () => { showPast = !showPast; render(); });
+        }
+
+        function render() {
+            const now = new Date(); now.setHours(0,0,0,0);
+            const processed = eventsConfig.map(e => {
+                const [y,m,d] = e.date.split('-');
+                const dt = new Date(+y, +m-1, +d); dt.setHours(0,0,0,0);
+                return { ...e, parsedDate: dt, isUpcoming: dt >= now, isPast: dt < now, isNext: false };
+            });
+            const upcoming = processed.filter(e => e.isUpcoming).sort((a,b) => a.parsedDate - b.parsedDate);
+            if (upcoming.length) upcoming[0].isNext = true;
+
+            let filtered = processed.filter(e => {
+                if (!showPast && e.isPast) return false;
+                if (selectedType !== 'all' && e.type !== selectedType) return false;
+                return true;
+            }).sort((a,b) => showPast ? (a.isUpcoming === b.isUpcoming ? a.parsedDate - b.parsedDate : a.isUpcoming ? -1 : 1) : a.parsedDate - b.parsedDate);
+
+            if (!filtered.length) { container.innerHTML = '<p class="h2-no-events">No events found.</p>'; return; }
+
+            container.innerHTML = filtered.map(e => {
+                const dt = e.parsedDate;
+                const month = dt.toLocaleDateString('en-US', { month: 'short' });
+                const badges = [
+                    e.isNext ? '<span class="h2-event-badge next">Next Event</span>' : '',
+                    e.isPast ? '<span class="h2-event-badge past">Past</span>' : '',
+                    e.type ? `<span class="h2-event-badge type">${e.type}</span>` : '',
+                ].filter(Boolean).join(' ');
+
+                const actions = e.isUpcoming
+                    ? `<a href="${e.url}" target="_blank" rel="noopener noreferrer" class="h2-event-rsvp">${e.ctaText || 'RSVP'}</a>`
+                    : `<a href="${e.url}" target="_blank" rel="noopener noreferrer" class="h2-event-link">Details</a>`;
+
+                const free = e.isFree ? '<span class="h2-event-free">Free</span>' : '';
+                const price = e.price ? `<span>${e.price}${e.isFree ? '' : '/person'}</span>` : '';
+
+                return `
+                <div class="h2-event-card ${e.isNext ? 'next' : ''} ${e.isPast ? 'past' : ''}">
+                    <div class="h2-event-date-box">
+                        <div class="h2-event-day">${dt.getDate()}</div>
+                        <div class="h2-event-month">${month}</div>
+                    </div>
+                    <div class="h2-event-body">
+                        ${badges}
+                        <div class="h2-event-name">${e.title}</div>
+                        <div class="h2-event-meta">
+                            <span>${e.location}</span> · <span>${e.time}</span>
+                            ${price ? ' · ' + price : ''} ${free}
+                        </div>
+                        ${e.description ? `<div class="h2-event-meta">${e.description}</div>` : ''}
+                        <div class="h2-event-actions">${actions}</div>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        renderFilters();
+        render();
+    })();
+
+    // Mobile Navigation Drawer
+    (function() {
+        const toggleBtn = document.getElementById('h2-nav-toggle');
+        const navLinks = document.getElementById('h2-nav-links');
+        const backdrop = document.getElementById('h2-nav-backdrop');
+
+        function toggleMenu() {
+            const isOpen = navLinks.classList.toggle('open');
+            toggleBtn.classList.toggle('open', isOpen);
+            backdrop.classList.toggle('open', isOpen);
+            document.body.style.overflow = isOpen ? 'hidden' : '';
+        }
+
+        function closeMenu() {
+            navLinks.classList.remove('open');
+            toggleBtn.classList.remove('open');
+            backdrop.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        toggleBtn?.addEventListener('click', toggleMenu);
+        backdrop?.addEventListener('click', closeMenu);
+    })();
+    </script>
+</body>
+</html>
