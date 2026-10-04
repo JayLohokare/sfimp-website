@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Esteban&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="home2.css?v=20261004a">
+    <link rel="stylesheet" href="home2.css?v=20261004b">
 </head>
 
 <body>
@@ -230,12 +230,42 @@
     <!-- PayPal Hosted Buttons SDK -->
     <script src="https://www.paypal.com/sdk/js?client-id=BAAvOERr1aq-qr-B3_H_5F0LGxuo_iZhvC2mz618bf6_qgNXh3JF4XQyYRNlVmlfgZAeKLxBKYXagzrBjQ&components=hosted-buttons&enable-funding=venmo&currency=USD"></script>
     <script>
-    // Initialize PayPal Hosted Button
-    if (window.paypal && paypal.HostedButtons) {
-        paypal.HostedButtons({
-            hostedButtonId: "BTTQF93URDWAC",
-        }).render("#paypal-container-BTTQF93URDWAC");
-    }
+    // Initialize PayPal Hosted Button safely
+    (function initPayPal() {
+        const renderBtn = () => {
+            if (window.paypal && typeof paypal.HostedButtons === 'function') {
+                paypal.HostedButtons({
+                    hostedButtonId: "BTTQF93URDWAC",
+                }).render("#paypal-container-BTTQF93URDWAC").catch(err => {
+                    console.warn("PayPal render issue:", err);
+                    showFallback();
+                });
+            } else {
+                setTimeout(initPayPal, 200);
+            }
+        };
+
+        function showFallback() {
+            const container = document.getElementById('paypal-container-BTTQF93URDWAC');
+            if (container && !container.hasChildNodes()) {
+                container.innerHTML = `
+                    <a href="https://www.paypal.com/ncp/payment/BTTQF93URDWAC" target="_blank" rel="noopener noreferrer" class="h2-donate-fallback-btn">
+                        <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.72a.642.642 0 0 1 .632-.544h7.521c3.96 0 6.645 1.83 6.012 5.795-.544 3.407-3.04 5.342-6.577 5.342H9.957l-1.077 6.48a.642.642 0 0 1-.632.544H7.076z"/></svg>
+                        Donate with PayPal or Venmo
+                    </a>
+                `;
+            }
+        }
+
+        // Wait for DOM & SDK
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', renderBtn);
+        } else {
+            renderBtn();
+        }
+        // Fallback safety timeout if PayPal SDK takes > 4s or is blocked by ad-blocker
+        setTimeout(showFallback, 4000);
+    })();
     </script>
     <script>
     // home2.js — Clean minimal page logic

@@ -1069,6 +1069,43 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+}
+
+.h2-donate-paypal-box > div,
+#paypal-container-BTTQF93URDWAC {
+    width: 100% !important;
+    max-width: 380px !important;
+    min-width: 250px !important;
+    display: block !important;
+}
+
+#paypal-container-BTTQF93URDWAC iframe {
+    width: 100% !important;
+    min-width: 100% !important;
+}
+
+.h2-donate-fallback-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.9rem 2.25rem;
+    background: #0070BA;
+    color: #FFFFFF !important;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    box-shadow: var(--elevation-1);
+    transition: all 0.2s ease;
+    margin-top: 0.5rem;
+}
+
+.h2-donate-fallback-btn:hover {
+    background: #005EA6;
+    box-shadow: var(--elevation-2);
+    transform: translateY(-1px);
 }
 
 .h2-donate-meta {
