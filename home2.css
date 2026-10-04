@@ -106,9 +106,107 @@ body {
     color: var(--accent);
 }
 
+/* Hamburger Toggle Button (Hidden on Desktop) */
+.h2-nav-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    width: 40px;
+    height: 40px;
+    position: relative;
+    z-index: 1001;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.h2-nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hamburger animated state */
+.h2-nav-toggle.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.h2-nav-toggle.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.h2-nav-toggle.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+.h2-nav-backdrop {
+    display: none;
+}
+
+/* Mobile Nav Drawer (MUI App Bar Drawer) */
 @media (max-width: 768px) {
-    .h2-nav-links { gap: 1.25rem; }
-    .h2-nav-links a { font-size: 0.75rem; }
+    .h2-nav-toggle {
+        display: flex;
+    }
+
+    .h2-nav-links {
+        position: fixed;
+        top: 65px;
+        left: 0;
+        right: 0;
+        background: #FFFFFF;
+        flex-direction: column;
+        padding: 1.5rem 2rem 2.25rem;
+        gap: 1.25rem;
+        border-bottom: 1px solid var(--border);
+        box-shadow: var(--elevation-3);
+        transform: translateY(-120%);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
+        z-index: 999;
+    }
+
+    .h2-nav-links.open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .h2-nav-links a {
+        font-size: 0.9375rem;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        width: 100%;
+        padding: 0.6rem 0;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .h2-nav-links a:last-child {
+        border-bottom: none;
+    }
+
+    .h2-nav-backdrop {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.25);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+        z-index: 998;
+    }
+
+    .h2-nav-backdrop.open {
+        opacity: 1;
+        pointer-events: auto;
+    }
 }
 
 /* ── Split 2-Column Hero ── */
