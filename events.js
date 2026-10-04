@@ -1,6 +1,39 @@
 // Events configuration for SF Indian Music Project
 const eventsConfig = [
     {
+        id: 28,
+        title: "SF Indian Music Project @ Newark",
+        date: "2026-11-07",
+        time: "1:00 PM PT",
+        location: "6430 Thornton Ave, Newark, CA",
+        description: "Get ready for an afternoon of great company, and stripped-down melodies! We are hosting a casual, community acoustic jam and you're invited to be part of the music. Whether you want to belt out your favorite Bollywood classics, harmonize on some South Asian fusion tracks, or just sit back and enjoy the vibes, this is the perfect space to connect and create. 🚫 No Speakers Allowed 🚫 No Microphones or Amps 🎸 Acoustic Instruments Only. Family-friendly, all ages welcome!",
+        url: "https://partiful.com/e/HbDhdeViCETLKk7fms5b",
+        type: "Acoustic Jam",
+        isFree: true
+    },
+    {
+        id: 27,
+        title: "SF Indian Music Project Jam @ San Jose",
+        date: "2026-10-18",
+        time: "5:00 PM PT",
+        location: "4835 Doyle Rd, San Jose, CA",
+        description: "A music performance next to a pumpkin patch, with English and Hindi music! Whether you want to belt out your favorite Bollywood classics, harmonize on some American pop / Halloween tracks, or just sit back and enjoy the vibes - this is the perfect space to connect and create. 🚫 No Speakers Allowed 🚫 No Microphones or Amps 🎸 Acoustic Instruments Only. Family-friendly, all ages welcome!",
+        url: "https://partiful.com/e/8lr2yb4i83Cc1o98P6p3",
+        type: "Acoustic Jam",
+        isFree: true
+    },
+    {
+        id: 26,
+        title: "SF Indian Music Project @ The Commons SF",
+        date: "2026-10-14",
+        time: "6:00 PM PT",
+        location: "The Commons, 550 & 540 Laguna St, San Francisco",
+        description: "Get ready for an evening of great company, and stripped-down melodies! We are hosting a casual, community jam / open-mic. Bring your vocal cords and your favorite unplugged instruments - guitar, ukulele, tabla, or cajon, we want you to play along! 🚫 No Speakers Allowed 🚫 No Microphones or Amps 🎸 Acoustic Instruments Only. Family-friendly, all ages welcome!",
+        url: "https://partiful.com/e/8AiREzAwyNXz7OUUgllK",
+        type: "Jam @ The Commons SF",
+        isFree: true
+    },
+    {
         id: 25,
         title: "SF Indian Music Project Jam @ Egg Mania",
         date: "2026-10-10",
