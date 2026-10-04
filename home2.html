@@ -24,10 +24,11 @@
         <div class="container">
             <a href="/" class="h2-nav-logo">SF<span>IMP</span></a>
             <div class="h2-nav-links" id="h2-nav-links">
-                <a href="#events">Events</a>
-                <a href="#what-we-do">About</a>
-                <a href="#videos">Videos</a>
-                <a href="#gallery">Gallery</a>
+                <a href="/" class="active">Home</a>
+                <a href="about.html">About</a>
+                <a href="programs.html">Programs</a>
+                <a href="events.html">Events</a>
+                <a href="contact.html">Contact</a>
             </div>
             <button class="h2-nav-toggle" id="h2-nav-toggle" aria-label="Toggle navigation menu">
                 <span></span>
@@ -63,7 +64,7 @@
                     </div>
                     <div class="h2-hero-actions">
                         <a href="mailto:team@sfindianmusicproject.org" class="h2-hero-cta">Contact Us</a>
-                        <a href="#events" class="h2-hero-cta-secondary">Explore Events</a>
+                        <a href="events.html" class="h2-hero-cta-secondary">Explore Events</a>
                     </div>
                 </div>
             </div>
@@ -108,15 +109,6 @@
         </div>
     </section>
 
-    <!-- Events -->
-    <section id="events" class="h2-section h2-events-bg">
-        <div class="container">
-            <h2 class="h2-section-title">Upcoming Events</h2>
-            <p class="h2-section-sub">Join us for our next jam session or community event</p>
-            <div id="h2-events-filters" class="h2-filters"></div>
-            <div id="h2-events-container"></div>
-        </div>
-    </section>
 
     <!-- What We Do -->
     <section id="what-we-do" class="h2-section">
@@ -176,13 +168,40 @@
     <!-- Footer -->
     <footer class="h2-footer">
         <div class="container">
-            <p>SF Indian Music Project INC (501c3)</p>
+            <div class="h2-footer-content">
+                <div class="h2-footer-brand">
+                    <h4>SF Indian Music Project, Inc.</h4>
+                    <p>A California 501(c)(3) Nonprofit Public Benefit Corporation dedicated to increasing visibility of and educating people on South Asian culture and music through free lessons, cultural performances, and collaborative artist events.</p>
+                    <span class="h2-footer-legal-badge">EIN: 42-3510629 · 501(c)(3) Public Charity</span>
+                </div>
+                <div class="h2-footer-col">
+                    <h5>Navigation</h5>
+                    <ul class="h2-footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="programs.html">Programs</a></li>
+                        <li><a href="events.html">Events Schedule</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="h2-footer-col">
+                    <h5>Headquarters</h5>
+                    <div class="h2-footer-contact-info">
+                        39 Tehama St, Unit 16K<br>
+                        San Francisco, CA 94105<br><br>
+                        <a href="mailto:team@sfindianmusicproject.org">team@sfindianmusicproject.org</a>
+                    </div>
+                </div>
+            </div>
+            <div class="h2-footer-bottom">
+                <div>© 2026 SF Indian Music Project, Inc. All rights reserved.</div>
+                <div>Charity ID / EIN: 42-3510629 · San Francisco, CA</div>
+            </div>
         </div>
     </footer>
 
     <script src="epk_images.js"></script>
     <script src="youtube_videos.js"></script>
-    <script src="events.js"></script>
     <script>
     // home2.js — Clean minimal page logic
 
@@ -213,87 +232,6 @@
             let cur = 0;
             setInterval(() => { slides[cur].classList.remove('active'); cur = (cur + 1) % slides.length; slides[cur].classList.add('active'); }, 5000);
         }
-    })();
-
-    // Events
-    (function() {
-        const container = document.getElementById('h2-events-container');
-        const filtersEl = document.getElementById('h2-events-filters');
-        if (!container || typeof eventsConfig === 'undefined') return;
-
-        let showPast = false;
-        let selectedType = 'all';
-
-        const types = [...new Set(eventsConfig.map(e => e.type))];
-
-        function renderFilters() {
-            filtersEl.innerHTML = `
-                ${types.map(t => `<button class="h2-filter-btn ${selectedType === t ? 'active' : ''}" data-type="${t}">${t}</button>`).join('')}
-                <button class="h2-filter-btn ${selectedType === 'all' ? 'active' : ''}" data-type="all">All</button>
-                <button class="h2-filter-toggle" id="h2-toggle-past">${showPast ? 'Hide Past' : 'Show Past'}</button>
-            `;
-            filtersEl.querySelectorAll('.h2-filter-btn').forEach(btn => {
-                btn.addEventListener('click', () => { selectedType = btn.dataset.type; render(); });
-            });
-            document.getElementById('h2-toggle-past')?.addEventListener('click', () => { showPast = !showPast; render(); });
-        }
-
-        function render() {
-            const now = new Date(); now.setHours(0,0,0,0);
-            const processed = eventsConfig.map(e => {
-                const [y,m,d] = e.date.split('-');
-                const dt = new Date(+y, +m-1, +d); dt.setHours(0,0,0,0);
-                return { ...e, parsedDate: dt, isUpcoming: dt >= now, isPast: dt < now, isNext: false };
-            });
-            const upcoming = processed.filter(e => e.isUpcoming).sort((a,b) => a.parsedDate - b.parsedDate);
-            if (upcoming.length) upcoming[0].isNext = true;
-
-            let filtered = processed.filter(e => {
-                if (!showPast && e.isPast) return false;
-                if (selectedType !== 'all' && e.type !== selectedType) return false;
-                return true;
-            }).sort((a,b) => showPast ? (a.isUpcoming === b.isUpcoming ? a.parsedDate - b.parsedDate : a.isUpcoming ? -1 : 1) : a.parsedDate - b.parsedDate);
-
-            if (!filtered.length) { container.innerHTML = '<p class="h2-no-events">No events found.</p>'; return; }
-
-            container.innerHTML = filtered.map(e => {
-                const dt = e.parsedDate;
-                const month = dt.toLocaleDateString('en-US', { month: 'short' });
-                const badges = [
-                    e.isNext ? '<span class="h2-event-badge next">Next Event</span>' : '',
-                    e.isPast ? '<span class="h2-event-badge past">Past</span>' : '',
-                    e.type ? `<span class="h2-event-badge type">${e.type}</span>` : '',
-                ].filter(Boolean).join(' ');
-
-                const actions = e.isUpcoming
-                    ? `<a href="${e.url}" target="_blank" rel="noopener noreferrer" class="h2-event-rsvp">${e.ctaText || 'RSVP'}</a>`
-                    : `<a href="${e.url}" target="_blank" rel="noopener noreferrer" class="h2-event-link">Details</a>`;
-
-                const free = e.isFree ? '<span class="h2-event-free">Free</span>' : '';
-                const price = e.price ? `<span>${e.price}${e.isFree ? '' : '/person'}</span>` : '';
-
-                return `
-                <div class="h2-event-card ${e.isNext ? 'next' : ''} ${e.isPast ? 'past' : ''}">
-                    <div class="h2-event-date-box">
-                        <div class="h2-event-day">${dt.getDate()}</div>
-                        <div class="h2-event-month">${month}</div>
-                    </div>
-                    <div class="h2-event-body">
-                        ${badges}
-                        <div class="h2-event-name">${e.title}</div>
-                        <div class="h2-event-meta">
-                            <span>${e.location}</span> · <span>${e.time}</span>
-                            ${price ? ' · ' + price : ''} ${free}
-                        </div>
-                        ${e.description ? `<div class="h2-event-meta">${e.description}</div>` : ''}
-                        <div class="h2-event-actions">${actions}</div>
-                    </div>
-                </div>`;
-            }).join('');
-        }
-
-        renderFilters();
-        render();
     })();
 
     // Videos
@@ -356,13 +294,18 @@
         toggleBtn?.addEventListener('click', toggleMenu);
         backdrop?.addEventListener('click', closeMenu);
 
-        // Smooth scroll for nav links and close drawer
+        // Smooth scroll for hash nav links and close drawer
         document.querySelectorAll('.h2-nav-links a').forEach(a => {
             a.addEventListener('click', e => {
-                e.preventDefault();
-                closeMenu();
-                const target = document.querySelector(a.getAttribute('href'));
-                target?.scrollIntoView({ behavior: 'smooth' });
+                const href = a.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    e.preventDefault();
+                    closeMenu();
+                    const target = document.querySelector(href);
+                    target?.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    closeMenu();
+                }
             });
         });
     })();
