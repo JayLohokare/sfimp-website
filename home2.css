@@ -729,6 +729,22 @@ body {
     border: none;
 }
 
+.h2-video-info {
+    padding: 1rem 1.25rem;
+    background: #FFFFFF;
+    border-top: 1px solid var(--border);
+}
+
+.h2-video-title {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.45;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 /* ── Gallery ── */
 .h2-gallery-bg { background: var(--bg); }
 

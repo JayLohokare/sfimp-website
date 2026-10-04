@@ -290,15 +290,80 @@
         render();
     })();
 
-    // Videos
+    // Videos: Static Render + Dynamic RSS Refresh System
     (function() {
         const grid = document.getElementById('h2-video-grid');
-        if (!grid || typeof youtubeVideos === 'undefined') return;
-        grid.innerHTML = youtubeVideos.map(v => `
-            <div class="h2-video-card">
-                <iframe src="https://www.youtube.com/embed/${v.id}" title="${v.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-        `).join('');
+        if (!grid) return;
+
+        const CHANNEL_ID = 'UCPfOZK-GfS92UG4yaFJszNA';
+        const MAX_VIDEOS = 4;
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text || '';
+            return div.innerHTML;
+        }
+
+        function renderVideos(videos) {
+            if (!videos || !videos.length) return;
+            grid.innerHTML = videos.slice(0, MAX_VIDEOS).map(v => `
+                <div class="h2-video-card">
+                    <iframe src="https://www.youtube.com/embed/${v.id}" 
+                            title="${escapeHtml(v.title)}" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen 
+                            loading="lazy"></iframe>
+                    ${v.title ? `<div class="h2-video-info"><div class="h2-video-title">${escapeHtml(v.title)}</div></div>` : ''}
+                </div>
+            `).join('');
+        }
+
+        // 1. Initial render from statically generated youtube_videos.js
+        if (typeof youtubeVideos !== 'undefined' && youtubeVideos.length) {
+            renderVideos(youtubeVideos);
+        }
+
+        // 2. Dynamic fetch from YouTube RSS feed via allorigins proxy to stay live
+        async function fetchLatestVideos() {
+            try {
+                const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID}`;
+                const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(rssUrl)}`;
+                const res = await fetch(proxyUrl);
+                if (!res.ok) return;
+
+                const xmlText = await res.text();
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
+                const entries = Array.from(xmlDoc.querySelectorAll('entry')).slice(0, MAX_VIDEOS);
+
+                if (!entries.length) return;
+
+                const freshVideos = entries.map(entry => {
+                    const idNode = entry.getElementsByTagName('yt:videoId')[0] || entry.getElementsByTagName('videoId')[0];
+                    let videoId = idNode ? idNode.textContent : null;
+                    if (!videoId) {
+                        const linkNode = entry.querySelector("link[rel='alternate']");
+                        const href = linkNode ? (linkNode.getAttribute('href') || '') : '';
+                        const match = href.match(/[?&]v=([^&]+)/);
+                        videoId = match ? match[1] : null;
+                    }
+                    const titleNode = entry.querySelector('title');
+                    return {
+                        id: videoId,
+                        title: titleNode ? titleNode.textContent : 'SFIMP Video'
+                    };
+                }).filter(v => v.id);
+
+                if (freshVideos.length) {
+                    renderVideos(freshVideos);
+                }
+            } catch (err) {
+                console.log('Dynamic YouTube refresh error (using cached list):', err);
+            }
+        }
+
+        fetchLatestVideos();
     })();
 
     // Gallery
