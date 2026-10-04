@@ -1073,16 +1073,26 @@ body {
 }
 
 .h2-donate-paypal-box > div,
+#paypal-container-BTTQF93URDWAC,
+#paypal-container-BTTQF93URDWAC * {
+    max-width: 100% !important;
+    word-break: normal !important;
+    white-space: normal !important;
+    letter-spacing: normal !important;
+}
+
 #paypal-container-BTTQF93URDWAC {
     width: 100% !important;
     max-width: 380px !important;
-    min-width: 250px !important;
+    min-width: 280px !important;
+    margin: 0 auto !important;
     display: block !important;
 }
 
 #paypal-container-BTTQF93URDWAC iframe {
     width: 100% !important;
-    min-width: 100% !important;
+    min-width: 280px !important;
+    display: block !important;
 }
 
 .h2-donate-fallback-btn {
