@@ -1046,6 +1046,63 @@ body {
     }
 }
 
+/* ── Donation Section (501c3 Tax-Deductible) ── */
+.h2-donate-section {
+    background: #FFFFFF;
+    border-top: 1px solid var(--border);
+}
+
+.h2-donate-card {
+    background: #FFFFFF;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 3rem 2.5rem;
+    box-shadow: var(--elevation-2);
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto;
+}
+
+.h2-donate-paypal-box {
+    margin: 2rem auto 1.5rem;
+    min-height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.h2-donate-meta {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    line-height: 1.6;
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border-light);
+}
+
+.h2-nav-donate-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.45rem 1.15rem;
+    background: var(--accent);
+    color: #FFFFFF !important;
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    box-shadow: var(--elevation-1);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.h2-nav-donate-btn:hover {
+    background: var(--accent-hover);
+    color: #FFFFFF !important;
+    box-shadow: var(--elevation-2);
+    transform: translateY(-1px);
+}
+
 /* ── No-events ── */
 .h2-no-events {
     text-align: center;

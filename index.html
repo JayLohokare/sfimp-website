@@ -29,6 +29,7 @@
                 <a href="programs.html">Programs</a>
                 <a href="events.html">Events</a>
                 <a href="contact.html">Contact</a>
+                <a href="#donate" class="h2-nav-donate-btn">Donate</a>
             </div>
             <button class="h2-nav-toggle" id="h2-nav-toggle" aria-label="Toggle navigation menu">
                 <span></span>
@@ -165,6 +166,30 @@
         </div>
     </section>
 
+    <!-- Donation Section -->
+    <section id="donate" class="h2-section h2-donate-section">
+        <div class="container">
+            <div class="h2-donate-card">
+                <span class="h2-footer-legal-badge" style="margin-bottom: 1rem;">Support Our Non-Profit Mission</span>
+                <h2 class="h2-section-title" style="margin-bottom: 0.75rem;">Support the Music</h2>
+                <p style="font-size: 0.9375rem; color: var(--text-light); line-height: 1.7; max-width: 540px; margin: 0 auto;">
+                    Your contribution directly powers free community jam sessions, open-access workshops, instrument resources, and cross-cultural music initiatives across the Bay Area.
+                </p>
+
+                <!-- PayPal & Venmo Hosted Container -->
+                <div class="h2-donate-paypal-box">
+                    <div id="paypal-container-BTTQF93URDWAC"></div>
+                </div>
+
+                <div class="h2-donate-meta">
+                    <strong>501(c)(3) Tax-Deductible Contribution</strong><br>
+                    SF Indian Music Project, Inc. is an exempt 501(c)(3) public charity.<br>
+                    Federal EIN: 42-3510629 · Donations are tax-deductible to the full extent allowable by law.
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="h2-footer">
         <div class="container">
@@ -202,6 +227,16 @@
 
     <script src="epk_images.js"></script>
     <script src="youtube_videos.js"></script>
+    <!-- PayPal Hosted Buttons SDK -->
+    <script src="https://www.paypal.com/sdk/js?client-id=BAAvOERr1aq-qr-B3_H_5F0LGxuo_iZhvC2mz618bf6_qgNXh3JF4XQyYRNlVmlfgZAeKLxBKYXagzrBjQ&components=hosted-buttons&enable-funding=venmo&currency=USD"></script>
+    <script>
+    // Initialize PayPal Hosted Button
+    if (window.paypal && paypal.HostedButtons) {
+        paypal.HostedButtons({
+            hostedButtonId: "BTTQF93URDWAC",
+        }).render("#paypal-container-BTTQF93URDWAC");
+    }
+    </script>
     <script>
     // home2.js — Clean minimal page logic
 
