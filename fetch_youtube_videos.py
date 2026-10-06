@@ -6,120 +6,119 @@ import os
 import re
 
 CHANNEL_ID = 'UCPfOZK-GfS92UG4yaFJszNA' # SFIMP Channel ID
-OUTPUT_FILE = 'youtube_videos.js'
-MAX_RETRIES = 3
-RETRY_DELAY_S = 5
+HANDLE = '@sfindianmusicproject'
+VIDEOS_FILE = 'youtube_videos.js'
+SHORTS_FILE = 'youtube_shorts.js'
 NUM_VIDEOS = 6
+NUM_SHORTS = 6
+MAX_RETRIES = 3
+RETRY_DELAY_S = 3
 
-def load_existing_videos():
-    """Load the current youtube_videos.js so we can merge with newer ones."""
-    if not os.path.exists(OUTPUT_FILE):
+HEADERS = {
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+    'Accept-Language': 'en-US,en;q=0.9',
+}
+
+def load_existing(filename, var_name):
+    if not os.path.exists(filename):
         return []
     try:
-        with open(OUTPUT_FILE, 'r', encoding='utf-8') as f:
+        with open(filename, 'r', encoding='utf-8') as f:
             content = f.read()
-        json_str = content.split('const youtubeVideos = ', 1)[1].rstrip().rstrip(';')
+        json_str = content.split(f'const {var_name} = ', 1)[1].rstrip().rstrip(';')
         return json.loads(json_str)
     except Exception:
         return []
 
-def save_videos(videos):
-    with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
-        f.write(f'const youtubeVideos = {json.dumps(videos, indent=2, ensure_ascii=False)};\n')
+def save_data(filename, var_name, data):
+    with open(filename, 'w', encoding='utf-8') as f:
+        f.write(f'const {var_name} = {json.dumps(data, indent=2, ensure_ascii=False)};\n')
 
-def fetch_via_rss(channel_id):
-    """Strategy 1: YouTube RSS feed."""
-    rss_url = f'https://www.youtube.com/feeds/videos.xml?channel_id={channel_id}'
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
-        'Accept': 'text/xml,application/xml',
-        'Accept-Language': 'en-US,en;q=0.9',
-    }
-    req = urllib.request.Request(rss_url, headers=headers)
+def extract_yt_initial_data(url):
+    req = urllib.request.Request(url, headers=HEADERS)
     response = urllib.request.urlopen(req, timeout=15)
-    xml_data = response.read()
-
-    root = ET.fromstring(xml_data)
-    ns = {'atom': 'http://www.w3.org/2005/Atom', 'yt': 'http://www.youtube.com/xml/schemas/2015'}
-
-    videos = []
-    for entry in root.findall('atom:entry', ns):
-        video_id = entry.find('yt:videoId', ns).text
-        title = entry.find('atom:title', ns).text
-        videos.append({'id': video_id, 'title': title})
-        if len(videos) >= NUM_VIDEOS:
-            break
-    return videos
-
-INVIDIOUS_INSTANCES = [
-    'https://inv.nadeko.net',
-    'https://invidious.nerdvpn.de',
-    'https://iv.datura.network',
-    'https://invidious.jing.rocks',
-    'https://yewtu.be',
-    'https://vid.puffyan.us',
-    'https://invidious.lunar.icu',
-]
-
-def fetch_via_invidious(channel_id):
-    """Strategy 2: Invidious API."""
-    for instance in INVIDIOUS_INSTANCES:
-        try:
-            url = f'{instance}/api/v1/channels/{channel_id}/videos?sort_by=newest'
-            req = urllib.request.Request(url, headers={
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
-                'Accept': 'application/json',
-            })
-            response = urllib.request.urlopen(req, timeout=10)
-            data = json.loads(response.read())
-            videos = []
-            for vid in data.get('videos', [])[:NUM_VIDEOS]:
-                videos.append({
-                    'id': vid.get('videoId', vid.get('videoID', '')),
-                    'title': vid.get('title', ''),
-                })
-            if videos:
-                print(f"  ✅ Invidious instance {instance} worked")
-                return videos
-        except Exception as e:
-            print(f"  ⚠️ Invidious {instance} failed: {e}")
-            continue
+    html = response.read().decode('utf-8', errors='ignore')
+    idx = html.find('var ytInitialData = ')
+    if idx != -1:
+        end = html.find(';</script>', idx)
+        if end != -1:
+            return json.loads(html[idx + len('var ytInitialData = '):end])
     return None
 
-def fetch_via_noembed(video_ids):
-    """Strategy 3: Use noembed.com to resolve video IDs to titles."""
+def fetch_shorts():
+    """Fetch latest YouTube Shorts from channel /shorts tab."""
+    print("🔄 Fetching latest YouTube Shorts...")
+    for attempt in range(1, MAX_RETRIES + 1):
+        try:
+            url = f'https://www.youtube.com/{HANDLE}/shorts'
+            data = extract_yt_initial_data(url)
+            if not data:
+                continue
+            tabs = data.get('contents', {}).get('twoColumnBrowseResultsRenderer', {}).get('tabs', [])
+            shorts = []
+            for t in tabs:
+                if t.get('tabRenderer', {}).get('title') == 'Shorts':
+                    rg = t['tabRenderer']['content']['richGridRenderer']['contents']
+                    for item in rg:
+                        slvm = item.get('richItemRenderer', {}).get('content', {}).get('shortsLockupViewModel', {})
+                        if slvm:
+                            vid_id = slvm.get('entityId', '').replace('shorts-shelf-item-', '')
+                            title = slvm.get('overlayMetadata', {}).get('primaryText', {}).get('content', '')
+                            if vid_id and title:
+                                shorts.append({'id': vid_id, 'title': title})
+                            if len(shorts) >= NUM_SHORTS:
+                                break
+                    break
+            if shorts:
+                print(f"✅ Fetched {len(shorts)} YouTube Shorts")
+                return shorts
+        except Exception as e:
+            print(f"⚠️ Shorts attempt {attempt} failed: {e}")
+            time.sleep(RETRY_DELAY_S)
+    return None
+
+def fetch_videos_via_yt_data():
+    """Extract regular videos from /videos tab using ytInitialData."""
+    url = f'https://www.youtube.com/{HANDLE}/videos'
+    data = extract_yt_initial_data(url)
+    if not data:
+        return None
+    tabs = data.get('contents', {}).get('twoColumnBrowseResultsRenderer', {}).get('tabs', [])
+    videos = []
+    for t in tabs:
+        if t.get('tabRenderer', {}).get('title') == 'Videos':
+            rg = t['tabRenderer']['content']['richGridRenderer']['contents']
+            for item in rg:
+                lvm = item.get('richItemRenderer', {}).get('content', {}).get('lockupViewModel', {})
+                if lvm:
+                    content_id = lvm.get('contentId', '')
+                    title = lvm.get('metadata', {}).get('lockupMetadataViewModel', {}).get('title', {}).get('content', '')
+                    if content_id and title:
+                        videos.append({'id': content_id, 'title': title})
+                    if len(videos) >= NUM_VIDEOS:
+                        break
+            break
+    return videos if videos else None
+
+def fetch_videos_via_noembed(video_ids):
     videos = []
     for vid_id in video_ids[:NUM_VIDEOS]:
         try:
             url = f'https://noembed.com/embed?url=https://www.youtube.com/watch?v={vid_id}'
-            req = urllib.request.Request(url, headers={
-                'User-Agent': 'Mozilla/5.0',
-                'Accept': 'application/json',
-            })
-            response = urllib.request.urlopen(req, timeout=10)
-            data = json.loads(response.read())
-            title = data.get('title', '')
-            if title and title != vid_id and len(title) > 3:
+            req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+            res = urllib.request.urlopen(req, timeout=10)
+            d = json.loads(res.read())
+            title = d.get('title', '')
+            if title and title != vid_id:
                 videos.append({'id': vid_id, 'title': title})
-            else:
-                print(f"  ⚠️ Noembed returned bad title for {vid_id}: {title}")
-        except Exception as e:
-            print(f"  ⚠️ Noembed failed for {vid_id}: {e}")
+        except Exception:
+            continue
     return videos if videos else None
 
-def fetch_via_scrape(channel_id):
-    """Strategy 4: Scrape YouTube channel page for video IDs, then resolve titles via noembed."""
-    url = f'https://www.youtube.com/channel/{channel_id}'
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
-        'Accept': 'text/html',
-        'Accept-Language': 'en-US,en;q=0.9',
-    }
-    req = urllib.request.Request(url, headers=headers)
-    response = urllib.request.urlopen(req, timeout=15)
-    html = response.read().decode('utf-8', errors='ignore')
-
-    # Extract unique video IDs from page source
+def fetch_videos_via_scrape():
+    url = f'https://www.youtube.com/{HANDLE}/videos'
+    req = urllib.request.Request(url, headers=HEADERS)
+    html = urllib.request.urlopen(req, timeout=15).read().decode('utf-8', errors='ignore')
     video_ids = []
     seen = set()
     for vid_id in re.findall(r'"videoId":"([a-zA-Z0-9_-]{11})"', html):
@@ -128,50 +127,41 @@ def fetch_via_scrape(channel_id):
             video_ids.append(vid_id)
         if len(video_ids) >= NUM_VIDEOS:
             break
-
-    if not video_ids:
-        return None
-
-    # Resolve titles via noembed (never trust scrape regex for titles —
-    # it picks up garbage like "Keyboard shortcuts" from accessibility overlays)
-    return fetch_via_noembed(video_ids)
+    return fetch_videos_via_noembed(video_ids) if video_ids else None
 
 def fetch_videos():
-    """Try multiple strategies to fetch YouTube videos."""
-    strategies = [
-        ('YouTube RSS', fetch_via_rss),
-        ('Invidious API', lambda cid: fetch_via_invidious(cid)),
-        ('YouTube scrape + noembed', fetch_via_scrape),
-    ]
-
-    for name, strategy in strategies:
-        for attempt in range(1, MAX_RETRIES + 1):
-            try:
-                print(f"🔄 Trying {name} (attempt {attempt}/{MAX_RETRIES})...")
-                videos = strategy(CHANNEL_ID)
-                if videos:
-                    print(f"✅ {name} returned {len(videos)} videos")
-                    return videos
-            except Exception as e:
-                print(f"⚠️ {name} attempt {attempt}/{MAX_RETRIES} failed: {e}")
-                if attempt < MAX_RETRIES:
-                    time.sleep(RETRY_DELAY_S)
-
+    """Fetch regular YouTube videos using multiple fallback strategies."""
+    print("🔄 Fetching latest YouTube full videos...")
+    for strategy in [fetch_videos_via_yt_data, fetch_videos_via_scrape]:
+        try:
+            vids = strategy()
+            if vids:
+                print(f"✅ Fetched {len(vids)} full YouTube videos")
+                return vids
+        except Exception as e:
+            print(f"⚠️ Strategy failed: {e}")
     return None
 
-# Main
-fetched = fetch_videos()
-
-if fetched is not None:
-    # Merge: new videos first, then keep any existing ones not already in the new list
-    existing = load_existing_videos()
-    new_ids = {v['id'] for v in fetched}
-    merged = fetched + [v for v in existing if v['id'] not in new_ids]
-    save_videos(merged[:NUM_VIDEOS])
-    print(f"✅ youtube_videos.js updated with {len(fetched)} new videos ({len(merged[:NUM_VIDEOS])} total).")
-else:
-    existing = load_existing_videos()
-    if existing:
-        print(f"⚠️ YouTube fetch failed after all strategies. Keeping {len(existing)} existing videos.")
+# Execute fetch & save
+if __name__ == '__main__':
+    # 1. Update Videos
+    fetched_videos = fetch_videos()
+    if fetched_videos:
+        existing = load_existing(VIDEOS_FILE, 'youtubeVideos')
+        new_ids = {v['id'] for v in fetched_videos}
+        merged = fetched_videos + [v for v in existing if v['id'] not in new_ids]
+        save_data(VIDEOS_FILE, 'youtubeVideos', merged[:NUM_VIDEOS])
+        print(f"✅ {VIDEOS_FILE} updated ({len(merged[:NUM_VIDEOS])} videos)")
     else:
-        print(f"❌ YouTube fetch failed and no existing video data found.")
+        print(f"⚠️ Keeping existing {VIDEOS_FILE}")
+
+    # 2. Update Shorts
+    fetched_shorts = fetch_shorts()
+    if fetched_shorts:
+        existing_s = load_existing(SHORTS_FILE, 'youtubeShorts')
+        new_s_ids = {s['id'] for s in fetched_shorts}
+        merged_s = fetched_shorts + [s for s in existing_s if s['id'] not in new_s_ids]
+        save_data(SHORTS_FILE, 'youtubeShorts', merged_s[:NUM_SHORTS])
+        print(f"✅ {SHORTS_FILE} updated ({len(merged_s[:NUM_SHORTS])} shorts)")
+    else:
+        print(f"⚠️ Keeping existing {SHORTS_FILE}")
