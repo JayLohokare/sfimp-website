@@ -1,6 +1,19 @@
 // Events configuration for SF Indian Music Project
 const eventsConfig = [
     {
+        id: 29,
+        title: "Spiritual Voices",
+        date: "2026-10-18",
+        time: "6:00 PM - 9:00 PM PT",
+        location: "Saint Francis Episcopal Church, Hall, 1205 Pine Ave, San Jose, CA 95125",
+        description: "Uplifting and Spiritual Music Workshops, Performances and Sing-Alongs Conducted by Professional Artists and Local Clubs and Organizations.",
+        url: "https://www.eventbrite.com/e/spiritual-voices-tickets-2002322473419?keep_tld=true",
+        type: "Concerts",
+        isFree: false,
+        price: "$12.51",
+        ctaText: "Buy Tickets"
+    },
+    {
         id: 28,
         title: "SF Indian Music Project @ Newark",
         date: "2026-11-07",
