@@ -1,5 +1,13 @@
 const youtubeShorts = [
   {
+    "id": "FcBnKW-O03c",
+    "title": "Hai Apna Dil to Awara - Sunnyvale, CA"
+  },
+  {
+    "id": "602eWz_QVpc",
+    "title": "Dil Hai Chotasa - From our Fremont jam!"
+  },
+  {
     "id": "F_GUKR6SwLQ",
     "title": "Ye Shaam Mastani, from our Fremont jam"
   },
@@ -14,13 +22,5 @@ const youtubeShorts = [
   {
     "id": "bhkNlJlx58g",
     "title": "We are heading to Sacramento!"
-  },
-  {
-    "id": "Qp8A2ud8EQ0",
-    "title": "Fremont! Will you join us? #livemusic"
-  },
-  {
-    "id": "ZlgfyIb54xI",
-    "title": "San Jose! We are heading to you. With some Hindi songs and American Halloween classics!"
   }
 ];
