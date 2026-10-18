@@ -17,7 +17,7 @@ const eventsConfig = [
         date: "2026-10-18",
         time: "5:00 PM PT",
         location: "4835 Doyle Rd, San Jose, CA",
-        description: "A music performance next to a pumpkin patch, with English and Hindi music! Whether you want to belt out your favorite Bollywood classics, harmonize on some American pop / Halloween tracks, or just sit back and enjoy the vibes - this is the perfect space to connect and create. 🚫 No Speakers Allowed 🚫 No Microphones or Amps 🎸 Acoustic Instruments Only. Family-friendly, all ages welcome!",
+        description: "A music performance next to a pumpkin patch — English songs only! Belt out your favorite rock and pop classics (Zeppelin, Beatles, Eagles, Coldplay, Linkin Park and more), harmonize on some Halloween tracks, or just sit back and enjoy the vibes. 🚫 No Speakers Allowed 🚫 No Microphones or Amps 🎸 Acoustic Instruments Only. Family-friendly, all ages welcome!",
         url: "https://partiful.com/e/8lr2yb4i83Cc1o98P6p3",
         type: "Acoustic Jam",
         isFree: true
