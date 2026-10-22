@@ -1,6 +1,17 @@
 // Events configuration for SF Indian Music Project
 const eventsConfig = [
     {
+        id: 33,
+        title: "SF Indian Music Project / Non stop Bhangra",
+        date: "2026-11-13",
+        time: "5:00 PM PT",
+        location: "Downtown San Francisco, CA",
+        description: "Non-stop Bhangra in downtown SF! Join us for songs you love — an evening of high-energy Punjabi beats and dancing. Family-friendly, all ages welcome!",
+        url: "https://partiful.com/e/4QEiMWz0e8hJgaK4aqMj",
+        type: "Bhangra",
+        isFree: true
+    },
+    {
         id: 32,
         title: "SF Indian Music Project Jam @ Sunnyvale",
         date: "2027-01-16",
