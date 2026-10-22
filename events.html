@@ -121,19 +121,11 @@
         if (!container || typeof eventsConfig === 'undefined') return;
 
         let showPast = false;
-        let selectedType = 'all';
-
-        const types = [...new Set(eventsConfig.map(e => e.type))];
 
         function renderFilters() {
             filtersEl.innerHTML = `
-                ${types.map(t => `<button class="h2-filter-btn ${selectedType === t ? 'active' : ''}" data-type="${t}">${t}</button>`).join('')}
-                <button class="h2-filter-btn ${selectedType === 'all' ? 'active' : ''}" data-type="all">All</button>
                 <button class="h2-filter-toggle" id="h2-toggle-past">${showPast ? 'Hide Past' : 'Show Past'}</button>
             `;
-            filtersEl.querySelectorAll('.h2-filter-btn').forEach(btn => {
-                btn.addEventListener('click', () => { selectedType = btn.dataset.type; render(); });
-            });
             document.getElementById('h2-toggle-past')?.addEventListener('click', () => { showPast = !showPast; render(); });
         }
 
@@ -149,7 +141,6 @@
 
             let filtered = processed.filter(e => {
                 if (!showPast && e.isPast) return false;
-                if (selectedType !== 'all' && e.type !== selectedType) return false;
                 return true;
             }).sort((a,b) => showPast ? (a.isUpcoming === b.isUpcoming ? a.parsedDate - b.parsedDate : a.isUpcoming ? -1 : 1) : a.parsedDate - b.parsedDate);
 
@@ -161,7 +152,6 @@
                 const badges = [
                     e.isNext ? '<span class="h2-event-badge next">Next Event</span>' : '',
                     e.isPast ? '<span class="h2-event-badge past">Past</span>' : '',
-                    e.type ? `<span class="h2-event-badge type">${e.type}</span>` : '',
                 ].filter(Boolean).join(' ');
 
                 const actions = e.isUpcoming
