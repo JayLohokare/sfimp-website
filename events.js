@@ -8,7 +8,7 @@ const eventsConfig = [
         location: "Downtown San Francisco, CA",
         description: "Non-stop Bhangra in downtown SF! Join us for songs you love — an evening of high-energy Punjabi beats and dancing. Family-friendly, all ages welcome!",
         url: "https://partiful.com/e/4QEiMWz0e8hJgaK4aqMj",
-        type: "Bhangra",
+        type: "Acoustic Jam",
         isFree: true
     },
     {
