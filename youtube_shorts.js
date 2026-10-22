@@ -1,5 +1,9 @@
 const youtubeShorts = [
   {
+    "id": "U0zez8QM298",
+    "title": "Churaliya / Sunnyvale #bayarea #churaliyahaitumne #ashabhosle #sfindianmusicproject"
+  },
+  {
     "id": "fznB7kXrCB0",
     "title": "Ye Dosti / Sunnyvale #music #bayarea #sfindianmusicproject"
   },
@@ -18,9 +22,5 @@ const youtubeShorts = [
   {
     "id": "602eWz_QVpc",
     "title": "Dil Hai Chotasa - From our Fremont jam!"
-  },
-  {
-    "id": "F_GUKR6SwLQ",
-    "title": "Ye Shaam Mastani, from our Fremont jam"
   }
 ];
