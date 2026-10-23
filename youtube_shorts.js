@@ -1,5 +1,9 @@
 const youtubeShorts = [
   {
+    "id": "O7c5P8tvZjE",
+    "title": "O Re Piya / Cupertino CA #bayarea #music"
+  },
+  {
     "id": "U0zez8QM298",
     "title": "Churaliya / Sunnyvale #bayarea #churaliyahaitumne #ashabhosle #sfindianmusicproject"
   },
@@ -18,9 +22,5 @@ const youtubeShorts = [
   {
     "id": "FcBnKW-O03c",
     "title": "Hai Apna Dil to Awara - Sunnyvale, CA"
-  },
-  {
-    "id": "602eWz_QVpc",
-    "title": "Dil Hai Chotasa - From our Fremont jam!"
   }
 ];
