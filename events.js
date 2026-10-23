@@ -26,7 +26,7 @@ const eventsConfig = [
         id: 31,
         title: "SONGS OF LIGHT – A Diwali Musical Celebration @ Livermore",
         date: "2026-11-01",
-        time: "2:00 PM PT",
+        time: "3:00 PM PT",
         location: "Bankhead Plaza, 2400 First St, Livermore, CA",
         description: "Get ready for an evening of great company, and stripped-down melodies! We are hosting a casual, community acoustic jam and you're invited to be part of the music. Whether you want to belt out your favorite Bollywood classics, harmonize on some South Asian fusion tracks, or just sit back and enjoy the vibes, this is the perfect space to connect and create. 🚫 No Speakers Allowed 🚫 No Microphones or Amps 🎸 Acoustic Instruments Only. Family-friendly, all ages welcome!",
         url: "https://partiful.com/e/KvRhAx92yiyKBUBPH8a7",
