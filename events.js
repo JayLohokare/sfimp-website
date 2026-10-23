@@ -1,6 +1,17 @@
 // Events configuration for SF Indian Music Project
 const eventsConfig = [
     {
+        id: 34,
+        title: "SF Indian Music Project @ Fremont",
+        date: "2026-12-12",
+        time: "5:00 PM PT",
+        location: "Fremont, CA (Location TBD)",
+        description: "Get ready for an afternoon of fantastic food, great company, and stripped-down melodies! We are hosting a casual, community acoustic jam in Fremont, and you're invited to be part of the music. 🚫 No Speakers Allowed 🚫 No Microphones or Amps 🎸 Acoustic Instruments Only. Family-friendly, all ages welcome!",
+        url: "https://partiful.com/e/Bx679X01MqJeV9fXDWxv",
+        type: "Acoustic Jam",
+        isFree: true
+    },
+    {
         id: 33,
         title: "SF Indian Music Project / Non stop Bhangra",
         date: "2026-11-13",
