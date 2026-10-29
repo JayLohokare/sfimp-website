@@ -26,10 +26,10 @@ const eventsConfig = [
         id: 32,
         title: "SF Indian Music Project Jam @ Sunnyvale",
         date: "2027-01-30",
-        time: "4:00 PM PT",
+        time: "5:00 PM PT",
         location: "Egg Mania, Sunnyvale",
         description: "Get ready for an afternoon of fantastic food, great company, and stripped-down melodies! We are hosting a casual, community acoustic jam at Egg Mania in Sunnyvale. Acoustic instruments only! Family-friendly, all ages welcome!",
-        url: "https://partiful.com/e/1X6hHD2bxyFPuY8btTi3",
+        url: "https://fanfly.live/shows/306",
         type: "Acoustic Jam",
         isFree: true
     },
