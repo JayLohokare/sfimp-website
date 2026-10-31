@@ -1,6 +1,17 @@
 // Events configuration for SF Indian Music Project
 const eventsConfig = [
     {
+        id: 35,
+        title: "SFIMP @ Shoreline Park",
+        date: "2027-01-23",
+        time: "3:00 PM PT",
+        location: "Shoreline Park, 3160 North Shoreline Boulevard, Mountain View, CA 94043",
+        description: "Get ready for an afternoon of fantastic food, great company, and stripped-down melodies! We are hosting a casual, community acoustic jam at Shoreline Park in Mountain View, and you're invited to be part of the music. 🚫 No Speakers Allowed 🚫 No Microphones or Amps 🎸 Acoustic Instruments Only. Family-friendly, all ages welcome!",
+        url: "https://fanfly.live/shows/309",
+        type: "Acoustic Jam",
+        isFree: true
+    },
+    {
         id: 34,
         title: "SF Indian Music Project @ Fremont",
         date: "2026-12-12",
