@@ -1,6 +1,17 @@
 // Events configuration for SF Indian Music Project
 const eventsConfig = [
     {
+        id: 36,
+        title: "SFIMP Indian Classical Jam @ Sunnyvale",
+        date: "2026-12-05",
+        time: "5:30 PM PT",
+        location: "St Thomas' Episcopal Church, 231 Sunset Avenue, Sunnyvale, CA 94086",
+        description: "Join us for an evening of Indian Classical music! This is not a concert, and our sessions are designed to be interactive. Introduction to Raags, demonstrations by trained musicians, learn the Raagas / sing songs with us, plus an open mic for trained musicians.",
+        url: "https://fanfly.live/shows/313",
+        type: "Acoustic Jam",
+        isFree: true
+    },
+    {
         id: 35,
         title: "SFIMP @ Shoreline Park",
         date: "2027-01-23",
