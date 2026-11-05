@@ -1,5 +1,9 @@
 const youtubeShorts = [
   {
+    "id": "IEath-X2zVQ",
+    "title": "Masakali / Livermore #bayarea #music"
+  },
+  {
     "id": "Zepdp71MRlo",
     "title": "Maaeri / Sunnyvale CA #music #sunnyvale #euphoria #bayarea #livemusic"
   },
@@ -18,9 +22,5 @@ const youtubeShorts = [
   {
     "id": "_-2mxh7IKAg",
     "title": "Coldplay Viva La Vida from our San Jose jam! #bayarea #music"
-  },
-  {
-    "id": "K40TSYw76cE",
-    "title": "Flute and 400 people singing together 🤌 #music #bayarea"
   }
 ];
