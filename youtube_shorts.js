@@ -1,5 +1,13 @@
 const youtubeShorts = [
   {
+    "id": "3VTkOFuMFZk",
+    "title": "Maeri / Milpitas, California #music #bayarea #sfindianmusicproject"
+  },
+  {
+    "id": "fMxbG5Tl8BQ",
+    "title": "Rabata / Sunnyvale #bayarea #music #livemusic"
+  },
+  {
     "id": "IEath-X2zVQ",
     "title": "Masakali / Livermore #bayarea #music"
   },
@@ -14,13 +22,5 @@ const youtubeShorts = [
   {
     "id": "U0zez8QM298",
     "title": "Churaliya / Sunnyvale #bayarea #churaliyahaitumne #ashabhosle #sfindianmusicproject"
-  },
-  {
-    "id": "fznB7kXrCB0",
-    "title": "Ye Dosti / Sunnyvale #music #bayarea #sfindianmusicproject"
-  },
-  {
-    "id": "_-2mxh7IKAg",
-    "title": "Coldplay Viva La Vida from our San Jose jam! #bayarea #music"
   }
 ];
