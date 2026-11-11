@@ -40,7 +40,7 @@ const eventsConfig = [
         time: "4:00 PM PT",
         location: "Fremont, CA (Location TBD)",
         description: "Get ready for an afternoon of fantastic food, great company, and stripped-down melodies! We are hosting a casual, community acoustic jam in Fremont, and you're invited to be part of the music. 🚫 No Speakers Allowed 🚫 No Microphones or Amps 🎸 Acoustic Instruments Only. Family-friendly, all ages welcome!",
-        url: "https://partiful.com/e/Bx679X01MqJeV9fXDWxv",
+        url: "https://fanfly.live/shows/314",
         type: "Acoustic Jam",
         isFree: true
     },
