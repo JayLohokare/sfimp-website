@@ -1,5 +1,9 @@
 const youtubeVideos = [
   {
+    "id": "VGOJPIeg8Qg",
+    "title": "Studio Session: Need you now / Dooriyaan"
+  },
+  {
     "id": "soVgZ6Pf9yg",
     "title": "Studio Session: Phantom of the Opera / Dastane-Om"
   },
@@ -18,9 +22,5 @@ const youtubeVideos = [
   {
     "id": "cVdvlEWOxtI",
     "title": "Community Highlights: Pareshaan"
-  },
-  {
-    "id": "y9ADgprUd6Y",
-    "title": "Community Highlights: Falling in Love with you"
   }
 ];
