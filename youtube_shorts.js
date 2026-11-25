@@ -1,5 +1,13 @@
 const youtubeShorts = [
   {
+    "id": "wpF1JBV-1iw",
+    "title": "KK / Yaroon #bayarea #music #kk #sfindianmusicproject"
+  },
+  {
+    "id": "DKE-4jTCII0",
+    "title": "Some OG SRK in Livermore #bayarea #music"
+  },
+  {
     "id": "3VTkOFuMFZk",
     "title": "Maeri / Milpitas, California #music #bayarea #sfindianmusicproject"
   },
@@ -14,13 +22,5 @@ const youtubeShorts = [
   {
     "id": "Zepdp71MRlo",
     "title": "Maaeri / Sunnyvale CA #music #sunnyvale #euphoria #bayarea #livemusic"
-  },
-  {
-    "id": "O7c5P8tvZjE",
-    "title": "O Re Piya / Cupertino CA #bayarea #music"
-  },
-  {
-    "id": "U0zez8QM298",
-    "title": "Churaliya / Sunnyvale #bayarea #churaliyahaitumne #ashabhosle #sfindianmusicproject"
   }
 ];
